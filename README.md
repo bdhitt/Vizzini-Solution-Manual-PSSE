@@ -1,2 +1,2 @@
 # Solution-Manual-CPS
- Solutions for Computational Probability and Statistics
+ Solutions for Probability and Statistics for Scientists and Engineers
