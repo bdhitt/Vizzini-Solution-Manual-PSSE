@@ -5,7 +5,7 @@ author:
 - Brianna Hitt
 - Kenneth Horton
 - Bradley Warner
-date: "`r Sys.Date()`"
+date: "2021-11-21"
 header-includes:
    - \usepackage{multirow}
    - \usepackage{multicol}
@@ -23,9 +23,7 @@ description: "This is a set of solutions used for Math 356 starting in the sprin
 # Preface {-}
 
 
-```{r echo=FALSE}
-knitr::include_graphics("./figures/SolutionCoverPSSE.png")
-```
+<img src="./figures/SolutionCoverPSSE.png" width="850" />
   
 
 Contained in this volume are the solutions to homework problems in the Probability and Statistics for Scientists and Engineers book.  
@@ -47,33 +45,18 @@ c.	Advancing practical and theoretical analytic experience and skills
 These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **mosaic** [@R-mosaic], **mosaicCalc** [@R-mosaicCalc], **tidyverse** [@R-tidyverse], **ISLR** [@R-ISLR], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **openintro** [@R-openintro], **broom** [@R-broom], **infer** [@R-infer],  **ISLR** [@R-ISLR], **kableExtra** [@R-kableExtra], **DT** [@R-DT].
 
 
-```{r echo=FALSE}
-knitr::include_graphics("./figures/by-nc-sa.png")  
-``` 
+<img src="./figures/by-nc-sa.png" width="44" />
 
 
 This book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown','mosaic','mosaicCalc','vcd','ISLR','tidyverse','ggplot2','MASS','openintro','broom','infer','ISLR','kableExtra','DT'
-), 'packages.bib')
-```
+
 
 ## File Creation Information 
 
-  * File creation date: `r Sys.Date()`
-  * `r R.version.string`
+  * File creation date: 2021-11-21
+  * R version 4.1.2 (2021-11-01)
 
 
-```{r warning=FALSE,message=FALSE,include=FALSE}
-library(knitr)
-library(kableExtra)
-library(mosaic)
-library(openintro)
-library(ISLR)
-library(tidyverse)
-library(broom)
-```
+
 
