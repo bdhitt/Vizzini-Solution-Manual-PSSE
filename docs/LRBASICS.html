@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 24 Linear Regression Basics | Solutions for Probability and Statistics for Scientists and Engineers</title>
+  <meta name="description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 24 Linear Regression Basics | Solutions for Probability and Statistics for Scientists and Engineers" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/figures/SolutionCoverPSSE.png" />
+  <meta property="og:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 24 Linear Regression Basics | Solutions for Probability and Statistics for Scientists and Engineers" />
+  
+  <meta name="twitter:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
+  <meta name="twitter:image" content="/figures/SolutionCoverPSSE.png" />
+
+<meta name="author" content="Matthew Davis" />
+<meta name="author" content="Brianna Hitt" />
+<meta name="author" content="Kenneth Horton" />
+<meta name="author" content="Bradley Warner" />
+
+
+<meta name="date" content="2021-11-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="CS4.html"/>
+<link rel="next" href="LRINF.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Solutions Manual</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#book-structure-and-how-to-use-it"><i class="fa fa-check"></i><b>0.1</b> Book Structure and How to Use It</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2</b> Packages</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#file-creation-information"><i class="fa fa-check"></i><b>0.3</b> File Creation Information</a></li>
+</ul></li>
+<li class="part"><span><b>I Descriptive Statistical Modeling</b></span></li>
+<li class="chapter" data-level="1" data-path="CS1.html"><a href="CS1.html"><i class="fa fa-check"></i><b>1</b> Case Study</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="CS1.html"><a href="CS1.html#objectives"><i class="fa fa-check"></i><b>1.1</b> Objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="CS1.html"><a href="CS1.html#homework"><i class="fa fa-check"></i><b>1.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="CS1.html"><a href="CS1.html#problem-1"><i class="fa fa-check"></i><b>1.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="1.2.2" data-path="CS1.html"><a href="CS1.html#problem-2"><i class="fa fa-check"></i><b>1.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="DB.html"><a href="DB.html"><i class="fa fa-check"></i><b>2</b> Data Basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="DB.html"><a href="DB.html#objectives-1"><i class="fa fa-check"></i><b>2.1</b> Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="DB.html"><a href="DB.html#homework-1"><i class="fa fa-check"></i><b>2.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="DB.html"><a href="DB.html#problem-1-1"><i class="fa fa-check"></i><b>2.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="2.2.2" data-path="DB.html"><a href="DB.html#problem-2-1"><i class="fa fa-check"></i><b>2.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="2.2.3" data-path="DB.html"><a href="DB.html#problem-3"><i class="fa fa-check"></i><b>2.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ODCP.html"><a href="ODCP.html"><i class="fa fa-check"></i><b>3</b> Overview of Data Collection Principles</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ODCP.html"><a href="ODCP.html#objectives-2"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="ODCP.html"><a href="ODCP.html#homework-2"><i class="fa fa-check"></i><b>3.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="ODCP.html"><a href="ODCP.html#problem-1-2"><i class="fa fa-check"></i><b>3.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="3.2.2" data-path="ODCP.html"><a href="ODCP.html#problem-2-2"><i class="fa fa-check"></i><b>3.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="3.2.3" data-path="ODCP.html"><a href="ODCP.html#problem-3-1"><i class="fa fa-check"></i><b>3.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="STUDY.html"><a href="STUDY.html"><i class="fa fa-check"></i><b>4</b> Studies</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="STUDY.html"><a href="STUDY.html#objectives-3"><i class="fa fa-check"></i><b>4.1</b> Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="STUDY.html"><a href="STUDY.html#homework-3"><i class="fa fa-check"></i><b>4.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="STUDY.html"><a href="STUDY.html#problem-1-3"><i class="fa fa-check"></i><b>4.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="4.2.2" data-path="STUDY.html"><a href="STUDY.html#problem-2-3"><i class="fa fa-check"></i><b>4.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="4.2.3" data-path="STUDY.html"><a href="STUDY.html#problem-3-2"><i class="fa fa-check"></i><b>4.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="4.2.4" data-path="STUDY.html"><a href="STUDY.html#problem-4"><i class="fa fa-check"></i><b>4.2.4</b> Problem 4</a></li>
+<li class="chapter" data-level="4.2.5" data-path="STUDY.html"><a href="STUDY.html#problem-5"><i class="fa fa-check"></i><b>4.2.5</b> Problem 5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="NUMDATA.html"><a href="NUMDATA.html"><i class="fa fa-check"></i><b>5</b> Numerical Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="NUMDATA.html"><a href="NUMDATA.html#objectives-4"><i class="fa fa-check"></i><b>5.1</b> Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="NUMDATA.html"><a href="NUMDATA.html#homework-4"><i class="fa fa-check"></i><b>5.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-1-4"><i class="fa fa-check"></i><b>5.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="5.2.2" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-2-4"><i class="fa fa-check"></i><b>5.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="5.2.3" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-3-3"><i class="fa fa-check"></i><b>5.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="CATDATA.html"><a href="CATDATA.html"><i class="fa fa-check"></i><b>6</b> Categorical Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="CATDATA.html"><a href="CATDATA.html#objectives-5"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="CATDATA.html"><a href="CATDATA.html#homework-5"><i class="fa fa-check"></i><b>6.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="CATDATA.html"><a href="CATDATA.html#problem-1-5"><i class="fa fa-check"></i><b>6.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="6.2.2" data-path="CATDATA.html"><a href="CATDATA.html#problem-2-5"><i class="fa fa-check"></i><b>6.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="6.2.3" data-path="CATDATA.html"><a href="CATDATA.html#problem-3-4"><i class="fa fa-check"></i><b>6.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Probability Modeling</b></span></li>
+<li class="chapter" data-level="7" data-path="CS2.html"><a href="CS2.html"><i class="fa fa-check"></i><b>7</b> Case Study</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="CS2.html"><a href="CS2.html#objectives-6"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="CS2.html"><a href="CS2.html#homework-6"><i class="fa fa-check"></i><b>7.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="CS2.html"><a href="CS2.html#problem-1-6"><i class="fa fa-check"></i><b>7.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="7.2.2" data-path="CS2.html"><a href="CS2.html#problem-2-6"><i class="fa fa-check"></i><b>7.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="PROBRULES.html"><a href="PROBRULES.html"><i class="fa fa-check"></i><b>8</b> Probability Rules</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="PROBRULES.html"><a href="PROBRULES.html#objectives-7"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="PROBRULES.html"><a href="PROBRULES.html#homework-7"><i class="fa fa-check"></i><b>8.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-1-7"><i class="fa fa-check"></i><b>8.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="8.2.2" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-2-7"><i class="fa fa-check"></i><b>8.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="8.2.3" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-3-5"><i class="fa fa-check"></i><b>8.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="8.2.4" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-4-1"><i class="fa fa-check"></i><b>8.2.4</b> Problem 4</a></li>
+<li class="chapter" data-level="8.2.5" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-5-1"><i class="fa fa-check"></i><b>8.2.5</b> Problem 5</a></li>
+<li class="chapter" data-level="8.2.6" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-6"><i class="fa fa-check"></i><b>8.2.6</b> Problem 6</a></li>
+<li class="chapter" data-level="8.2.7" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-7"><i class="fa fa-check"></i><b>8.2.7</b> Problem 7</a></li>
+<li class="chapter" data-level="8.2.8" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-8"><i class="fa fa-check"></i><b>8.2.8</b> Problem 8</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="CONDPROB.html"><a href="CONDPROB.html"><i class="fa fa-check"></i><b>9</b> Conditional Probability</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="CONDPROB.html"><a href="CONDPROB.html#objectives-8"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="CONDPROB.html"><a href="CONDPROB.html#homework-8"><i class="fa fa-check"></i><b>9.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-1-8"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="9.2.2" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-2-8"><i class="fa fa-check"></i><b>9.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="9.2.3" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-3-6"><i class="fa fa-check"></i><b>9.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="9.2.4" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-4-2"><i class="fa fa-check"></i><b>9.2.4</b> Problem 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="RANDVAR.html"><a href="RANDVAR.html"><i class="fa fa-check"></i><b>10</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="RANDVAR.html"><a href="RANDVAR.html#objectives-9"><i class="fa fa-check"></i><b>10.1</b> Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="RANDVAR.html"><a href="RANDVAR.html#homework-9"><i class="fa fa-check"></i><b>10.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-1-9"><i class="fa fa-check"></i><b>10.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="10.2.2" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-2-9"><i class="fa fa-check"></i><b>10.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="10.2.3" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-3-7"><i class="fa fa-check"></i><b>10.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="10.2.4" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-4-3"><i class="fa fa-check"></i><b>10.2.4</b> Problem 4</a></li>
+<li class="chapter" data-level="10.2.5" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-5-2"><i class="fa fa-check"></i><b>10.2.5</b> Problem 5</a></li>
+<li class="chapter" data-level="10.2.6" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-6-1"><i class="fa fa-check"></i><b>10.2.6</b> Problem 6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html"><i class="fa fa-check"></i><b>11</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#objectives-10"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#homework-10"><i class="fa fa-check"></i><b>11.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-1-10"><i class="fa fa-check"></i><b>11.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="11.2.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-2-10"><i class="fa fa-check"></i><b>11.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html"><i class="fa fa-check"></i><b>12</b> Named Discrete Distributions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#objectives-11"><i class="fa fa-check"></i><b>12.1</b> Objectives</a></li>
+<li class="chapter" data-level="12.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#homework-11"><i class="fa fa-check"></i><b>12.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-1-11"><i class="fa fa-check"></i><b>12.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="12.2.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-2-11"><i class="fa fa-check"></i><b>12.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="12.2.3" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-3-8"><i class="fa fa-check"></i><b>12.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html"><i class="fa fa-check"></i><b>13</b> Named Continuous Distributions</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#objectives-12"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
+<li class="chapter" data-level="13.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#homework-12"><i class="fa fa-check"></i><b>13.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-1-12"><i class="fa fa-check"></i><b>13.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="13.2.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-2-12"><i class="fa fa-check"></i><b>13.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="13.2.3" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-3-9"><i class="fa fa-check"></i><b>13.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="13.2.4" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-4-4"><i class="fa fa-check"></i><b>13.2.4</b> Problem 4</a></li>
+<li class="chapter" data-level="13.2.5" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-5-3"><i class="fa fa-check"></i><b>13.2.5</b> Problem 5</a></li>
+<li class="chapter" data-level="13.2.6" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-6-2"><i class="fa fa-check"></i><b>13.2.6</b> Problem 6</a></li>
+<li class="chapter" data-level="13.2.7" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-7-1"><i class="fa fa-check"></i><b>13.2.7</b> Problem 7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html"><i class="fa fa-check"></i><b>14</b> Multivariate Distributions</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#objectives-13"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+<li class="chapter" data-level="14.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#homework-13"><i class="fa fa-check"></i><b>14.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-1-13"><i class="fa fa-check"></i><b>14.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="14.2.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-2-13"><i class="fa fa-check"></i><b>14.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="14.2.3" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-3-10"><i class="fa fa-check"></i><b>14.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="14.2.4" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-4-5"><i class="fa fa-check"></i><b>14.2.4</b> Problem 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="EST.html"><a href="EST.html"><i class="fa fa-check"></i><b>15</b> Estimation Methods</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="EST.html"><a href="EST.html#objectives-14"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
+<li class="chapter" data-level="15.2" data-path="EST.html"><a href="EST.html#homework-14"><i class="fa fa-check"></i><b>15.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="EST.html"><a href="EST.html#problem-1-14"><i class="fa fa-check"></i><b>15.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="15.2.2" data-path="EST.html"><a href="EST.html#problem-2-14"><i class="fa fa-check"></i><b>15.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="15.2.3" data-path="EST.html"><a href="EST.html#problem-3-11"><i class="fa fa-check"></i><b>15.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="15.2.4" data-path="EST.html"><a href="EST.html#problem-4-6"><i class="fa fa-check"></i><b>15.2.4</b> Problem 4</a></li>
+<li class="chapter" data-level="15.2.5" data-path="EST.html"><a href="EST.html#problem-5-4"><i class="fa fa-check"></i><b>15.2.5</b> Problem 5</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Statistical Modeling</b></span></li>
+<li class="chapter" data-level="16" data-path="CS3.html"><a href="CS3.html"><i class="fa fa-check"></i><b>16</b> Case Study</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="CS3.html"><a href="CS3.html#objectives-15"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
+<li class="chapter" data-level="16.2" data-path="CS3.html"><a href="CS3.html#homework-15"><i class="fa fa-check"></i><b>16.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="CS3.html"><a href="CS3.html#problem-1-15"><i class="fa fa-check"></i><b>16.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="16.2.2" data-path="CS3.html"><a href="CS3.html#problem-2-15"><i class="fa fa-check"></i><b>16.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="HYPOTEST.html"><a href="HYPOTEST.html"><i class="fa fa-check"></i><b>17</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#objectives-16"><i class="fa fa-check"></i><b>17.1</b> Objectives</a></li>
+<li class="chapter" data-level="17.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#homework-16"><i class="fa fa-check"></i><b>17.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-1-16"><i class="fa fa-check"></i><b>17.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="17.2.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-2-16"><i class="fa fa-check"></i><b>17.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="PVALUES.html"><a href="PVALUES.html"><i class="fa fa-check"></i><b>18</b> Empirical p-values</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="PVALUES.html"><a href="PVALUES.html#objective"><i class="fa fa-check"></i><b>18.1</b> Objective</a></li>
+<li class="chapter" data-level="18.2" data-path="PVALUES.html"><a href="PVALUES.html#homework-17"><i class="fa fa-check"></i><b>18.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="PVALUES.html"><a href="PVALUES.html#problem-1-17"><i class="fa fa-check"></i><b>18.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="18.2.2" data-path="PVALUES.html"><a href="PVALUES.html#problem-2-17"><i class="fa fa-check"></i><b>18.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="18.2.3" data-path="PVALUES.html"><a href="PVALUES.html#problem-3-12"><i class="fa fa-check"></i><b>18.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="CLT.html"><a href="CLT.html"><i class="fa fa-check"></i><b>19</b> Central Limit Theorem</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="CLT.html"><a href="CLT.html#objectives-17"><i class="fa fa-check"></i><b>19.1</b> Objectives</a></li>
+<li class="chapter" data-level="19.2" data-path="CLT.html"><a href="CLT.html#homework-18"><i class="fa fa-check"></i><b>19.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="CLT.html"><a href="CLT.html#problem-1-18"><i class="fa fa-check"></i><b>19.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="19.2.2" data-path="CLT.html"><a href="CLT.html#problem-2-18"><i class="fa fa-check"></i><b>19.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="19.2.3" data-path="CLT.html"><a href="CLT.html#problem-3-13"><i class="fa fa-check"></i><b>19.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="19.2.4" data-path="CLT.html"><a href="CLT.html#problem-4-7"><i class="fa fa-check"></i><b>19.2.4</b> Problem 4</a></li>
+<li class="chapter" data-level="19.2.5" data-path="CLT.html"><a href="CLT.html#problem-5-5"><i class="fa fa-check"></i><b>19.2.5</b> Problem 5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>20</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="CI.html"><a href="CI.html#objectives-18"><i class="fa fa-check"></i><b>20.1</b> Objectives</a></li>
+<li class="chapter" data-level="20.2" data-path="CI.html"><a href="CI.html#homework-19"><i class="fa fa-check"></i><b>20.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="CI.html"><a href="CI.html#problem-1-19"><i class="fa fa-check"></i><b>20.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="20.2.2" data-path="CI.html"><a href="CI.html#problem-2-19"><i class="fa fa-check"></i><b>20.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="20.2.3" data-path="CI.html"><a href="CI.html#problem-3-14"><i class="fa fa-check"></i><b>20.2.3</b> Problem 3</a></li>
+<li class="chapter" data-level="20.2.4" data-path="CI.html"><a href="CI.html#problem-4-8"><i class="fa fa-check"></i><b>20.2.4</b> Problem 4</a></li>
+<li class="chapter" data-level="20.2.5" data-path="CI.html"><a href="CI.html#problem-5-6"><i class="fa fa-check"></i><b>20.2.5</b> Problem 5</a></li>
+<li class="chapter" data-level="20.2.6" data-path="CI.html"><a href="CI.html#problem-6-3"><i class="fa fa-check"></i><b>20.2.6</b> Problem 6</a></li>
+<li class="chapter" data-level="20.2.7" data-path="CI.html"><a href="CI.html#problem-7-2"><i class="fa fa-check"></i><b>20.2.7</b> Problem 7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="BOOT.html"><a href="BOOT.html"><i class="fa fa-check"></i><b>21</b> Bootstrap</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="BOOT.html"><a href="BOOT.html#objectives-19"><i class="fa fa-check"></i><b>21.1</b> Objectives</a></li>
+<li class="chapter" data-level="21.2" data-path="BOOT.html"><a href="BOOT.html#homework-20"><i class="fa fa-check"></i><b>21.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="BOOT.html"><a href="BOOT.html#problem-1-20"><i class="fa fa-check"></i><b>21.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="21.2.2" data-path="BOOT.html"><a href="BOOT.html#problem-2-20"><i class="fa fa-check"></i><b>21.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="21.2.3" data-path="BOOT.html"><a href="BOOT.html#problem-3-15"><i class="fa fa-check"></i><b>21.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ADDTESTS.html"><a href="ADDTESTS.html"><i class="fa fa-check"></i><b>22</b> Additional Hypothesis Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#objectives-20"><i class="fa fa-check"></i><b>22.1</b> Objectives</a></li>
+<li class="chapter" data-level="22.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#homework-21"><i class="fa fa-check"></i><b>22.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-1-21"><i class="fa fa-check"></i><b>22.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-2-21"><i class="fa fa-check"></i><b>22.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="22.2.3" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-3-16"><i class="fa fa-check"></i><b>22.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Predictive Statistical Modeling</b></span></li>
+<li class="chapter" data-level="23" data-path="CS4.html"><a href="CS4.html"><i class="fa fa-check"></i><b>23</b> Case Study</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="CS4.html"><a href="CS4.html#objectives-21"><i class="fa fa-check"></i><b>23.1</b> Objectives</a></li>
+<li class="chapter" data-level="23.2" data-path="CS4.html"><a href="CS4.html#homework-22"><i class="fa fa-check"></i><b>23.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="23.2.1" data-path="CS4.html"><a href="CS4.html#problem-1-22"><i class="fa fa-check"></i><b>23.2.1</b> Problem 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="LRBASICS.html"><a href="LRBASICS.html"><i class="fa fa-check"></i><b>24</b> Linear Regression Basics</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="LRBASICS.html"><a href="LRBASICS.html#objectives-22"><i class="fa fa-check"></i><b>24.1</b> Objectives</a></li>
+<li class="chapter" data-level="24.2" data-path="LRBASICS.html"><a href="LRBASICS.html#homework-23"><i class="fa fa-check"></i><b>24.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="LRBASICS.html"><a href="LRBASICS.html#problem-1-23"><i class="fa fa-check"></i><b>24.2.1</b> Problem 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="LRINF.html"><a href="LRINF.html"><i class="fa fa-check"></i><b>25</b> Linear Regression Inference</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="LRINF.html"><a href="LRINF.html#objectives-23"><i class="fa fa-check"></i><b>25.1</b> Objectives</a></li>
+<li class="chapter" data-level="25.2" data-path="LRINF.html"><a href="LRINF.html#homework-24"><i class="fa fa-check"></i><b>25.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="LRINF.html"><a href="LRINF.html#problem-1-24"><i class="fa fa-check"></i><b>25.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="25.2.2" data-path="LRINF.html"><a href="LRINF.html#problem-2-22"><i class="fa fa-check"></i><b>25.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="25.2.3" data-path="LRINF.html"><a href="LRINF.html#problem-3-17"><i class="fa fa-check"></i><b>25.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="LRDIAG.html"><a href="LRDIAG.html"><i class="fa fa-check"></i><b>26</b> Regression Diagnostics</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="LRDIAG.html"><a href="LRDIAG.html#objectives-24"><i class="fa fa-check"></i><b>26.1</b> Objectives</a></li>
+<li class="chapter" data-level="26.2" data-path="LRDIAG.html"><a href="LRDIAG.html#homework-25"><i class="fa fa-check"></i><b>26.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="26.2.1" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-1-25"><i class="fa fa-check"></i><b>26.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="26.2.2" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-2-23"><i class="fa fa-check"></i><b>26.2.2</b> Problem 2</a></li>
+<li class="chapter" data-level="26.2.3" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-3-18"><i class="fa fa-check"></i><b>26.2.3</b> Problem 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="LRSIM.html"><a href="LRSIM.html"><i class="fa fa-check"></i><b>27</b> Simulation Based Linear Regression</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="LRSIM.html"><a href="LRSIM.html#objectives-25"><i class="fa fa-check"></i><b>27.1</b> Objectives</a></li>
+<li class="chapter" data-level="27.2" data-path="LRSIM.html"><a href="LRSIM.html#homework-26"><i class="fa fa-check"></i><b>27.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="LRSIM.html"><a href="LRSIM.html#problem-1-26"><i class="fa fa-check"></i><b>27.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="27.2.2" data-path="LRSIM.html"><a href="LRSIM.html#problem-2-24"><i class="fa fa-check"></i><b>27.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="LRMULTI.html"><a href="LRMULTI.html"><i class="fa fa-check"></i><b>28</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="LRMULTI.html"><a href="LRMULTI.html#objectives-26"><i class="fa fa-check"></i><b>28.1</b> Objectives</a></li>
+<li class="chapter" data-level="28.2" data-path="LRMULTI.html"><a href="LRMULTI.html#homework-27"><i class="fa fa-check"></i><b>28.2</b> Homework</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-1-27"><i class="fa fa-check"></i><b>28.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="28.2.2" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-2-25"><i class="fa fa-check"></i><b>28.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="LOGREG.html"><a href="LOGREG.html"><i class="fa fa-check"></i><b>29</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="LOGREG.html"><a href="LOGREG.html#objectives-27"><i class="fa fa-check"></i><b>29.1</b> Objectives</a></li>
+<li class="chapter" data-level="29.2" data-path="LOGREG.html"><a href="LOGREG.html#homework-problems"><i class="fa fa-check"></i><b>29.2</b> Homework Problems</a>
+<ul>
+<li class="chapter" data-level="29.2.1" data-path="LOGREG.html"><a href="LOGREG.html#problem-1-28"><i class="fa fa-check"></i><b>29.2.1</b> Problem 1</a></li>
+<li class="chapter" data-level="29.2.2" data-path="LOGREG.html"><a href="LOGREG.html#problem-2-26"><i class="fa fa-check"></i><b>29.2.2</b> Problem 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solutions for Probability and Statistics for Scientists and Engineers</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="LRBASICS" class="section level1" number="24">
+<h1><span class="header-section-number">Chapter 24</span> Linear Regression Basics</h1>
+<div id="objectives-22" class="section level2" number="24.1">
+<h2><span class="header-section-number">24.1</span> Objectives</h2>
+<ol style="list-style-type: decimal">
+<li>Obtain parameter estimates of a simple linear regression model given a sample of data.<br />
+</li>
+<li>Interpret the coefficients of a simple linear regression.<br />
+</li>
+<li>Create a scatterplot with a regression line.<br />
+</li>
+<li>Explain and check the assumptions of linear regression.<br />
+</li>
+<li>Use and be able to explain all new terms.</li>
+</ol>
+</div>
+<div id="homework-23" class="section level2" number="24.2">
+<h2><span class="header-section-number">24.2</span> Homework</h2>
+<div id="problem-1-23" class="section level3" number="24.2.1">
+<h3><span class="header-section-number">24.2.1</span> Problem 1</h3>
+<p><strong>Nutrition at Starbucks</strong></p>
+<p>In the <code>data</code> folder is a file named <code>starbucks.csv</code>. Use it to answer the questions below.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Create a scatterplot of number of calories and amount of carbohydrates.</li>
+</ol>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="LRBASICS.html#cb580-1" aria-hidden="true" tabindex="-1"></a>starbucks <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/starbucks.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 77 Columns: 7</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): item, type
+## dbl (5): calories, fat, carb, fiber, protein</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="LRBASICS.html#cb584-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(starbucks)</span></code></pre></div>
+<pre><code>## Rows: 77
+## Columns: 7
+## $ item     &lt;chr&gt; &quot;8-Grain Roll&quot;, &quot;Apple Bran Muffin&quot;, &quot;Apple Fritter&quot;, &quot;Banana…
+## $ calories &lt;dbl&gt; 350, 350, 420, 490, 130, 370, 460, 370, 310, 420, 380, 320, 3…
+## $ fat      &lt;dbl&gt; 8, 9, 20, 19, 6, 14, 22, 14, 18, 25, 17, 12, 17, 21, 5, 18, 1…
+## $ carb     &lt;dbl&gt; 67, 64, 59, 75, 17, 47, 61, 55, 32, 39, 51, 53, 34, 57, 52, 7…
+## $ fiber    &lt;dbl&gt; 5, 7, 0, 4, 0, 5, 2, 0, 0, 0, 2, 3, 2, 2, 3, 3, 2, 3, 0, 2, 0…
+## $ protein  &lt;dbl&gt; 10, 6, 5, 7, 0, 6, 7, 6, 5, 7, 4, 6, 5, 5, 12, 7, 8, 6, 0, 10…
+## $ type     &lt;chr&gt; &quot;bakery&quot;, &quot;bakery&quot;, &quot;bakery&quot;, &quot;bakery&quot;, &quot;bakery&quot;, &quot;bakery&quot;, &quot;…</code></pre>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="LRBASICS.html#cb586-1" aria-hidden="true" tabindex="-1"></a>starbucks <span class="sc">%&gt;%</span></span>
+<span id="cb586-2"><a href="LRBASICS.html#cb586-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_point</span>(calories<span class="sc">~</span>carb) <span class="sc">%&gt;%</span></span>
+<span id="cb586-3"><a href="LRBASICS.html#cb586-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x=</span><span class="st">&quot;Carbohydrate Content (g)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Calories&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb586-4"><a href="LRBASICS.html#cb586-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_classic</span>())</span></code></pre></div>
+<p><img src="26-Linear-Regression-Basics-Solutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We put <code>calories</code> as the response.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Describe the relationship in the graph.</li>
+</ol>
+<p>There is a positive, moderate, linear association between number of calories and amount of carbohydrates. In addition, the amount of carbohydrates is more variable for menu items with higher calories, indicating non-constant variance. There also appear to be two clusters of data: a patch of about a dozen observations in the lower left and a
+larger patch on the right side. There might be some natural groupings of the these points. For example, the points in the lower left might come from a <em>light</em> menu.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>In this scenario, what are the explanatory and response variables?</li>
+</ol>
+<p>Response: number of calories. Explanatory: amount of carbohydrates (in grams).</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Why might we want to fit a regression line to these data?</li>
+</ol>
+<p>With a regression line, we can predict the amount of calories for a given number of carbohydrates. This may be useful if you are concerned about your carb intake and its impact on calorie consumption. Typically you can get both on the menu so this model might not be that valuable.</p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Create a scatterplot of number of calories and amount of carbohydrates with the regression line included.</li>
+</ol>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="LRBASICS.html#cb587-1" aria-hidden="true" tabindex="-1"></a>starbucks <span class="sc">%&gt;%</span></span>
+<span id="cb587-2"><a href="LRBASICS.html#cb587-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_point</span>(calories<span class="sc">~</span>carb) <span class="sc">%&gt;%</span></span>
+<span id="cb587-3"><a href="LRBASICS.html#cb587-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x=</span><span class="st">&quot;Carbohydrate Content (g)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Calories&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb587-4"><a href="LRBASICS.html#cb587-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_lm</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb587-5"><a href="LRBASICS.html#cb587-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_classic</span>())</span></code></pre></div>
+<p><img src="26-Linear-Regression-Basics-Solutions_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Using ’lm()` fit a least squares line to the data.</li>
+</ol>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="LRBASICS.html#cb588-1" aria-hidden="true" tabindex="-1"></a>star_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(calories<span class="sc">~</span>carb,<span class="at">data=</span>starbucks)</span></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="LRBASICS.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(star_mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = calories ~ carb, data = starbucks)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -151.962  -70.556   -0.636   54.908  179.444 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 146.0204    25.9186   5.634 2.93e-07 ***
+## carb          4.2971     0.5424   7.923 1.67e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 78.26 on 75 degrees of freedom
+## Multiple R-squared:  0.4556, Adjusted R-squared:  0.4484 
+## F-statistic: 62.77 on 1 and 75 DF,  p-value: 1.673e-11</code></pre>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Report and interpret the slope coefficient.</li>
+</ol>
+<p>The estimated slope is 4.297 so one additional gram of carbohydrates results in an average increase in calories of 4.297.</p>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>For a menu item with 51 g of carbs, what is the estimated calorie count?</li>
+</ol>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="LRBASICS.html#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="fl">146.0204+4.2971</span><span class="sc">*</span><span class="dv">51</span></span></code></pre></div>
+<pre><code>## [1] 365.1725</code></pre>
+<ol style="list-style-type: lower-roman">
+<li>Could we use the model for a menu item with 100 g of carbs?</li>
+</ol>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="LRBASICS.html#cb593-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(starbucks)</span></code></pre></div>
+<pre><code>##      item              calories          fat             carb      
+##  Length:77          Min.   : 80.0   Min.   : 0.00   Min.   :16.00  
+##  Class :character   1st Qu.:300.0   1st Qu.: 9.00   1st Qu.:31.00  
+##  Mode  :character   Median :350.0   Median :13.00   Median :45.00  
+##                     Mean   :338.8   Mean   :13.77   Mean   :44.87  
+##                     3rd Qu.:420.0   3rd Qu.:18.00   3rd Qu.:59.00  
+##                     Max.   :500.0   Max.   :28.00   Max.   :80.00  
+##      fiber          protein           type          
+##  Min.   :0.000   Min.   : 0.000   Length:77         
+##  1st Qu.:0.000   1st Qu.: 5.000   Class :character  
+##  Median :2.000   Median : 7.000   Mode  :character  
+##  Mean   :2.221   Mean   : 9.481                     
+##  3rd Qu.:4.000   3rd Qu.:15.000                     
+##  Max.   :7.000   Max.   :34.000</code></pre>
+<p>The maximum carb value is 80 so 100 is outside of the observed data. It would be suspect to extrapolate to that value.</p>
+<ol start="10" style="list-style-type: lower-alpha">
+<li>Does the assumption of constant variance seem reasonable for this problem?</li>
+</ol>
+<p>We are going to use the <code>broom</code> package to get the residuals and corresponding independent variable values. You could also get the residuals from the model object and the independent variable values from the original dataframe.</p>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="LRBASICS.html#cb595-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="LRBASICS.html#cb596-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(star_mod) <span class="sc">%&gt;%</span></span>
+<span id="cb596-2"><a href="LRBASICS.html#cb596-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_point</span>(.resid<span class="sc">~</span>carb) <span class="sc">%&gt;%</span></span>
+<span id="cb596-3"><a href="LRBASICS.html#cb596-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb596-4"><a href="LRBASICS.html#cb596-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb596-5"><a href="LRBASICS.html#cb596-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">title=</span><span class="st">&quot;Residual plot&quot;</span>,<span class="at">x=</span><span class="st">&quot;Carbohydrates&quot;</span>,<span class="at">y=</span><span class="st">&quot;Residual&quot;</span>)</span></code></pre></div>
+<p><img src="26-Linear-Regression-Basics-Solutions_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>It seems that the variance in the second group is larger that the first, so it may not be a reasonable assumption. Also note that the linearity assumption is also questionable.</p>
+<ol start="11" style="list-style-type: lower-alpha">
+<li>Verify that the line passes through the mean carb and mean calories, do this mathematically.</li>
+</ol>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="LRBASICS.html#cb597-1" aria-hidden="true" tabindex="-1"></a><span class="fl">146.0204+4.2971</span><span class="sc">*</span><span class="fl">44.87</span></span></code></pre></div>
+<pre><code>## [1] 338.8313</code></pre>
+<p>It checks.</p>
+<ol start="12" style="list-style-type: lower-alpha">
+<li>What is the estimate of the standard deviation of the residuals? How could you use this information?</li>
+</ol>
+<p>The estimate is 78.26. If the normal assumption is accurate, we would expect a majority of observations to be within <span class="math inline">\(\pm\)</span> 78.26 calories of the line.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="CS4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="LRINF.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
