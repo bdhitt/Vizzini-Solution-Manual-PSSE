@@ -682,7 +682,8 @@ tidy(glm(Accept=="D"~.-Acceptance-MCAT-VR-Apps-BCPM-WS-PS,
 ## 3 GPA         0.0325   0.0611 
 ## 4 BS          0.00448  0.0134
 ```
-I will stop there. There has to be a better way. Math 378 will explore how to select predictors and improve a model. 
+
+We will stop there. There has to be a better way. Machine learning and advanced regression courses explore how to select predictors and improve a model. 
 
 f. Generate a confusion matrix for the best model you have developed.  
 

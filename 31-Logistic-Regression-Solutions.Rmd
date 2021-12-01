@@ -311,7 +311,8 @@ tidy(glm(Accept=="D"~.-Acceptance-MCAT-VR-Apps-BCPM-WS-PS,
   mutate(p.adj=p.adjust(p.value)) %>%
   select(term,p.value,p.adj)
 ```
-I will stop there. There has to be a better way. Math 378 will explore how to select predictors and improve a model. 
+
+We will stop there. There has to be a better way. Machine learning and advanced regression courses explore how to select predictors and improve a model. 
 
 f. Generate a confusion matrix for the best model you have developed.  
 
