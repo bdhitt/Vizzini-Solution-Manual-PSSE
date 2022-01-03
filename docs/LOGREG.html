@@ -1,528 +1,129 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 29 Logistic Regression | Solutions for Probability and Statistics for Scientists and Engineers</title>
-  <meta name="description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 29 Logistic Regression | Solutions for Probability and Statistics for Scientists and Engineers" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="/figures/SolutionCoverPSSE.png" />
-  <meta property="og:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 29 Logistic Regression | Solutions for Probability and Statistics for Scientists and Engineers" />
-  
-  <meta name="twitter:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  <meta name="twitter:image" content="/figures/SolutionCoverPSSE.png" />
-
-<meta name="author" content="Matthew Davis" />
-<meta name="author" content="Brianna Hitt" />
-<meta name="author" content="Kenneth Horton" />
-<meta name="author" content="Bradley Warner" />
-
-
-<meta name="date" content="2021-12-15" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="LRMULTI.html"/>
-<link rel="next" href="references.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 29 Logistic Regression | Solutions for Probability and Statistics for Scientists and Engineers</title>
+<meta name="author" content="Matthew Davis">
+<meta name="author" content="Brianna Hitt">
+<meta name="author" content="Kenneth Horton">
+<meta name="author" content="Bradley Warner">
+<meta name="description" content="29.1 Objectives Using R, conduct logistic regression and interpret the output and perform model selection. Write the logistic regression model and predict outputs for given inputs. Find confidence...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 29 Logistic Regression | Solutions for Probability and Statistics for Scientists and Engineers">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/figures/SolutionCoverPSSE.png">
+<meta property="og:description" content="29.1 Objectives Using R, conduct logistic regression and interpret the output and perform model selection. Write the logistic regression model and predict outputs for given inputs. Find confidence...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 29 Logistic Regression | Solutions for Probability and Statistics for Scientists and Engineers">
+<meta name="twitter:description" content="29.1 Objectives Using R, conduct logistic regression and interpret the output and perform model selection. Write the logistic regression model and predict outputs for given inputs. Find confidence...">
+<meta name="twitter:image" content="/figures/SolutionCoverPSSE.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Solutions Manual</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#book-structure-and-how-to-use-it"><i class="fa fa-check"></i><b>0.1</b> Book Structure and How to Use It</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2</b> Packages</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#file-creation-information"><i class="fa fa-check"></i><b>0.3</b> File Creation Information</a></li>
-</ul></li>
-<li class="part"><span><b>I Descriptive Statistical Modeling</b></span></li>
-<li class="chapter" data-level="1" data-path="CS1.html"><a href="CS1.html"><i class="fa fa-check"></i><b>1</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="CS1.html"><a href="CS1.html#objectives"><i class="fa fa-check"></i><b>1.1</b> Objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="CS1.html"><a href="CS1.html#homework"><i class="fa fa-check"></i><b>1.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="CS1.html"><a href="CS1.html#problem-1"><i class="fa fa-check"></i><b>1.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="1.2.2" data-path="CS1.html"><a href="CS1.html#problem-2"><i class="fa fa-check"></i><b>1.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="DB.html"><a href="DB.html"><i class="fa fa-check"></i><b>2</b> Data Basics</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="DB.html"><a href="DB.html#objectives-1"><i class="fa fa-check"></i><b>2.1</b> Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="DB.html"><a href="DB.html#homework-1"><i class="fa fa-check"></i><b>2.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="DB.html"><a href="DB.html#problem-1-1"><i class="fa fa-check"></i><b>2.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="2.2.2" data-path="DB.html"><a href="DB.html#problem-2-1"><i class="fa fa-check"></i><b>2.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="2.2.3" data-path="DB.html"><a href="DB.html#problem-3"><i class="fa fa-check"></i><b>2.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="ODCP.html"><a href="ODCP.html"><i class="fa fa-check"></i><b>3</b> Overview of Data Collection Principles</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="ODCP.html"><a href="ODCP.html#objectives-2"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
-<li class="chapter" data-level="3.2" data-path="ODCP.html"><a href="ODCP.html#homework-2"><i class="fa fa-check"></i><b>3.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="ODCP.html"><a href="ODCP.html#problem-1-2"><i class="fa fa-check"></i><b>3.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="3.2.2" data-path="ODCP.html"><a href="ODCP.html#problem-2-2"><i class="fa fa-check"></i><b>3.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="3.2.3" data-path="ODCP.html"><a href="ODCP.html#problem-3-1"><i class="fa fa-check"></i><b>3.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="STUDY.html"><a href="STUDY.html"><i class="fa fa-check"></i><b>4</b> Studies</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="STUDY.html"><a href="STUDY.html#objectives-3"><i class="fa fa-check"></i><b>4.1</b> Objectives</a></li>
-<li class="chapter" data-level="4.2" data-path="STUDY.html"><a href="STUDY.html#homework-3"><i class="fa fa-check"></i><b>4.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="STUDY.html"><a href="STUDY.html#problem-1-3"><i class="fa fa-check"></i><b>4.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="4.2.2" data-path="STUDY.html"><a href="STUDY.html#problem-2-3"><i class="fa fa-check"></i><b>4.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="4.2.3" data-path="STUDY.html"><a href="STUDY.html#problem-3-2"><i class="fa fa-check"></i><b>4.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="4.2.4" data-path="STUDY.html"><a href="STUDY.html#problem-4"><i class="fa fa-check"></i><b>4.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="4.2.5" data-path="STUDY.html"><a href="STUDY.html#problem-5"><i class="fa fa-check"></i><b>4.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="NUMDATA.html"><a href="NUMDATA.html"><i class="fa fa-check"></i><b>5</b> Numerical Data</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="NUMDATA.html"><a href="NUMDATA.html#objectives-4"><i class="fa fa-check"></i><b>5.1</b> Objectives</a></li>
-<li class="chapter" data-level="5.2" data-path="NUMDATA.html"><a href="NUMDATA.html#homework-4"><i class="fa fa-check"></i><b>5.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-1-4"><i class="fa fa-check"></i><b>5.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="5.2.2" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-2-4"><i class="fa fa-check"></i><b>5.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="5.2.3" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-3-3"><i class="fa fa-check"></i><b>5.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="CATDATA.html"><a href="CATDATA.html"><i class="fa fa-check"></i><b>6</b> Categorical Data</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="CATDATA.html"><a href="CATDATA.html#objectives-5"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
-<li class="chapter" data-level="6.2" data-path="CATDATA.html"><a href="CATDATA.html#homework-5"><i class="fa fa-check"></i><b>6.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="CATDATA.html"><a href="CATDATA.html#problem-1-5"><i class="fa fa-check"></i><b>6.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="6.2.2" data-path="CATDATA.html"><a href="CATDATA.html#problem-2-5"><i class="fa fa-check"></i><b>6.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="6.2.3" data-path="CATDATA.html"><a href="CATDATA.html#problem-3-4"><i class="fa fa-check"></i><b>6.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>II Probability Modeling</b></span></li>
-<li class="chapter" data-level="7" data-path="CS2.html"><a href="CS2.html"><i class="fa fa-check"></i><b>7</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="CS2.html"><a href="CS2.html#objectives-6"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
-<li class="chapter" data-level="7.2" data-path="CS2.html"><a href="CS2.html#homework-6"><i class="fa fa-check"></i><b>7.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="CS2.html"><a href="CS2.html#problem-1-6"><i class="fa fa-check"></i><b>7.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="7.2.2" data-path="CS2.html"><a href="CS2.html#problem-2-6"><i class="fa fa-check"></i><b>7.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="PROBRULES.html"><a href="PROBRULES.html"><i class="fa fa-check"></i><b>8</b> Probability Rules</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="PROBRULES.html"><a href="PROBRULES.html#objectives-7"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
-<li class="chapter" data-level="8.2" data-path="PROBRULES.html"><a href="PROBRULES.html#homework-7"><i class="fa fa-check"></i><b>8.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-1-7"><i class="fa fa-check"></i><b>8.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="8.2.2" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-2-7"><i class="fa fa-check"></i><b>8.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="8.2.3" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-3-5"><i class="fa fa-check"></i><b>8.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="8.2.4" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-4-1"><i class="fa fa-check"></i><b>8.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="8.2.5" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-5-1"><i class="fa fa-check"></i><b>8.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="8.2.6" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-6"><i class="fa fa-check"></i><b>8.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="8.2.7" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-7"><i class="fa fa-check"></i><b>8.2.7</b> Problem 7</a></li>
-<li class="chapter" data-level="8.2.8" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-8"><i class="fa fa-check"></i><b>8.2.8</b> Problem 8</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="CONDPROB.html"><a href="CONDPROB.html"><i class="fa fa-check"></i><b>9</b> Conditional Probability</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="CONDPROB.html"><a href="CONDPROB.html#objectives-8"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="CONDPROB.html"><a href="CONDPROB.html#homework-8"><i class="fa fa-check"></i><b>9.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="9.2.1" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-1-8"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="9.2.2" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-2-8"><i class="fa fa-check"></i><b>9.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="9.2.3" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-3-6"><i class="fa fa-check"></i><b>9.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="9.2.4" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-4-2"><i class="fa fa-check"></i><b>9.2.4</b> Problem 4</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="RANDVAR.html"><a href="RANDVAR.html"><i class="fa fa-check"></i><b>10</b> Random Variables</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="RANDVAR.html"><a href="RANDVAR.html#objectives-9"><i class="fa fa-check"></i><b>10.1</b> Objectives</a></li>
-<li class="chapter" data-level="10.2" data-path="RANDVAR.html"><a href="RANDVAR.html#homework-9"><i class="fa fa-check"></i><b>10.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="10.2.1" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-1-9"><i class="fa fa-check"></i><b>10.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="10.2.2" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-2-9"><i class="fa fa-check"></i><b>10.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="10.2.3" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-3-7"><i class="fa fa-check"></i><b>10.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="10.2.4" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-4-3"><i class="fa fa-check"></i><b>10.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="10.2.5" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-5-2"><i class="fa fa-check"></i><b>10.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="10.2.6" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-6-1"><i class="fa fa-check"></i><b>10.2.6</b> Problem 6</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html"><i class="fa fa-check"></i><b>11</b> Continuous Random Variables</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#objectives-10"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
-<li class="chapter" data-level="11.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#homework-10"><i class="fa fa-check"></i><b>11.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="11.2.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-1-10"><i class="fa fa-check"></i><b>11.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="11.2.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-2-10"><i class="fa fa-check"></i><b>11.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html"><i class="fa fa-check"></i><b>12</b> Named Discrete Distributions</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#objectives-11"><i class="fa fa-check"></i><b>12.1</b> Objectives</a></li>
-<li class="chapter" data-level="12.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#homework-11"><i class="fa fa-check"></i><b>12.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-1-11"><i class="fa fa-check"></i><b>12.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="12.2.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-2-11"><i class="fa fa-check"></i><b>12.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="12.2.3" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-3-8"><i class="fa fa-check"></i><b>12.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html"><i class="fa fa-check"></i><b>13</b> Named Continuous Distributions</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#objectives-12"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
-<li class="chapter" data-level="13.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#homework-12"><i class="fa fa-check"></i><b>13.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-1-12"><i class="fa fa-check"></i><b>13.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="13.2.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-2-12"><i class="fa fa-check"></i><b>13.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="13.2.3" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-3-9"><i class="fa fa-check"></i><b>13.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="13.2.4" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-4-4"><i class="fa fa-check"></i><b>13.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="13.2.5" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-5-3"><i class="fa fa-check"></i><b>13.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="13.2.6" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-6-2"><i class="fa fa-check"></i><b>13.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="13.2.7" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-7-1"><i class="fa fa-check"></i><b>13.2.7</b> Problem 7</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html"><i class="fa fa-check"></i><b>14</b> Multivariate Distributions</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#objectives-13"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
-<li class="chapter" data-level="14.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#homework-13"><i class="fa fa-check"></i><b>14.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-1-13"><i class="fa fa-check"></i><b>14.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="14.2.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-2-13"><i class="fa fa-check"></i><b>14.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="14.2.3" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-3-10"><i class="fa fa-check"></i><b>14.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="14.2.4" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-4-5"><i class="fa fa-check"></i><b>14.2.4</b> Problem 4</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="EST.html"><a href="EST.html"><i class="fa fa-check"></i><b>15</b> Estimation Methods</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="EST.html"><a href="EST.html#objectives-14"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
-<li class="chapter" data-level="15.2" data-path="EST.html"><a href="EST.html#homework-14"><i class="fa fa-check"></i><b>15.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="EST.html"><a href="EST.html#problem-1-14"><i class="fa fa-check"></i><b>15.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="15.2.2" data-path="EST.html"><a href="EST.html#problem-2-14"><i class="fa fa-check"></i><b>15.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="15.2.3" data-path="EST.html"><a href="EST.html#problem-3-11"><i class="fa fa-check"></i><b>15.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="15.2.4" data-path="EST.html"><a href="EST.html#problem-4-6"><i class="fa fa-check"></i><b>15.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="15.2.5" data-path="EST.html"><a href="EST.html#problem-5-4"><i class="fa fa-check"></i><b>15.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>III Statistical Modeling</b></span></li>
-<li class="chapter" data-level="16" data-path="CS3.html"><a href="CS3.html"><i class="fa fa-check"></i><b>16</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="CS3.html"><a href="CS3.html#objectives-15"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
-<li class="chapter" data-level="16.2" data-path="CS3.html"><a href="CS3.html#homework-15"><i class="fa fa-check"></i><b>16.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="16.2.1" data-path="CS3.html"><a href="CS3.html#problem-1-15"><i class="fa fa-check"></i><b>16.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="16.2.2" data-path="CS3.html"><a href="CS3.html#problem-2-15"><i class="fa fa-check"></i><b>16.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="HYPOTEST.html"><a href="HYPOTEST.html"><i class="fa fa-check"></i><b>17</b> Hypothesis Testing</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#objectives-16"><i class="fa fa-check"></i><b>17.1</b> Objectives</a></li>
-<li class="chapter" data-level="17.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#homework-16"><i class="fa fa-check"></i><b>17.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="17.2.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-1-16"><i class="fa fa-check"></i><b>17.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="17.2.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-2-16"><i class="fa fa-check"></i><b>17.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="PVALUES.html"><a href="PVALUES.html"><i class="fa fa-check"></i><b>18</b> Empirical p-values</a>
-<ul>
-<li class="chapter" data-level="18.1" data-path="PVALUES.html"><a href="PVALUES.html#objective"><i class="fa fa-check"></i><b>18.1</b> Objective</a></li>
-<li class="chapter" data-level="18.2" data-path="PVALUES.html"><a href="PVALUES.html#homework-17"><i class="fa fa-check"></i><b>18.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="18.2.1" data-path="PVALUES.html"><a href="PVALUES.html#problem-1-17"><i class="fa fa-check"></i><b>18.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="18.2.2" data-path="PVALUES.html"><a href="PVALUES.html#problem-2-17"><i class="fa fa-check"></i><b>18.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="18.2.3" data-path="PVALUES.html"><a href="PVALUES.html#problem-3-12"><i class="fa fa-check"></i><b>18.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="CLT.html"><a href="CLT.html"><i class="fa fa-check"></i><b>19</b> Central Limit Theorem</a>
-<ul>
-<li class="chapter" data-level="19.1" data-path="CLT.html"><a href="CLT.html#objectives-17"><i class="fa fa-check"></i><b>19.1</b> Objectives</a></li>
-<li class="chapter" data-level="19.2" data-path="CLT.html"><a href="CLT.html#homework-18"><i class="fa fa-check"></i><b>19.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="19.2.1" data-path="CLT.html"><a href="CLT.html#problem-1-18"><i class="fa fa-check"></i><b>19.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="19.2.2" data-path="CLT.html"><a href="CLT.html#problem-2-18"><i class="fa fa-check"></i><b>19.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="19.2.3" data-path="CLT.html"><a href="CLT.html#problem-3-13"><i class="fa fa-check"></i><b>19.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="19.2.4" data-path="CLT.html"><a href="CLT.html#problem-4-7"><i class="fa fa-check"></i><b>19.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="19.2.5" data-path="CLT.html"><a href="CLT.html#problem-5-5"><i class="fa fa-check"></i><b>19.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="20" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>20</b> Confidence Intervals</a>
-<ul>
-<li class="chapter" data-level="20.1" data-path="CI.html"><a href="CI.html#objectives-18"><i class="fa fa-check"></i><b>20.1</b> Objectives</a></li>
-<li class="chapter" data-level="20.2" data-path="CI.html"><a href="CI.html#homework-19"><i class="fa fa-check"></i><b>20.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="20.2.1" data-path="CI.html"><a href="CI.html#problem-1-19"><i class="fa fa-check"></i><b>20.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="20.2.2" data-path="CI.html"><a href="CI.html#problem-2-19"><i class="fa fa-check"></i><b>20.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="20.2.3" data-path="CI.html"><a href="CI.html#problem-3-14"><i class="fa fa-check"></i><b>20.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="20.2.4" data-path="CI.html"><a href="CI.html#problem-4-8"><i class="fa fa-check"></i><b>20.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="20.2.5" data-path="CI.html"><a href="CI.html#problem-5-6"><i class="fa fa-check"></i><b>20.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="20.2.6" data-path="CI.html"><a href="CI.html#problem-6-3"><i class="fa fa-check"></i><b>20.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="20.2.7" data-path="CI.html"><a href="CI.html#problem-7-2"><i class="fa fa-check"></i><b>20.2.7</b> Problem 7</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="21" data-path="BOOT.html"><a href="BOOT.html"><i class="fa fa-check"></i><b>21</b> Bootstrap</a>
-<ul>
-<li class="chapter" data-level="21.1" data-path="BOOT.html"><a href="BOOT.html#objectives-19"><i class="fa fa-check"></i><b>21.1</b> Objectives</a></li>
-<li class="chapter" data-level="21.2" data-path="BOOT.html"><a href="BOOT.html#homework-20"><i class="fa fa-check"></i><b>21.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="21.2.1" data-path="BOOT.html"><a href="BOOT.html#problem-1-20"><i class="fa fa-check"></i><b>21.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="21.2.2" data-path="BOOT.html"><a href="BOOT.html#problem-2-20"><i class="fa fa-check"></i><b>21.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="21.2.3" data-path="BOOT.html"><a href="BOOT.html#problem-3-15"><i class="fa fa-check"></i><b>21.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="22" data-path="ADDTESTS.html"><a href="ADDTESTS.html"><i class="fa fa-check"></i><b>22</b> Additional Hypothesis Tests</a>
-<ul>
-<li class="chapter" data-level="22.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#objectives-20"><i class="fa fa-check"></i><b>22.1</b> Objectives</a></li>
-<li class="chapter" data-level="22.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#homework-21"><i class="fa fa-check"></i><b>22.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="22.2.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-1-21"><i class="fa fa-check"></i><b>22.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="22.2.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-2-21"><i class="fa fa-check"></i><b>22.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="22.2.3" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-3-16"><i class="fa fa-check"></i><b>22.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>IV Predictive Statistical Modeling</b></span></li>
-<li class="chapter" data-level="23" data-path="CS4.html"><a href="CS4.html"><i class="fa fa-check"></i><b>23</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="23.1" data-path="CS4.html"><a href="CS4.html#objectives-21"><i class="fa fa-check"></i><b>23.1</b> Objectives</a></li>
-<li class="chapter" data-level="23.2" data-path="CS4.html"><a href="CS4.html#homework-22"><i class="fa fa-check"></i><b>23.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="23.2.1" data-path="CS4.html"><a href="CS4.html#problem-1-22"><i class="fa fa-check"></i><b>23.2.1</b> Problem 1</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="24" data-path="LRBASICS.html"><a href="LRBASICS.html"><i class="fa fa-check"></i><b>24</b> Linear Regression Basics</a>
-<ul>
-<li class="chapter" data-level="24.1" data-path="LRBASICS.html"><a href="LRBASICS.html#objectives-22"><i class="fa fa-check"></i><b>24.1</b> Objectives</a></li>
-<li class="chapter" data-level="24.2" data-path="LRBASICS.html"><a href="LRBASICS.html#homework-23"><i class="fa fa-check"></i><b>24.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="24.2.1" data-path="LRBASICS.html"><a href="LRBASICS.html#problem-1-23"><i class="fa fa-check"></i><b>24.2.1</b> Problem 1</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="25" data-path="LRINF.html"><a href="LRINF.html"><i class="fa fa-check"></i><b>25</b> Linear Regression Inference</a>
-<ul>
-<li class="chapter" data-level="25.1" data-path="LRINF.html"><a href="LRINF.html#objectives-23"><i class="fa fa-check"></i><b>25.1</b> Objectives</a></li>
-<li class="chapter" data-level="25.2" data-path="LRINF.html"><a href="LRINF.html#homework-24"><i class="fa fa-check"></i><b>25.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="25.2.1" data-path="LRINF.html"><a href="LRINF.html#problem-1-24"><i class="fa fa-check"></i><b>25.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="25.2.2" data-path="LRINF.html"><a href="LRINF.html#problem-2-22"><i class="fa fa-check"></i><b>25.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="25.2.3" data-path="LRINF.html"><a href="LRINF.html#problem-3-17"><i class="fa fa-check"></i><b>25.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="26" data-path="LRDIAG.html"><a href="LRDIAG.html"><i class="fa fa-check"></i><b>26</b> Regression Diagnostics</a>
-<ul>
-<li class="chapter" data-level="26.1" data-path="LRDIAG.html"><a href="LRDIAG.html#objectives-24"><i class="fa fa-check"></i><b>26.1</b> Objectives</a></li>
-<li class="chapter" data-level="26.2" data-path="LRDIAG.html"><a href="LRDIAG.html#homework-25"><i class="fa fa-check"></i><b>26.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="26.2.1" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-1-25"><i class="fa fa-check"></i><b>26.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="26.2.2" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-2-23"><i class="fa fa-check"></i><b>26.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="26.2.3" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-3-18"><i class="fa fa-check"></i><b>26.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="27" data-path="LRSIM.html"><a href="LRSIM.html"><i class="fa fa-check"></i><b>27</b> Simulation Based Linear Regression</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="LRSIM.html"><a href="LRSIM.html#objectives-25"><i class="fa fa-check"></i><b>27.1</b> Objectives</a></li>
-<li class="chapter" data-level="27.2" data-path="LRSIM.html"><a href="LRSIM.html#homework-26"><i class="fa fa-check"></i><b>27.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="27.2.1" data-path="LRSIM.html"><a href="LRSIM.html#problem-1-26"><i class="fa fa-check"></i><b>27.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="27.2.2" data-path="LRSIM.html"><a href="LRSIM.html#problem-2-24"><i class="fa fa-check"></i><b>27.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="28" data-path="LRMULTI.html"><a href="LRMULTI.html"><i class="fa fa-check"></i><b>28</b> Multiple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="28.1" data-path="LRMULTI.html"><a href="LRMULTI.html#objectives-26"><i class="fa fa-check"></i><b>28.1</b> Objectives</a></li>
-<li class="chapter" data-level="28.2" data-path="LRMULTI.html"><a href="LRMULTI.html#homework-27"><i class="fa fa-check"></i><b>28.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="28.2.1" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-1-27"><i class="fa fa-check"></i><b>28.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="28.2.2" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-2-25"><i class="fa fa-check"></i><b>28.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="29" data-path="LOGREG.html"><a href="LOGREG.html"><i class="fa fa-check"></i><b>29</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="29.1" data-path="LOGREG.html"><a href="LOGREG.html#objectives-27"><i class="fa fa-check"></i><b>29.1</b> Objectives</a></li>
-<li class="chapter" data-level="29.2" data-path="LOGREG.html"><a href="LOGREG.html#homework-problems"><i class="fa fa-check"></i><b>29.2</b> Homework Problems</a>
-<ul>
-<li class="chapter" data-level="29.2.1" data-path="LOGREG.html"><a href="LOGREG.html#problem-1-28"><i class="fa fa-check"></i><b>29.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="29.2.2" data-path="LOGREG.html"><a href="LOGREG.html#problem-2-26"><i class="fa fa-check"></i><b>29.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Solutions for Probability and Statistics for Scientists and Engineers</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solutions for Probability and Statistics for Scientists and Engineers</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Descriptive Statistical Modeling</li>
+<li><a class="" href="CS1.html"><span class="header-section-number">1</span> Case Study</a></li>
+<li><a class="" href="DB.html"><span class="header-section-number">2</span> Data Basics</a></li>
+<li><a class="" href="ODCP.html"><span class="header-section-number">3</span> Overview of Data Collection Principles</a></li>
+<li><a class="" href="STUDY.html"><span class="header-section-number">4</span> Studies</a></li>
+<li><a class="" href="NUMDATA.html"><span class="header-section-number">5</span> Numerical Data</a></li>
+<li><a class="" href="CATDATA.html"><span class="header-section-number">6</span> Categorical Data</a></li>
+<li class="book-part">Probability Modeling</li>
+<li><a class="" href="CS2.html"><span class="header-section-number">7</span> Case Study</a></li>
+<li><a class="" href="PROBRULES.html"><span class="header-section-number">8</span> Probability Rules</a></li>
+<li><a class="" href="CONDPROB.html"><span class="header-section-number">9</span> Conditional Probability</a></li>
+<li><a class="" href="RANDVAR.html"><span class="header-section-number">10</span> Random Variables</a></li>
+<li><a class="" href="CONRANDVAR.html"><span class="header-section-number">11</span> Continuous Random Variables</a></li>
+<li><a class="" href="DISCRETENAMED.html"><span class="header-section-number">12</span> Named Discrete Distributions</a></li>
+<li><a class="" href="CONTNNAMED.html"><span class="header-section-number">13</span> Named Continuous Distributions</a></li>
+<li><a class="" href="MULTIDISTS.html"><span class="header-section-number">14</span> Multivariate Distributions</a></li>
+<li><a class="" href="EST.html"><span class="header-section-number">15</span> Estimation Methods</a></li>
+<li class="book-part">Statistical Modeling</li>
+<li><a class="" href="CS3.html"><span class="header-section-number">16</span> Case Study</a></li>
+<li><a class="" href="HYPOTEST.html"><span class="header-section-number">17</span> Hypothesis Testing</a></li>
+<li><a class="" href="PVALUES.html"><span class="header-section-number">18</span> Empirical p-values</a></li>
+<li><a class="" href="CLT.html"><span class="header-section-number">19</span> Central Limit Theorem</a></li>
+<li><a class="" href="CI.html"><span class="header-section-number">20</span> Confidence Intervals</a></li>
+<li><a class="" href="BOOT.html"><span class="header-section-number">21</span> Bootstrap</a></li>
+<li><a class="" href="ADDTESTS.html"><span class="header-section-number">22</span> Additional Hypothesis Tests</a></li>
+<li class="book-part">Predictive Statistical Modeling</li>
+<li><a class="" href="CS4.html"><span class="header-section-number">23</span> Case Study</a></li>
+<li><a class="" href="LRBASICS.html"><span class="header-section-number">24</span> Linear Regression Basics</a></li>
+<li><a class="" href="LRINF.html"><span class="header-section-number">25</span> Linear Regression Inference</a></li>
+<li><a class="" href="LRDIAG.html"><span class="header-section-number">26</span> Regression Diagnostics</a></li>
+<li><a class="" href="LRSIM.html"><span class="header-section-number">27</span> Simulation Based Linear Regression</a></li>
+<li><a class="" href="LRMULTI.html"><span class="header-section-number">28</span> Multiple Linear Regression</a></li>
+<li><a class="active" href="LOGREG.html"><span class="header-section-number">29</span> Logistic Regression</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="LOGREG" class="section level1" number="29">
-<h1><span class="header-section-number">Chapter 29</span> Logistic Regression</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="LOGREG" class="section level1" number="29">
+<h1>
+<span class="header-section-number">29</span> Logistic Regression<a class="anchor" aria-label="anchor" href="#LOGREG"><i class="fas fa-link"></i></a>
+</h1>
 <div id="objectives-27" class="section level2" number="29.1">
-<h2><span class="header-section-number">29.1</span> Objectives</h2>
+<h2>
+<span class="header-section-number">29.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-27"><i class="fas fa-link"></i></a>
+</h2>
 <ol style="list-style-type: decimal">
-<li>Using <code>R</code>, conduct logistic regression and interpret the output and perform model selection.<br />
+<li>Using <code>R</code>, conduct logistic regression and interpret the output and perform model selection.<br>
 </li>
-<li>Write the logistic regression model and predict outputs for given inputs.<br />
+<li>Write the logistic regression model and predict outputs for given inputs.<br>
 </li>
-<li>Find confidence intervals for parameter estimates and predictions.<br />
+<li>Find confidence intervals for parameter estimates and predictions.<br>
 </li>
 <li>Create and interpret a confusion matrix.</li>
 </ol>
 </div>
 <div id="homework-problems" class="section level2" number="29.2">
-<h2><span class="header-section-number">29.2</span> Homework Problems</h2>
+<h2>
+<span class="header-section-number">29.2</span> Homework Problems<a class="anchor" aria-label="anchor" href="#homework-problems"><i class="fas fa-link"></i></a>
+</h2>
 <div id="problem-1-28" class="section level3" number="29.2.1">
-<h3><span class="header-section-number">29.2.1</span> Problem 1</h3>
+<h3>
+<span class="header-section-number">29.2.1</span> Problem 1<a class="anchor" aria-label="anchor" href="#problem-1-28"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Possum classification</strong></p>
 <p>Let’s investigate the <code>possum</code> data set again. This time we want to model a binary outcome variable. As a reminder, the common brushtail possum of the Australia region is a bit cuter than its distant cousin, the American opossum. We consider 104 brushtail possums from two regions in Australia, where the possums may be considered a random sample from the population. The first region is Victoria, which is in the eastern half of Australia and traverses the southern coast. The second region consists of New South Wales and Queensland, which make up eastern and northeastern Australia.</p>
 <p>We use logistic regression to differentiate between possums in these two regions. The outcome variable, called <code>pop</code>, takes value <code>Vic</code> when a possum is from Victoria and <code>other</code> when it is from New South Wales or Queensland. We consider five predictors: <code>sex</code>, <code>head_l</code>, <code>skull_w</code>, <code>total_l</code>, and <code>tail_l</code>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Explore the data by making histograms of the quantitative variables, and bar charts of the discrete variables. Are there any outliers that are likely to have a very large influence on the logistic regression model?</li>
 </ol>
-<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="LOGREG.html#cb676-1" aria-hidden="true" tabindex="-1"></a>possum <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/possum.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb676-2"><a href="LOGREG.html#cb676-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pop,sex,head_l,skull_w,total_l,tail_l) <span class="sc">%&gt;%</span></span>
-<span id="cb676-3"><a href="LOGREG.html#cb676-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pop=</span><span class="fu">factor</span>(pop),<span class="at">sex=</span><span class="fu">factor</span>(sex))</span></code></pre></div>
-<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="LOGREG.html#cb677-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(possum)</span></code></pre></div>
+<div class="sourceCode" id="cb676"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/possum.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">pop</span>,<span class="va">sex</span>,<span class="va">head_l</span>,<span class="va">skull_w</span>,<span class="va">total_l</span>,<span class="va">tail_l</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pop<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">pop</span><span class="op">)</span>,sex<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaicCore/man/inspect.html">inspect</a></span><span class="op">(</span><span class="va">possum</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## categorical variables:  
 ##   name  class levels   n missing                                  distribution
@@ -540,44 +141,53 @@ div.csl-indent {
 ## ...2       0
 ## ...3       0
 ## ...4       0</code></pre>
-<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="LOGREG.html#cb679-1" aria-hidden="true" tabindex="-1"></a>possum <span class="sc">%&gt;%</span></span>
-<span id="cb679-2"><a href="LOGREG.html#cb679-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_props</span>(<span class="sc">~</span>pop,<span class="at">fill=</span><span class="st">&quot;cyan&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb679-3"><a href="LOGREG.html#cb679-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb679-4"><a href="LOGREG.html#cb679-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x=</span><span class="st">&quot;Population&quot;</span>)</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="LOGREG.html#cb680-1" aria-hidden="true" tabindex="-1"></a>possum <span class="sc">%&gt;%</span></span>
-<span id="cb680-2"><a href="LOGREG.html#cb680-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_props</span>(<span class="sc">~</span>sex,<span class="at">fill=</span><span class="st">&quot;cyan&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb680-3"><a href="LOGREG.html#cb680-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb680-4"><a href="LOGREG.html#cb680-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x=</span><span class="st">&quot;Gender&quot;</span>)</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="LOGREG.html#cb681-1" aria-hidden="true" tabindex="-1"></a>possum <span class="sc">%&gt;%</span></span>
-<span id="cb681-2"><a href="LOGREG.html#cb681-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_boxplot</span>(<span class="sc">~</span>head_l) <span class="sc">%&gt;%</span></span>
-<span id="cb681-3"><a href="LOGREG.html#cb681-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>())</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="LOGREG.html#cb682-1" aria-hidden="true" tabindex="-1"></a>possum <span class="sc">%&gt;%</span></span>
-<span id="cb682-2"><a href="LOGREG.html#cb682-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_boxplot</span>(<span class="sc">~</span>skull_w) <span class="sc">%&gt;%</span></span>
-<span id="cb682-3"><a href="LOGREG.html#cb682-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>())</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="LOGREG.html#cb683-1" aria-hidden="true" tabindex="-1"></a>possum <span class="sc">%&gt;%</span></span>
-<span id="cb683-2"><a href="LOGREG.html#cb683-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_boxplot</span>(<span class="sc">~</span>total_l) <span class="sc">%&gt;%</span></span>
-<span id="cb683-3"><a href="LOGREG.html#cb683-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>())</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="LOGREG.html#cb684-1" aria-hidden="true" tabindex="-1"></a>possum <span class="sc">%&gt;%</span></span>
-<span id="cb684-2"><a href="LOGREG.html#cb684-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_boxplot</span>(<span class="sc">~</span>tail_l) <span class="sc">%&gt;%</span></span>
-<span id="cb684-3"><a href="LOGREG.html#cb684-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>())</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb679"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_props</span><span class="op">(</span><span class="op">~</span><span class="va">pop</span>,fill<span class="op">=</span><span class="st">"cyan"</span>,color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_labs</span><span class="op">(</span>x<span class="op">=</span><span class="st">"Population"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="sourceCode" id="cb680"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_props</span><span class="op">(</span><span class="op">~</span><span class="va">sex</span>,fill<span class="op">=</span><span class="st">"cyan"</span>,color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_labs</span><span class="op">(</span>x<span class="op">=</span><span class="st">"Gender"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb681"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_boxplot</span><span class="op">(</span><span class="op">~</span><span class="va">head_l</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="sourceCode" id="cb682"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_boxplot</span><span class="op">(</span><span class="op">~</span><span class="va">skull_w</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="sourceCode" id="cb683"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_boxplot</span><span class="op">(</span><span class="op">~</span><span class="va">total_l</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<div class="sourceCode" id="cb684"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_boxplot</span><span class="op">(</span><span class="op">~</span><span class="va">tail_l</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 <p>There are some potential outliers for skull width but otherwise not much concern.</p>
-<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="LOGREG.html#cb685-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(possum[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>],<span class="at">lower.panel =</span> panel.smooth)</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<div class="sourceCode" id="cb685"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">possum</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>,lower.panel <span class="op">=</span> <span class="va">panel.smooth</span><span class="op">)</span></code></pre></div>
+<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-9-1.png" width="672">
 We can see that <code>head_l</code> is correlated with the other three variables. This will cause some multicollinearity problems.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Build a logistic regression model with all the variable. Report a summary of the model.</li>
 </ol>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="LOGREG.html#cb686-1" aria-hidden="true" tabindex="-1"></a>possum_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(pop<span class="sc">==</span><span class="st">&quot;Vic&quot;</span><span class="sc">~</span>.,<span class="at">data=</span>possum,<span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="LOGREG.html#cb687-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(possum_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb686"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">pop</span><span class="op">==</span><span class="st">"Vic"</span><span class="op">~</span><span class="va">.</span>,data<span class="op">=</span><span class="va">possum</span>,family<span class="op">=</span><span class="st">"binomial"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb687"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">possum_mod</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = pop == &quot;Vic&quot; ~ ., family = &quot;binomial&quot;, data = possum)
+## glm(formula = pop == "Vic" ~ ., family = "binomial", data = possum)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
@@ -592,7 +202,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## total_l       0.6488     0.1531   4.236 2.27e-05 ***
 ## tail_l       -1.8708     0.3741  -5.001 5.71e-07 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -601,7 +211,8 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## AIC: 84.155
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
-<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="LOGREG.html#cb689-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(possum_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb689"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/confint.html">confint</a></span><span class="op">(</span><span class="va">possum_mod</span><span class="op">)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##                  2.5 %      97.5 %
 ## (Intercept) 18.8530781 64.66444839
@@ -614,12 +225,14 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <li>Using the p-values decide if you want to remove a variable(S) and if so build that model.</li>
 </ol>
 <p>Let’s remove <code>head_l</code> first.</p>
-<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="LOGREG.html#cb692-1" aria-hidden="true" tabindex="-1"></a>possum_mod_red <span class="ot">&lt;-</span> <span class="fu">glm</span>(pop<span class="sc">==</span><span class="st">&quot;Vic&quot;</span><span class="sc">~</span>sex<span class="sc">+</span>skull_w<span class="sc">+</span>total_l<span class="sc">+</span>tail_l,<span class="at">data=</span>possum,<span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="LOGREG.html#cb693-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(possum_mod_red)</span></code></pre></div>
+<div class="sourceCode" id="cb692"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">possum_mod_red</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">pop</span><span class="op">==</span><span class="st">"Vic"</span><span class="op">~</span><span class="va">sex</span><span class="op">+</span><span class="va">skull_w</span><span class="op">+</span><span class="va">total_l</span><span class="op">+</span><span class="va">tail_l</span>,data<span class="op">=</span><span class="va">possum</span>,family<span class="op">=</span><span class="st">"binomial"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb693"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">possum_mod_red</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = pop == &quot;Vic&quot; ~ sex + skull_w + total_l + tail_l, 
-##     family = &quot;binomial&quot;, data = possum)
+## glm(formula = pop == "Vic" ~ sex + skull_w + total_l + tail_l, 
+##     family = "binomial", data = possum)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
@@ -633,7 +246,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## total_l       0.5687     0.1322   4.302 1.69e-05 ***
 ## tail_l       -1.8057     0.3599  -5.016 5.26e-07 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -646,7 +259,8 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <ol start="4" style="list-style-type: lower-alpha">
 <li>For any variable you decide to remove, build a 95% confidence interval for the parameter.</li>
 </ol>
-<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="LOGREG.html#cb695-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(possum_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb695"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/confint.html">confint</a></span><span class="op">(</span><span class="va">possum_mod</span><span class="op">)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##                  2.5 %      97.5 %
 ## (Intercept) 18.8530781 64.66444839
@@ -657,9 +271,11 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## tail_l      -2.7170468 -1.23231969</code></pre>
 <p>We are 95% confident that the true slope coefficient for <code>head_l</code> is between -0.44 and 0.108.</p>
 <p>The bootstrap is not working for this problem. It may be that we have convergence issues when we resample the data. This is a reminder that we need to be careful and not just run methods without checking results. Here is the code:</p>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="LOGREG.html#cb698-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">952</span>)</span>
-<span id="cb698-2"><a href="LOGREG.html#cb698-2" aria-hidden="true" tabindex="-1"></a>results<span class="ot">&lt;-</span><span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">glm</span>(pop<span class="sc">==</span><span class="st">&quot;Vic&quot;</span><span class="sc">~</span>.,<span class="at">data=</span><span class="fu">resample</span>(possum),<span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="LOGREG.html#cb699-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb698"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">952</span><span class="op">)</span>
+<span class="va">results</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/do.html">do</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">pop</span><span class="op">==</span><span class="st">"Vic"</span><span class="op">~</span><span class="va">.</span>,data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/resample.html">resample</a></span><span class="op">(</span><span class="va">possum</span><span class="op">)</span>,family<span class="op">=</span><span class="st">"binomial"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb699"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>##     Intercept          sexm        head_l       skull_w       total_l
 ## 1 -1184.61865  2.122389e+01  3.861560e+00  2.749263e+00  7.274005e+00
 ## 2  6371.55494 -1.301513e+02  1.023732e+01 -2.738815e+01 -1.076913e+01
@@ -667,13 +283,15 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 4   -25.18662 -1.852185e+01  2.097593e+01 -1.353619e+01  1.483815e+01
 ## 5   -26.56607  2.167890e-13 -4.396307e-15  5.075768e-15  4.484497e-14
 ## 6 -1025.00035  6.159665e+01  2.526181e+01 -2.032143e+01  1.438639e+01</code></pre>
-<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="LOGREG.html#cb701-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb701-2"><a href="LOGREG.html#cb701-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_histogram</span>(<span class="sc">~</span>head_l,<span class="at">fill=</span><span class="st">&quot;cyan&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb701-3"><a href="LOGREG.html#cb701-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb701-4"><a href="LOGREG.html#cb701-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">title=</span><span class="st">&quot;Bootstrap sampling distribtuion&quot;</span>,</span>
-<span id="cb701-5"><a href="LOGREG.html#cb701-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">x=</span><span class="st">&quot;sex paramater estimate&quot;</span>)</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="LOGREG.html#cb702-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cdata</span>(<span class="sc">~</span>head_l,<span class="at">data=</span>results)</span></code></pre></div>
+<div class="sourceCode" id="cb701"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_histogram</span><span class="op">(</span><span class="op">~</span><span class="va">head_l</span>,fill<span class="op">=</span><span class="st">"cyan"</span>,color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_labs</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Bootstrap sampling distribtuion"</span>,
+          x<span class="op">=</span><span class="st">"sex paramater estimate"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
+<div class="sourceCode" id="cb702"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/pqrdata.html">cdata</a></span><span class="op">(</span><span class="op">~</span><span class="va">head_l</span>,data<span class="op">=</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <pre><code>##          lower    upper central.p
 ## 2.5% -187.5252 63.61867      0.95</code></pre>
 <p>This interval is too large. The resampling process has too much variation in it. This could be due to the small sample size and the multicollinearity.</p>
@@ -694,8 +312,9 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <li>Suppose we see a brushtail possum at a zoo in the US, and a sign says the possum had been captured in the wild in Australia, but it doesn’t say which part of Australia. However, the sign does indicate that the possum is male, its skull is about 63 mm wide, its tail is 37 cm long, and its total length is 83 cm. What is the reduced model’s computed probability that this possum is from Victoria? How confident are you in the model’s accuracy of this probability calculation?</li>
 </ol>
 <p>Let’s predict the outcome. We use <code>response</code> for the type to put the answer in the form of a probability. See the help menu on <code>predict.glm</code> for more information.</p>
-<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="LOGREG.html#cb704-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(possum_mod_red,<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">sex=</span><span class="st">&quot;m&quot;</span>,<span class="at">skull_w=</span><span class="dv">63</span>,<span class="at">tail_l=</span><span class="dv">37</span>,<span class="at">total_l=</span><span class="dv">83</span>),</span>
-<span id="cb704-2"><a href="LOGREG.html#cb704-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">type=</span><span class="st">&quot;response&quot;</span>,<span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">possum_mod_red</span>,newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sex<span class="op">=</span><span class="st">"m"</span>,skull_w<span class="op">=</span><span class="fl">63</span>,tail_l<span class="op">=</span><span class="fl">37</span>,total_l<span class="op">=</span><span class="fl">83</span><span class="op">)</span>,
+        type<span class="op">=</span><span class="st">"response"</span>,se.fit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## $fit
 ##           1 
 ## 0.006205055 
@@ -708,36 +327,32 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## [1] 1</code></pre>
 <p>While the probability, 0.006, is very near zero, we have not run diagnostics on the model. We should also have a little skepticism that the model will hold for a possum found in a US zoo. However, it is encouraging that the possum was caught in the wild.</p>
 <p>As a rough sense of the accuracy, we will use the standard error. The errors are really binomial but we are trying to use a normal approximation. If you remember back to our block on probability, with such a low probability, this assumption of normality is suspect. However, we will use it to give us an upper bound.</p>
-<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="LOGREG.html#cb706-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0062</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>.<span class="dv">008</span></span></code></pre></div>
+<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">0.0062</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">.008</span></code></pre></div>
 <pre><code>## [1] -0.00948  0.02188</code></pre>
 <p>So at most, the probability of the possum being from Victoria is 2%.</p>
 </div>
 <div id="problem-2-26" class="section level3" number="29.2.2">
-<h3><span class="header-section-number">29.2.2</span> Problem 2</h3>
+<h3>
+<span class="header-section-number">29.2.2</span> Problem 2<a class="anchor" aria-label="anchor" href="#problem-2-26"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Medical school admission</strong></p>
 <p>The file <code>MedGPA.csv</code> in the <code>data</code> folder has information on medical school admission status and GPA and standardized test scores gathered on 55 medical school applicants from a liberal arts college in the Midwest.</p>
 <p>The variables are:</p>
 <p><code>Accept Status</code>: A=accepted to medical school or D=denied admission
-<code>Acceptance</code>: Indicator for Accept: 1=accepted or 0=denied<br />
-<code>Sex</code>: F=female or M=male<br />
-<code>BCPM</code>: Bio/Chem/Physics/Math grade point average<br />
-<code>GPA</code>: College grade point average<br />
-<code>VR</code>: Verbal reasoning (subscore)<br />
-<code>PS</code>: Physical sciences (subscore)<br />
-<code>WS</code>: Writing sample (subcore)<br />
-<code>BS</code>: Biological sciences (subscore)<br />
-<code>MCAT</code>: Score on the MCAT exam (sum of CR+PS+WS+BS)<br />
-<code>Apps</code>: Number of medical schools applied to</p>
+<code>Acceptance</code>: Indicator for Accept: 1=accepted or 0=denied<br><code>Sex</code>: F=female or M=male<br><code>BCPM</code>: Bio/Chem/Physics/Math grade point average<br><code>GPA</code>: College grade point average<br><code>VR</code>: Verbal reasoning (subscore)<br><code>PS</code>: Physical sciences (subscore)<br><code>WS</code>: Writing sample (subcore)<br><code>BS</code>: Biological sciences (subscore)<br><code>MCAT</code>: Score on the MCAT exam (sum of CR+PS+WS+BS)<br><code>Apps</code>: Number of medical schools applied to</p>
 <ol style="list-style-type: lower-alpha">
 <li>Build a logistic regression model to predict <code>Acceptance</code> from <code>GPA</code> and `Sex.</li>
 </ol>
-<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="LOGREG.html#cb708-1" aria-hidden="true" tabindex="-1"></a>MedGPA <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/MedGPA.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="LOGREG.html#cb709-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(MedGPA)</span></code></pre></div>
+<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">MedGPA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/MedGPA.csv"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">MedGPA</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 55
 ## Columns: 11
-## $ Accept     &lt;chr&gt; &quot;D&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;D&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;,…
+## $ Accept     &lt;chr&gt; "D", "A", "A", "A", "A", "A", "A", "D", "A", "A", "A", "A",…
 ## $ Acceptance &lt;dbl&gt; 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1,…
-## $ Sex        &lt;chr&gt; &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;,…
+## $ Sex        &lt;chr&gt; "F", "M", "F", "F", "F", "M", "M", "M", "F", "F", "F", "F",…
 ## $ BCPM       &lt;dbl&gt; 3.59, 3.75, 3.24, 3.74, 3.53, 3.59, 3.85, 3.26, 3.74, 3.86,…
 ## $ GPA        &lt;dbl&gt; 3.62, 3.84, 3.23, 3.69, 3.38, 3.72, 3.89, 3.34, 3.71, 3.89,…
 ## $ VR         &lt;dbl&gt; 11, 12, 9, 12, 9, 10, 11, 11, 8, 9, 11, 11, 8, 9, 11, 12, 8…
@@ -746,11 +361,13 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## $ BS         &lt;dbl&gt; 9, 12, 9, 10, 11, 10, 11, 9, 11, 10, 11, 8, 10, 10, 7, 10, …
 ## $ MCAT       &lt;dbl&gt; 38, 45, 33, 40, 35, 36, 40, 39, 35, 34, 39, 31, 35, 32, 32,…
 ## $ Apps       &lt;dbl&gt; 5, 3, 19, 5, 11, 5, 5, 7, 5, 11, 6, 9, 5, 8, 15, 6, 6, 1, 5…</code></pre>
-<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb711-1"><a href="LOGREG.html#cb711-1" aria-hidden="true" tabindex="-1"></a>med_mod<span class="ot">&lt;-</span><span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>GPA<span class="sc">+</span>Sex,<span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)</span></code></pre></div>
-<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="LOGREG.html#cb712-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(med_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">med_mod</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">GPA</span><span class="op">+</span><span class="va">Sex</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">med_mod</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = Accept == &quot;D&quot; ~ GPA + Sex, family = binomial, data = MedGPA)
+## glm(formula = Accept == "D" ~ GPA + Sex, family = binomial, data = MedGPA)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
@@ -762,7 +379,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## GPA          -6.1324     1.8283  -3.354 0.000796 ***
 ## SexM          1.1697     0.7178   1.629 0.103210    
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -774,34 +391,40 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Generate a 95% confidence interval for the coefficient associated with <code>GPA</code>.</li>
 </ol>
-<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="LOGREG.html#cb714-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(med_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/confint.html">confint</a></span><span class="op">(</span><span class="va">med_mod</span><span class="op">)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##                   2.5 %    97.5 %
 ## (Intercept)  10.0651173 35.579760
 ## GPA         -10.2977983 -3.007544
 ## SexM         -0.1720454  2.697436</code></pre>
 <p>Let’s try the bootstrap for this problem.</p>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb717-1"><a href="LOGREG.html#cb717-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">819</span>)</span>
-<span id="cb717-2"><a href="LOGREG.html#cb717-2" aria-hidden="true" tabindex="-1"></a>results_med <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>GPA<span class="sc">+</span>Sex,<span class="at">data=</span><span class="fu">resample</span>(MedGPA),<span class="at">family=</span>binomial)</span></code></pre></div>
+<div class="sourceCode" id="cb717"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">819</span><span class="op">)</span>
+<span class="va">results_med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/do.html">do</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">GPA</span><span class="op">+</span><span class="va">Sex</span>,data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/resample.html">resample</a></span><span class="op">(</span><span class="va">MedGPA</span><span class="op">)</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="LOGREG.html#cb719-1" aria-hidden="true" tabindex="-1"></a>results_med <span class="sc">%&gt;%</span></span>
-<span id="cb719-2"><a href="LOGREG.html#cb719-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_histogram</span>(<span class="sc">~</span>GPA,<span class="at">fill=</span><span class="st">&quot;cyan&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb719-3"><a href="LOGREG.html#cb719-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb719-4"><a href="LOGREG.html#cb719-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">title=</span><span class="st">&quot;Bootstrap sampling distribtuion&quot;</span>,</span>
-<span id="cb719-5"><a href="LOGREG.html#cb719-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">x=</span><span class="st">&quot;GPA paramater estimate&quot;</span>)</span></code></pre></div>
-<p><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb720-1"><a href="LOGREG.html#cb720-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cdata</span>(<span class="sc">~</span>GPA,<span class="at">data=</span>results_med)</span></code></pre></div>
+<div class="sourceCode" id="cb719"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results_med</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_histogram</span><span class="op">(</span><span class="op">~</span><span class="va">GPA</span>,fill<span class="op">=</span><span class="st">"cyan"</span>,color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_labs</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Bootstrap sampling distribtuion"</span>,
+          x<span class="op">=</span><span class="st">"GPA paramater estimate"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="31-Logistic-Regression-Solutions_files/figure-html/unnamed-chunk-28-1.png" width="672"></div>
+<div class="sourceCode" id="cb720"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/pqrdata.html">cdata</a></span><span class="op">(</span><span class="op">~</span><span class="va">GPA</span>,data<span class="op">=</span><span class="va">results_med</span><span class="op">)</span></code></pre></div>
 <pre><code>##         lower     upper central.p
 ## 2.5% -14.2047 -3.213036      0.95</code></pre>
 <p>This is not so bad. It appears that the distribution of <code>GPA</code> is skewed to the left.</p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Fit a model with a polynomial of degree 2 in the <code>GPA</code>. Drop <code>Sex</code> from the model. Does a quadratic fit improve the model?</li>
 </ol>
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="LOGREG.html#cb722-1" aria-hidden="true" tabindex="-1"></a>med_mod2<span class="ot">&lt;-</span><span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span><span class="fu">poly</span>(GPA,<span class="dv">2</span>),<span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)</span></code></pre></div>
-<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="LOGREG.html#cb723-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(med_mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb722"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">med_mod2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">GPA</span>,<span class="fl">2</span><span class="op">)</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb723"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">med_mod2</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = Accept == &quot;D&quot; ~ poly(GPA, 2), family = binomial, 
+## glm(formula = Accept == "D" ~ poly(GPA, 2), family = binomial, 
 ##     data = MedGPA)
 ## 
 ## Deviance Residuals: 
@@ -814,7 +437,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## poly(GPA, 2)1 -10.7293     3.0664  -3.499 0.000467 ***
 ## poly(GPA, 2)2  -3.4967     3.0987  -1.128 0.259133    
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -827,21 +450,24 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Fit a model with just <code>GPA</code> and interpret the coefficient.</li>
 </ol>
-<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb725-1"><a href="LOGREG.html#cb725-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>GPA,<span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial))</span></code></pre></div>
+<div class="sourceCode" id="cb725"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">GPA</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)    19.2       5.63      3.41 0.000644
 ## 2 GPA            -5.45      1.58     -3.45 0.000553</code></pre>
-<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="LOGREG.html#cb727-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">5.454166</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb727"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5.454166</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.004278444</code></pre>
 <p>An increase of 1 in a student’s GPA decreases the odds of being denied acceptance by 0.00428. Remember that this is not a probability. As a reminder an odds of <span class="math inline">\(\frac{1}{2}\)</span> means the probability of success is <span class="math inline">\(\frac{1}{3}\)</span>. An odds of 1 means a probability of success of <span class="math inline">\(\frac{1}{2}\)</span>. Assume the initial odds are 1 if the odds are now 0.00428 smaller, then the probability of success is <span class="math inline">\(\frac{428}{10428}\)</span> or 0.04. The probability decreased by an order of magnitude.</p>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Try to add different predictors to come up with your best model. Do not use Acceptance and MCAT in the model.</li>
 </ol>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="LOGREG.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>.<span class="sc">-</span>Acceptance<span class="sc">-</span>MCAT,<span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)) <span class="sc">%&gt;%</span></span>
-<span id="cb729-2"><a href="LOGREG.html#cb729-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.adj=</span><span class="fu">p.adjust</span>(p.value)) <span class="sc">%&gt;%</span></span>
-<span id="cb729-3"><a href="LOGREG.html#cb729-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term,p.value,p.adj)</span></code></pre></div>
+<div class="sourceCode" id="cb729"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 9 × 3
 ##   term        p.value  p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
@@ -855,9 +481,10 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 8 BS          0.00490 0.0392
 ## 9 Apps        0.728   1</code></pre>
 <p>Let’s take out <code>VR</code>.</p>
-<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="LOGREG.html#cb731-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>.<span class="sc">-</span>Acceptance<span class="sc">-</span>MCAT<span class="sc">-</span>VR,<span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)) <span class="sc">%&gt;%</span></span>
-<span id="cb731-2"><a href="LOGREG.html#cb731-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.adj=</span><span class="fu">p.adjust</span>(p.value)) <span class="sc">%&gt;%</span></span>
-<span id="cb731-3"><a href="LOGREG.html#cb731-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term,p.value,p.adj)</span></code></pre></div>
+<div class="sourceCode" id="cb731"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span><span class="op">-</span><span class="va">VR</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 3
 ##   term        p.value  p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
@@ -870,9 +497,10 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 7 BS          0.00476 0.0333
 ## 8 Apps        0.742   0.742</code></pre>
 <p>Now let’s take out <code>Apps</code>.</p>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="LOGREG.html#cb733-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>.<span class="sc">-</span>Acceptance<span class="sc">-</span>MCAT<span class="sc">-</span>VR<span class="sc">-</span>Apps,<span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)) <span class="sc">%&gt;%</span></span>
-<span id="cb733-2"><a href="LOGREG.html#cb733-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.adj=</span><span class="fu">p.adjust</span>(p.value)) <span class="sc">%&gt;%</span></span>
-<span id="cb733-3"><a href="LOGREG.html#cb733-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term,p.value,p.adj)</span></code></pre></div>
+<div class="sourceCode" id="cb733"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span><span class="op">-</span><span class="va">VR</span><span class="op">-</span><span class="va">Apps</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 3
 ##   term        p.value  p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
@@ -884,10 +512,11 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 6 WS          0.0385  0.133 
 ## 7 BS          0.00477 0.0286</code></pre>
 <p>Next, let’s remove <code>BCPM</code>.</p>
-<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="LOGREG.html#cb735-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>.<span class="sc">-</span>Acceptance<span class="sc">-</span>MCAT<span class="sc">-</span>VR<span class="sc">-</span>Apps<span class="sc">-</span>BCPM,</span>
-<span id="cb735-2"><a href="LOGREG.html#cb735-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)) <span class="sc">%&gt;%</span></span>
-<span id="cb735-3"><a href="LOGREG.html#cb735-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.adj=</span><span class="fu">p.adjust</span>(p.value)) <span class="sc">%&gt;%</span></span>
-<span id="cb735-4"><a href="LOGREG.html#cb735-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term,p.value,p.adj)</span></code></pre></div>
+<div class="sourceCode" id="cb735"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span><span class="op">-</span><span class="va">VR</span><span class="op">-</span><span class="va">Apps</span><span class="op">-</span><span class="va">BCPM</span>,
+         data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   term        p.value   p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;
@@ -898,10 +527,11 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 5 WS          0.0401  0.0901 
 ## 6 BS          0.00537 0.0269</code></pre>
 <p>Now <code>WS</code>.</p>
-<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="LOGREG.html#cb737-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>.<span class="sc">-</span>Acceptance<span class="sc">-</span>MCAT<span class="sc">-</span>VR<span class="sc">-</span>Apps<span class="sc">-</span>BCPM<span class="sc">-</span>WS,</span>
-<span id="cb737-2"><a href="LOGREG.html#cb737-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)) <span class="sc">%&gt;%</span></span>
-<span id="cb737-3"><a href="LOGREG.html#cb737-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.adj=</span><span class="fu">p.adjust</span>(p.value)) <span class="sc">%&gt;%</span></span>
-<span id="cb737-4"><a href="LOGREG.html#cb737-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term,p.value,p.adj)</span></code></pre></div>
+<div class="sourceCode" id="cb737"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span><span class="op">-</span><span class="va">VR</span><span class="op">-</span><span class="va">Apps</span><span class="op">-</span><span class="va">BCPM</span><span class="op">-</span><span class="va">WS</span>,
+         data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 3
 ##   term         p.value   p.adj
 ##   &lt;chr&gt;          &lt;dbl&gt;   &lt;dbl&gt;
@@ -911,10 +541,11 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 4 PS          0.0634   0.0732 
 ## 5 BS          0.0100   0.0401</code></pre>
 <p>Maybe <code>PS</code>.</p>
-<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="LOGREG.html#cb739-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>.<span class="sc">-</span>Acceptance<span class="sc">-</span>MCAT<span class="sc">-</span>VR<span class="sc">-</span>Apps<span class="sc">-</span>BCPM<span class="sc">-</span>WS<span class="sc">-</span>PS,</span>
-<span id="cb739-2"><a href="LOGREG.html#cb739-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)) <span class="sc">%&gt;%</span></span>
-<span id="cb739-3"><a href="LOGREG.html#cb739-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.adj=</span><span class="fu">p.adjust</span>(p.value)) <span class="sc">%&gt;%</span></span>
-<span id="cb739-4"><a href="LOGREG.html#cb739-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term,p.value,p.adj)</span></code></pre></div>
+<div class="sourceCode" id="cb739"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span><span class="op">-</span><span class="va">VR</span><span class="op">-</span><span class="va">Apps</span><span class="op">-</span><span class="va">BCPM</span><span class="op">-</span><span class="va">WS</span><span class="op">-</span><span class="va">PS</span>,
+         data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ##   term         p.value   p.adj
 ##   &lt;chr&gt;          &lt;dbl&gt;   &lt;dbl&gt;
@@ -926,12 +557,14 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <ol start="6" style="list-style-type: lower-alpha">
 <li>Generate a confusion matrix for the best model you have developed.</li>
 </ol>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="LOGREG.html#cb741-1" aria-hidden="true" tabindex="-1"></a>med_mod2<span class="ot">&lt;-</span><span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>Sex<span class="sc">+</span>GPA<span class="sc">+</span>BS,</span>
-<span id="cb741-2"><a href="LOGREG.html#cb741-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>MedGPA,<span class="at">family=</span>binomial)</span></code></pre></div>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="LOGREG.html#cb742-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(med_mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb741"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">med_mod2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">Sex</span><span class="op">+</span><span class="va">GPA</span><span class="op">+</span><span class="va">BS</span>,
+         data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb742"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">med_mod2</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = Accept == &quot;D&quot; ~ Sex + GPA + BS, family = binomial, 
+## glm(formula = Accept == "D" ~ Sex + GPA + BS, family = binomial, 
 ##     data = MedGPA)
 ## 
 ## Deviance Residuals: 
@@ -945,7 +578,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## GPA          -4.2900     2.0062  -2.138 0.032484 *  
 ## BS           -1.3752     0.4838  -2.843 0.004471 ** 
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -954,11 +587,12 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## AIC: 48.835
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
-<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="LOGREG.html#cb744-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(med_mod2,<span class="at">type.predict =</span> <span class="st">&quot;response&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb744-2"><a href="LOGREG.html#cb744-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">actual=</span><span class="fu">starts_with</span>(<span class="st">&#39;Accept ==&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb744-3"><a href="LOGREG.html#cb744-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">result=</span><span class="fu">as.integer</span>(.fitted<span class="sc">&gt;</span><span class="fl">0.5</span>),</span>
-<span id="cb744-4"><a href="LOGREG.html#cb744-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">actual=</span><span class="fu">as.integer</span>(actual)) <span class="sc">%&gt;%</span></span>
-<span id="cb744-5"><a href="LOGREG.html#cb744-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">med_mod2</span>,type.predict <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>actual<span class="op">=</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'Accept =='</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span><span class="op">(</span>result<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">.fitted</span><span class="op">&gt;</span><span class="fl">0.5</span><span class="op">)</span>,
+            actual<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">actual</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##       actual
 ## result  0  1
 ##      0 26  4
@@ -967,10 +601,11 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <ol start="6" style="list-style-type: lower-alpha">
 <li>Find a 95% confidence interval for the probability a female student with a 3.5 GPA, a <code>BCPM</code> of 3.8, a verbal reasoning score of 10, a physical sciences score of 9, a writing sample score of 8, a biological score of 10, a MCAT score of 40, and who applied to 5 medical schools.</li>
 </ol>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="LOGREG.html#cb746-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(med_mod2,<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Sex=</span><span class="st">&quot;F&quot;</span>,</span>
-<span id="cb746-2"><a href="LOGREG.html#cb746-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">GPA=</span><span class="fl">3.5</span>,</span>
-<span id="cb746-3"><a href="LOGREG.html#cb746-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">BS=</span><span class="dv">10</span>),</span>
-<span id="cb746-4"><a href="LOGREG.html#cb746-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">type=</span><span class="st">&quot;response&quot;</span>,<span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb746"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">med_mod2</span>,newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Sex<span class="op">=</span><span class="st">"F"</span>,
+                                      GPA<span class="op">=</span><span class="fl">3.5</span>,
+                                      BS<span class="op">=</span><span class="fl">10</span><span class="op">)</span>,
+        type<span class="op">=</span><span class="st">"response"</span>,se.fit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## $fit
 ##         1 
 ## 0.2130332 
@@ -981,15 +616,18 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 
 ## $residual.scale
 ## [1] 1</code></pre>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="LOGREG.html#cb748-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.2130332</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>.<span class="dv">1122277</span></span></code></pre></div>
+<div class="sourceCode" id="cb748"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">0.2130332</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">.1122277</span></code></pre></div>
 <pre><code>## [1] -0.006933092  0.432999492</code></pre>
 <p>For a female students with a GPA of 3.5 and a biological score of 10, we are 95% confident that the probability of being denied acceptance to medical school is between 0 and .433.</p>
 <p>Let’s try a bootstrap.</p>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="LOGREG.html#cb750-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">729</span>)</span>
-<span id="cb750-2"><a href="LOGREG.html#cb750-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">glm</span>(Accept<span class="sc">==</span><span class="st">&quot;D&quot;</span><span class="sc">~</span>Sex<span class="sc">+</span>GPA<span class="sc">+</span>BS,</span>
-<span id="cb750-3"><a href="LOGREG.html#cb750-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span><span class="fu">resample</span>(MedGPA),</span>
-<span id="cb750-4"><a href="LOGREG.html#cb750-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family=</span>binomial)</span></code></pre></div>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="LOGREG.html#cb751-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">729</span><span class="op">)</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/do.html">do</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">Sex</span><span class="op">+</span><span class="va">GPA</span><span class="op">+</span><span class="va">BS</span>,
+                      data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/resample.html">resample</a></span><span class="op">(</span><span class="va">MedGPA</span><span class="op">)</span>,
+                      family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb751"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <pre><code>##    Intercept       SexM        GPA         BS .row .index
 ## 1  204.23984  20.701630  -4.547781 -20.801516    1      1
 ## 2   16.78193   1.373795  -2.508340  -0.908112    1      2
@@ -997,9 +635,11 @@ We can see that <code>head_l</code> is correlated with the other three variables
 ## 4 1104.42269 105.236280 -90.461857 -86.132398    1      4
 ## 5   25.37989   1.139262  -3.729948  -1.331750    1      5
 ## 6   26.58307   3.197072  -3.426165  -1.772581    1      6</code></pre>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="LOGREG.html#cb753-1" aria-hidden="true" tabindex="-1"></a>results_pred <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span> </span>
-<span id="cb753-2"><a href="LOGREG.html#cb753-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred=</span><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>(Intercept<span class="fl">+3.5</span><span class="sc">*</span>GPA<span class="sc">+</span><span class="dv">10</span><span class="sc">*</span>BS))))</span></code></pre></div>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="LOGREG.html#cb754-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cdata</span>(<span class="sc">~</span>pred,<span class="at">data=</span>results_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb753"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results_pred</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pred<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="op">(</span><span class="va">Intercept</span><span class="op">+</span><span class="fl">3.5</span><span class="op">*</span><span class="va">GPA</span><span class="op">+</span><span class="fl">10</span><span class="op">*</span><span class="va">BS</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb754"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/pqrdata.html">cdata</a></span><span class="op">(</span><span class="op">~</span><span class="va">pred</span>,data<span class="op">=</span><span class="va">results_pred</span><span class="op">)</span></code></pre></div>
 <pre><code>##            lower     upper central.p
 ## 2.5% 7.77316e-10 0.5032905      0.95</code></pre>
 <p>This is close to what we found and does not make the assumption the probability of success is normally distributed.</p>
@@ -1007,56 +647,45 @@ We can see that <code>head_l</code> is correlated with the other three variables
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="LRMULTI.html"><span class="header-section-number">28</span> Multiple Linear Regression</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#LOGREG"><span class="header-section-number">29</span> Logistic Regression</a></li>
+<li><a class="nav-link" href="#objectives-27"><span class="header-section-number">29.1</span> Objectives</a></li>
+<li>
+<a class="nav-link" href="#homework-problems"><span class="header-section-number">29.2</span> Homework Problems</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#problem-1-28"><span class="header-section-number">29.2.1</span> Problem 1</a></li>
+<li><a class="nav-link" href="#problem-2-26"><span class="header-section-number">29.2.2</span> Problem 2</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="LRMULTI.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": null,
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": null,
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"info": false
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -1068,7 +697,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

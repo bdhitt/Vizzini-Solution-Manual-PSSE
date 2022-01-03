@@ -1,518 +1,117 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Probability Rules | Solutions for Probability and Statistics for Scientists and Engineers</title>
-  <meta name="description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 8 Probability Rules | Solutions for Probability and Statistics for Scientists and Engineers" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="/figures/SolutionCoverPSSE.png" />
-  <meta property="og:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Probability Rules | Solutions for Probability and Statistics for Scientists and Engineers" />
-  
-  <meta name="twitter:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  <meta name="twitter:image" content="/figures/SolutionCoverPSSE.png" />
-
-<meta name="author" content="Matthew Davis" />
-<meta name="author" content="Brianna Hitt" />
-<meta name="author" content="Kenneth Horton" />
-<meta name="author" content="Bradley Warner" />
-
-
-<meta name="date" content="2021-12-15" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="CS2.html"/>
-<link rel="next" href="CONDPROB.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Probability Rules | Solutions for Probability and Statistics for Scientists and Engineers</title>
+<meta name="author" content="Matthew Davis">
+<meta name="author" content="Brianna Hitt">
+<meta name="author" content="Kenneth Horton">
+<meta name="author" content="Bradley Warner">
+<meta name="description" content="8.1 Objectives Define and use properly in context all new terminology related to probability to include but not limited to: outcome, event, sample space, probability. Apply basic probability and...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Probability Rules | Solutions for Probability and Statistics for Scientists and Engineers">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/figures/SolutionCoverPSSE.png">
+<meta property="og:description" content="8.1 Objectives Define and use properly in context all new terminology related to probability to include but not limited to: outcome, event, sample space, probability. Apply basic probability and...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Probability Rules | Solutions for Probability and Statistics for Scientists and Engineers">
+<meta name="twitter:description" content="8.1 Objectives Define and use properly in context all new terminology related to probability to include but not limited to: outcome, event, sample space, probability. Apply basic probability and...">
+<meta name="twitter:image" content="/figures/SolutionCoverPSSE.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Solutions Manual</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#book-structure-and-how-to-use-it"><i class="fa fa-check"></i><b>0.1</b> Book Structure and How to Use It</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2</b> Packages</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#file-creation-information"><i class="fa fa-check"></i><b>0.3</b> File Creation Information</a></li>
-</ul></li>
-<li class="part"><span><b>I Descriptive Statistical Modeling</b></span></li>
-<li class="chapter" data-level="1" data-path="CS1.html"><a href="CS1.html"><i class="fa fa-check"></i><b>1</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="CS1.html"><a href="CS1.html#objectives"><i class="fa fa-check"></i><b>1.1</b> Objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="CS1.html"><a href="CS1.html#homework"><i class="fa fa-check"></i><b>1.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="CS1.html"><a href="CS1.html#problem-1"><i class="fa fa-check"></i><b>1.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="1.2.2" data-path="CS1.html"><a href="CS1.html#problem-2"><i class="fa fa-check"></i><b>1.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="DB.html"><a href="DB.html"><i class="fa fa-check"></i><b>2</b> Data Basics</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="DB.html"><a href="DB.html#objectives-1"><i class="fa fa-check"></i><b>2.1</b> Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="DB.html"><a href="DB.html#homework-1"><i class="fa fa-check"></i><b>2.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="DB.html"><a href="DB.html#problem-1-1"><i class="fa fa-check"></i><b>2.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="2.2.2" data-path="DB.html"><a href="DB.html#problem-2-1"><i class="fa fa-check"></i><b>2.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="2.2.3" data-path="DB.html"><a href="DB.html#problem-3"><i class="fa fa-check"></i><b>2.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="ODCP.html"><a href="ODCP.html"><i class="fa fa-check"></i><b>3</b> Overview of Data Collection Principles</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="ODCP.html"><a href="ODCP.html#objectives-2"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
-<li class="chapter" data-level="3.2" data-path="ODCP.html"><a href="ODCP.html#homework-2"><i class="fa fa-check"></i><b>3.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="ODCP.html"><a href="ODCP.html#problem-1-2"><i class="fa fa-check"></i><b>3.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="3.2.2" data-path="ODCP.html"><a href="ODCP.html#problem-2-2"><i class="fa fa-check"></i><b>3.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="3.2.3" data-path="ODCP.html"><a href="ODCP.html#problem-3-1"><i class="fa fa-check"></i><b>3.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="STUDY.html"><a href="STUDY.html"><i class="fa fa-check"></i><b>4</b> Studies</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="STUDY.html"><a href="STUDY.html#objectives-3"><i class="fa fa-check"></i><b>4.1</b> Objectives</a></li>
-<li class="chapter" data-level="4.2" data-path="STUDY.html"><a href="STUDY.html#homework-3"><i class="fa fa-check"></i><b>4.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="STUDY.html"><a href="STUDY.html#problem-1-3"><i class="fa fa-check"></i><b>4.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="4.2.2" data-path="STUDY.html"><a href="STUDY.html#problem-2-3"><i class="fa fa-check"></i><b>4.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="4.2.3" data-path="STUDY.html"><a href="STUDY.html#problem-3-2"><i class="fa fa-check"></i><b>4.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="4.2.4" data-path="STUDY.html"><a href="STUDY.html#problem-4"><i class="fa fa-check"></i><b>4.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="4.2.5" data-path="STUDY.html"><a href="STUDY.html#problem-5"><i class="fa fa-check"></i><b>4.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="NUMDATA.html"><a href="NUMDATA.html"><i class="fa fa-check"></i><b>5</b> Numerical Data</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="NUMDATA.html"><a href="NUMDATA.html#objectives-4"><i class="fa fa-check"></i><b>5.1</b> Objectives</a></li>
-<li class="chapter" data-level="5.2" data-path="NUMDATA.html"><a href="NUMDATA.html#homework-4"><i class="fa fa-check"></i><b>5.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-1-4"><i class="fa fa-check"></i><b>5.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="5.2.2" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-2-4"><i class="fa fa-check"></i><b>5.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="5.2.3" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-3-3"><i class="fa fa-check"></i><b>5.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="CATDATA.html"><a href="CATDATA.html"><i class="fa fa-check"></i><b>6</b> Categorical Data</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="CATDATA.html"><a href="CATDATA.html#objectives-5"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
-<li class="chapter" data-level="6.2" data-path="CATDATA.html"><a href="CATDATA.html#homework-5"><i class="fa fa-check"></i><b>6.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="CATDATA.html"><a href="CATDATA.html#problem-1-5"><i class="fa fa-check"></i><b>6.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="6.2.2" data-path="CATDATA.html"><a href="CATDATA.html#problem-2-5"><i class="fa fa-check"></i><b>6.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="6.2.3" data-path="CATDATA.html"><a href="CATDATA.html#problem-3-4"><i class="fa fa-check"></i><b>6.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>II Probability Modeling</b></span></li>
-<li class="chapter" data-level="7" data-path="CS2.html"><a href="CS2.html"><i class="fa fa-check"></i><b>7</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="CS2.html"><a href="CS2.html#objectives-6"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
-<li class="chapter" data-level="7.2" data-path="CS2.html"><a href="CS2.html#homework-6"><i class="fa fa-check"></i><b>7.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="CS2.html"><a href="CS2.html#problem-1-6"><i class="fa fa-check"></i><b>7.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="7.2.2" data-path="CS2.html"><a href="CS2.html#problem-2-6"><i class="fa fa-check"></i><b>7.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="PROBRULES.html"><a href="PROBRULES.html"><i class="fa fa-check"></i><b>8</b> Probability Rules</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="PROBRULES.html"><a href="PROBRULES.html#objectives-7"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
-<li class="chapter" data-level="8.2" data-path="PROBRULES.html"><a href="PROBRULES.html#homework-7"><i class="fa fa-check"></i><b>8.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-1-7"><i class="fa fa-check"></i><b>8.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="8.2.2" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-2-7"><i class="fa fa-check"></i><b>8.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="8.2.3" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-3-5"><i class="fa fa-check"></i><b>8.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="8.2.4" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-4-1"><i class="fa fa-check"></i><b>8.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="8.2.5" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-5-1"><i class="fa fa-check"></i><b>8.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="8.2.6" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-6"><i class="fa fa-check"></i><b>8.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="8.2.7" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-7"><i class="fa fa-check"></i><b>8.2.7</b> Problem 7</a></li>
-<li class="chapter" data-level="8.2.8" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-8"><i class="fa fa-check"></i><b>8.2.8</b> Problem 8</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="CONDPROB.html"><a href="CONDPROB.html"><i class="fa fa-check"></i><b>9</b> Conditional Probability</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="CONDPROB.html"><a href="CONDPROB.html#objectives-8"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="CONDPROB.html"><a href="CONDPROB.html#homework-8"><i class="fa fa-check"></i><b>9.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="9.2.1" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-1-8"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="9.2.2" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-2-8"><i class="fa fa-check"></i><b>9.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="9.2.3" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-3-6"><i class="fa fa-check"></i><b>9.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="9.2.4" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-4-2"><i class="fa fa-check"></i><b>9.2.4</b> Problem 4</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="RANDVAR.html"><a href="RANDVAR.html"><i class="fa fa-check"></i><b>10</b> Random Variables</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="RANDVAR.html"><a href="RANDVAR.html#objectives-9"><i class="fa fa-check"></i><b>10.1</b> Objectives</a></li>
-<li class="chapter" data-level="10.2" data-path="RANDVAR.html"><a href="RANDVAR.html#homework-9"><i class="fa fa-check"></i><b>10.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="10.2.1" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-1-9"><i class="fa fa-check"></i><b>10.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="10.2.2" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-2-9"><i class="fa fa-check"></i><b>10.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="10.2.3" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-3-7"><i class="fa fa-check"></i><b>10.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="10.2.4" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-4-3"><i class="fa fa-check"></i><b>10.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="10.2.5" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-5-2"><i class="fa fa-check"></i><b>10.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="10.2.6" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-6-1"><i class="fa fa-check"></i><b>10.2.6</b> Problem 6</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html"><i class="fa fa-check"></i><b>11</b> Continuous Random Variables</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#objectives-10"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
-<li class="chapter" data-level="11.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#homework-10"><i class="fa fa-check"></i><b>11.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="11.2.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-1-10"><i class="fa fa-check"></i><b>11.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="11.2.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-2-10"><i class="fa fa-check"></i><b>11.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html"><i class="fa fa-check"></i><b>12</b> Named Discrete Distributions</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#objectives-11"><i class="fa fa-check"></i><b>12.1</b> Objectives</a></li>
-<li class="chapter" data-level="12.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#homework-11"><i class="fa fa-check"></i><b>12.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-1-11"><i class="fa fa-check"></i><b>12.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="12.2.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-2-11"><i class="fa fa-check"></i><b>12.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="12.2.3" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-3-8"><i class="fa fa-check"></i><b>12.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html"><i class="fa fa-check"></i><b>13</b> Named Continuous Distributions</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#objectives-12"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
-<li class="chapter" data-level="13.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#homework-12"><i class="fa fa-check"></i><b>13.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-1-12"><i class="fa fa-check"></i><b>13.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="13.2.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-2-12"><i class="fa fa-check"></i><b>13.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="13.2.3" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-3-9"><i class="fa fa-check"></i><b>13.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="13.2.4" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-4-4"><i class="fa fa-check"></i><b>13.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="13.2.5" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-5-3"><i class="fa fa-check"></i><b>13.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="13.2.6" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-6-2"><i class="fa fa-check"></i><b>13.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="13.2.7" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-7-1"><i class="fa fa-check"></i><b>13.2.7</b> Problem 7</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html"><i class="fa fa-check"></i><b>14</b> Multivariate Distributions</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#objectives-13"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
-<li class="chapter" data-level="14.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#homework-13"><i class="fa fa-check"></i><b>14.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-1-13"><i class="fa fa-check"></i><b>14.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="14.2.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-2-13"><i class="fa fa-check"></i><b>14.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="14.2.3" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-3-10"><i class="fa fa-check"></i><b>14.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="14.2.4" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-4-5"><i class="fa fa-check"></i><b>14.2.4</b> Problem 4</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="EST.html"><a href="EST.html"><i class="fa fa-check"></i><b>15</b> Estimation Methods</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="EST.html"><a href="EST.html#objectives-14"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
-<li class="chapter" data-level="15.2" data-path="EST.html"><a href="EST.html#homework-14"><i class="fa fa-check"></i><b>15.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="EST.html"><a href="EST.html#problem-1-14"><i class="fa fa-check"></i><b>15.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="15.2.2" data-path="EST.html"><a href="EST.html#problem-2-14"><i class="fa fa-check"></i><b>15.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="15.2.3" data-path="EST.html"><a href="EST.html#problem-3-11"><i class="fa fa-check"></i><b>15.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="15.2.4" data-path="EST.html"><a href="EST.html#problem-4-6"><i class="fa fa-check"></i><b>15.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="15.2.5" data-path="EST.html"><a href="EST.html#problem-5-4"><i class="fa fa-check"></i><b>15.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>III Statistical Modeling</b></span></li>
-<li class="chapter" data-level="16" data-path="CS3.html"><a href="CS3.html"><i class="fa fa-check"></i><b>16</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="CS3.html"><a href="CS3.html#objectives-15"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
-<li class="chapter" data-level="16.2" data-path="CS3.html"><a href="CS3.html#homework-15"><i class="fa fa-check"></i><b>16.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="16.2.1" data-path="CS3.html"><a href="CS3.html#problem-1-15"><i class="fa fa-check"></i><b>16.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="16.2.2" data-path="CS3.html"><a href="CS3.html#problem-2-15"><i class="fa fa-check"></i><b>16.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="HYPOTEST.html"><a href="HYPOTEST.html"><i class="fa fa-check"></i><b>17</b> Hypothesis Testing</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#objectives-16"><i class="fa fa-check"></i><b>17.1</b> Objectives</a></li>
-<li class="chapter" data-level="17.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#homework-16"><i class="fa fa-check"></i><b>17.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="17.2.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-1-16"><i class="fa fa-check"></i><b>17.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="17.2.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-2-16"><i class="fa fa-check"></i><b>17.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="PVALUES.html"><a href="PVALUES.html"><i class="fa fa-check"></i><b>18</b> Empirical p-values</a>
-<ul>
-<li class="chapter" data-level="18.1" data-path="PVALUES.html"><a href="PVALUES.html#objective"><i class="fa fa-check"></i><b>18.1</b> Objective</a></li>
-<li class="chapter" data-level="18.2" data-path="PVALUES.html"><a href="PVALUES.html#homework-17"><i class="fa fa-check"></i><b>18.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="18.2.1" data-path="PVALUES.html"><a href="PVALUES.html#problem-1-17"><i class="fa fa-check"></i><b>18.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="18.2.2" data-path="PVALUES.html"><a href="PVALUES.html#problem-2-17"><i class="fa fa-check"></i><b>18.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="18.2.3" data-path="PVALUES.html"><a href="PVALUES.html#problem-3-12"><i class="fa fa-check"></i><b>18.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="CLT.html"><a href="CLT.html"><i class="fa fa-check"></i><b>19</b> Central Limit Theorem</a>
-<ul>
-<li class="chapter" data-level="19.1" data-path="CLT.html"><a href="CLT.html#objectives-17"><i class="fa fa-check"></i><b>19.1</b> Objectives</a></li>
-<li class="chapter" data-level="19.2" data-path="CLT.html"><a href="CLT.html#homework-18"><i class="fa fa-check"></i><b>19.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="19.2.1" data-path="CLT.html"><a href="CLT.html#problem-1-18"><i class="fa fa-check"></i><b>19.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="19.2.2" data-path="CLT.html"><a href="CLT.html#problem-2-18"><i class="fa fa-check"></i><b>19.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="19.2.3" data-path="CLT.html"><a href="CLT.html#problem-3-13"><i class="fa fa-check"></i><b>19.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="19.2.4" data-path="CLT.html"><a href="CLT.html#problem-4-7"><i class="fa fa-check"></i><b>19.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="19.2.5" data-path="CLT.html"><a href="CLT.html#problem-5-5"><i class="fa fa-check"></i><b>19.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="20" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>20</b> Confidence Intervals</a>
-<ul>
-<li class="chapter" data-level="20.1" data-path="CI.html"><a href="CI.html#objectives-18"><i class="fa fa-check"></i><b>20.1</b> Objectives</a></li>
-<li class="chapter" data-level="20.2" data-path="CI.html"><a href="CI.html#homework-19"><i class="fa fa-check"></i><b>20.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="20.2.1" data-path="CI.html"><a href="CI.html#problem-1-19"><i class="fa fa-check"></i><b>20.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="20.2.2" data-path="CI.html"><a href="CI.html#problem-2-19"><i class="fa fa-check"></i><b>20.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="20.2.3" data-path="CI.html"><a href="CI.html#problem-3-14"><i class="fa fa-check"></i><b>20.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="20.2.4" data-path="CI.html"><a href="CI.html#problem-4-8"><i class="fa fa-check"></i><b>20.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="20.2.5" data-path="CI.html"><a href="CI.html#problem-5-6"><i class="fa fa-check"></i><b>20.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="20.2.6" data-path="CI.html"><a href="CI.html#problem-6-3"><i class="fa fa-check"></i><b>20.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="20.2.7" data-path="CI.html"><a href="CI.html#problem-7-2"><i class="fa fa-check"></i><b>20.2.7</b> Problem 7</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="21" data-path="BOOT.html"><a href="BOOT.html"><i class="fa fa-check"></i><b>21</b> Bootstrap</a>
-<ul>
-<li class="chapter" data-level="21.1" data-path="BOOT.html"><a href="BOOT.html#objectives-19"><i class="fa fa-check"></i><b>21.1</b> Objectives</a></li>
-<li class="chapter" data-level="21.2" data-path="BOOT.html"><a href="BOOT.html#homework-20"><i class="fa fa-check"></i><b>21.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="21.2.1" data-path="BOOT.html"><a href="BOOT.html#problem-1-20"><i class="fa fa-check"></i><b>21.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="21.2.2" data-path="BOOT.html"><a href="BOOT.html#problem-2-20"><i class="fa fa-check"></i><b>21.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="21.2.3" data-path="BOOT.html"><a href="BOOT.html#problem-3-15"><i class="fa fa-check"></i><b>21.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="22" data-path="ADDTESTS.html"><a href="ADDTESTS.html"><i class="fa fa-check"></i><b>22</b> Additional Hypothesis Tests</a>
-<ul>
-<li class="chapter" data-level="22.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#objectives-20"><i class="fa fa-check"></i><b>22.1</b> Objectives</a></li>
-<li class="chapter" data-level="22.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#homework-21"><i class="fa fa-check"></i><b>22.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="22.2.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-1-21"><i class="fa fa-check"></i><b>22.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="22.2.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-2-21"><i class="fa fa-check"></i><b>22.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="22.2.3" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-3-16"><i class="fa fa-check"></i><b>22.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>IV Predictive Statistical Modeling</b></span></li>
-<li class="chapter" data-level="23" data-path="CS4.html"><a href="CS4.html"><i class="fa fa-check"></i><b>23</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="23.1" data-path="CS4.html"><a href="CS4.html#objectives-21"><i class="fa fa-check"></i><b>23.1</b> Objectives</a></li>
-<li class="chapter" data-level="23.2" data-path="CS4.html"><a href="CS4.html#homework-22"><i class="fa fa-check"></i><b>23.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="23.2.1" data-path="CS4.html"><a href="CS4.html#problem-1-22"><i class="fa fa-check"></i><b>23.2.1</b> Problem 1</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="24" data-path="LRBASICS.html"><a href="LRBASICS.html"><i class="fa fa-check"></i><b>24</b> Linear Regression Basics</a>
-<ul>
-<li class="chapter" data-level="24.1" data-path="LRBASICS.html"><a href="LRBASICS.html#objectives-22"><i class="fa fa-check"></i><b>24.1</b> Objectives</a></li>
-<li class="chapter" data-level="24.2" data-path="LRBASICS.html"><a href="LRBASICS.html#homework-23"><i class="fa fa-check"></i><b>24.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="24.2.1" data-path="LRBASICS.html"><a href="LRBASICS.html#problem-1-23"><i class="fa fa-check"></i><b>24.2.1</b> Problem 1</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="25" data-path="LRINF.html"><a href="LRINF.html"><i class="fa fa-check"></i><b>25</b> Linear Regression Inference</a>
-<ul>
-<li class="chapter" data-level="25.1" data-path="LRINF.html"><a href="LRINF.html#objectives-23"><i class="fa fa-check"></i><b>25.1</b> Objectives</a></li>
-<li class="chapter" data-level="25.2" data-path="LRINF.html"><a href="LRINF.html#homework-24"><i class="fa fa-check"></i><b>25.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="25.2.1" data-path="LRINF.html"><a href="LRINF.html#problem-1-24"><i class="fa fa-check"></i><b>25.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="25.2.2" data-path="LRINF.html"><a href="LRINF.html#problem-2-22"><i class="fa fa-check"></i><b>25.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="25.2.3" data-path="LRINF.html"><a href="LRINF.html#problem-3-17"><i class="fa fa-check"></i><b>25.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="26" data-path="LRDIAG.html"><a href="LRDIAG.html"><i class="fa fa-check"></i><b>26</b> Regression Diagnostics</a>
-<ul>
-<li class="chapter" data-level="26.1" data-path="LRDIAG.html"><a href="LRDIAG.html#objectives-24"><i class="fa fa-check"></i><b>26.1</b> Objectives</a></li>
-<li class="chapter" data-level="26.2" data-path="LRDIAG.html"><a href="LRDIAG.html#homework-25"><i class="fa fa-check"></i><b>26.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="26.2.1" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-1-25"><i class="fa fa-check"></i><b>26.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="26.2.2" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-2-23"><i class="fa fa-check"></i><b>26.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="26.2.3" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-3-18"><i class="fa fa-check"></i><b>26.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="27" data-path="LRSIM.html"><a href="LRSIM.html"><i class="fa fa-check"></i><b>27</b> Simulation Based Linear Regression</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="LRSIM.html"><a href="LRSIM.html#objectives-25"><i class="fa fa-check"></i><b>27.1</b> Objectives</a></li>
-<li class="chapter" data-level="27.2" data-path="LRSIM.html"><a href="LRSIM.html#homework-26"><i class="fa fa-check"></i><b>27.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="27.2.1" data-path="LRSIM.html"><a href="LRSIM.html#problem-1-26"><i class="fa fa-check"></i><b>27.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="27.2.2" data-path="LRSIM.html"><a href="LRSIM.html#problem-2-24"><i class="fa fa-check"></i><b>27.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="28" data-path="LRMULTI.html"><a href="LRMULTI.html"><i class="fa fa-check"></i><b>28</b> Multiple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="28.1" data-path="LRMULTI.html"><a href="LRMULTI.html#objectives-26"><i class="fa fa-check"></i><b>28.1</b> Objectives</a></li>
-<li class="chapter" data-level="28.2" data-path="LRMULTI.html"><a href="LRMULTI.html#homework-27"><i class="fa fa-check"></i><b>28.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="28.2.1" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-1-27"><i class="fa fa-check"></i><b>28.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="28.2.2" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-2-25"><i class="fa fa-check"></i><b>28.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="29" data-path="LOGREG.html"><a href="LOGREG.html"><i class="fa fa-check"></i><b>29</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="29.1" data-path="LOGREG.html"><a href="LOGREG.html#objectives-27"><i class="fa fa-check"></i><b>29.1</b> Objectives</a></li>
-<li class="chapter" data-level="29.2" data-path="LOGREG.html"><a href="LOGREG.html#homework-problems"><i class="fa fa-check"></i><b>29.2</b> Homework Problems</a>
-<ul>
-<li class="chapter" data-level="29.2.1" data-path="LOGREG.html"><a href="LOGREG.html#problem-1-28"><i class="fa fa-check"></i><b>29.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="29.2.2" data-path="LOGREG.html"><a href="LOGREG.html#problem-2-26"><i class="fa fa-check"></i><b>29.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Solutions for Probability and Statistics for Scientists and Engineers</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solutions for Probability and Statistics for Scientists and Engineers</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Descriptive Statistical Modeling</li>
+<li><a class="" href="CS1.html"><span class="header-section-number">1</span> Case Study</a></li>
+<li><a class="" href="DB.html"><span class="header-section-number">2</span> Data Basics</a></li>
+<li><a class="" href="ODCP.html"><span class="header-section-number">3</span> Overview of Data Collection Principles</a></li>
+<li><a class="" href="STUDY.html"><span class="header-section-number">4</span> Studies</a></li>
+<li><a class="" href="NUMDATA.html"><span class="header-section-number">5</span> Numerical Data</a></li>
+<li><a class="" href="CATDATA.html"><span class="header-section-number">6</span> Categorical Data</a></li>
+<li class="book-part">Probability Modeling</li>
+<li><a class="" href="CS2.html"><span class="header-section-number">7</span> Case Study</a></li>
+<li><a class="active" href="PROBRULES.html"><span class="header-section-number">8</span> Probability Rules</a></li>
+<li><a class="" href="CONDPROB.html"><span class="header-section-number">9</span> Conditional Probability</a></li>
+<li><a class="" href="RANDVAR.html"><span class="header-section-number">10</span> Random Variables</a></li>
+<li><a class="" href="CONRANDVAR.html"><span class="header-section-number">11</span> Continuous Random Variables</a></li>
+<li><a class="" href="DISCRETENAMED.html"><span class="header-section-number">12</span> Named Discrete Distributions</a></li>
+<li><a class="" href="CONTNNAMED.html"><span class="header-section-number">13</span> Named Continuous Distributions</a></li>
+<li><a class="" href="MULTIDISTS.html"><span class="header-section-number">14</span> Multivariate Distributions</a></li>
+<li><a class="" href="EST.html"><span class="header-section-number">15</span> Estimation Methods</a></li>
+<li class="book-part">Statistical Modeling</li>
+<li><a class="" href="CS3.html"><span class="header-section-number">16</span> Case Study</a></li>
+<li><a class="" href="HYPOTEST.html"><span class="header-section-number">17</span> Hypothesis Testing</a></li>
+<li><a class="" href="PVALUES.html"><span class="header-section-number">18</span> Empirical p-values</a></li>
+<li><a class="" href="CLT.html"><span class="header-section-number">19</span> Central Limit Theorem</a></li>
+<li><a class="" href="CI.html"><span class="header-section-number">20</span> Confidence Intervals</a></li>
+<li><a class="" href="BOOT.html"><span class="header-section-number">21</span> Bootstrap</a></li>
+<li><a class="" href="ADDTESTS.html"><span class="header-section-number">22</span> Additional Hypothesis Tests</a></li>
+<li class="book-part">Predictive Statistical Modeling</li>
+<li><a class="" href="CS4.html"><span class="header-section-number">23</span> Case Study</a></li>
+<li><a class="" href="LRBASICS.html"><span class="header-section-number">24</span> Linear Regression Basics</a></li>
+<li><a class="" href="LRINF.html"><span class="header-section-number">25</span> Linear Regression Inference</a></li>
+<li><a class="" href="LRDIAG.html"><span class="header-section-number">26</span> Regression Diagnostics</a></li>
+<li><a class="" href="LRSIM.html"><span class="header-section-number">27</span> Simulation Based Linear Regression</a></li>
+<li><a class="" href="LRMULTI.html"><span class="header-section-number">28</span> Multiple Linear Regression</a></li>
+<li><a class="" href="LOGREG.html"><span class="header-section-number">29</span> Logistic Regression</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="PROBRULES" class="section level1" number="8">
-<h1><span class="header-section-number">Chapter 8</span> Probability Rules</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="PROBRULES" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Probability Rules<a class="anchor" aria-label="anchor" href="#PROBRULES"><i class="fas fa-link"></i></a>
+</h1>
 <div id="objectives-7" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> Objectives</h2>
+<h2>
+<span class="header-section-number">8.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-7"><i class="fas fa-link"></i></a>
+</h2>
 <ol style="list-style-type: decimal">
-<li>Define and use properly in context all new terminology related to probability to include but not limited to: outcome, event, sample space, probability.<br />
+<li>Define and use properly in context all new terminology related to probability to include but not limited to: outcome, event, sample space, probability.<br>
 </li>
-<li>Apply basic probability and counting rules to find probabilities.<br />
+<li>Apply basic probability and counting rules to find probabilities.<br>
 </li>
-<li>Describe the basic axioms of probability.<br />
+<li>Describe the basic axioms of probability.<br>
 </li>
 <li>Use <code>R</code> to calculate and simulate probabilities of events.</li>
 </ol>
 </div>
 <div id="homework-7" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Homework</h2>
+<h2>
+<span class="header-section-number">8.2</span> Homework<a class="anchor" aria-label="anchor" href="#homework-7"><i class="fas fa-link"></i></a>
+</h2>
 <div id="problem-1-7" class="section level3" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Problem 1</h3>
+<h3>
+<span class="header-section-number">8.2.1</span> Problem 1<a class="anchor" aria-label="anchor" href="#problem-1-7"><i class="fas fa-link"></i></a>
+</h3>
 <p>Let <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> be events such that <span class="math inline">\(\Prob(A)=0.5\)</span>, <span class="math inline">\(\Prob(B)=0.3\)</span>, and <span class="math inline">\(\Prob(C)=0.4\)</span>. Also, we know that <span class="math inline">\(\Prob(A \cap B)=0.2\)</span>, <span class="math inline">\(\Prob(B \cap C)=0.12\)</span>, <span class="math inline">\(\Prob(A \cap C)=0.1\)</span>, and <span class="math inline">\(\Prob(A \cap B \cap C)=0.05\)</span>. Find the following:</p>
 <ol style="list-style-type: lower-alpha">
 <li><p><span class="math inline">\(\Prob(A\cup B)\)</span>
@@ -526,9 +125,9 @@ div.csl-indent {
 <span class="math display">\[
 = 0.5+0.3+0.4-0.2-0.12-0.1+0.05 = 0.83
 \]</span></p></li>
-<li><p><span class="math inline">\(\Prob(B&#39;\cap C&#39;)\)</span>
+<li><p><span class="math inline">\(\Prob(B'\cap C')\)</span>
 <span class="math display">\[
-\Prob(B&#39;\cap C&#39;)=\Prob((B\cup C)&#39;) = 1-\Prob(B\cup C) = 1-[\Prob(B)+\Prob(C)-\Prob(B\cap C)]
+\Prob(B'\cap C')=\Prob((B\cup C)') = 1-\Prob(B\cup C) = 1-[\Prob(B)+\Prob(C)-\Prob(B\cap C)]
 \]</span>
 <span class="math display">\[
 = 1-(0.3+0.4-0.12) = 0.42
@@ -537,21 +136,24 @@ div.csl-indent {
 <span class="math display">\[
 \Prob(A\cup (B\cap C)) = \Prob(A)+\Prob(B\cap C) -\Prob(A\cap B \cap C) = 0.5+0.12-0.05 = 0.57
 \]</span></p></li>
-<li><p><span class="math inline">\(\Prob((A\cup B \cup C)\cap (A\cap B \cap C)&#39;)\)</span>
+<li><p><span class="math inline">\(\Prob((A\cup B \cup C)\cap (A\cap B \cap C)')\)</span>
 <span class="math display">\[
-\Prob((A\cup B \cup C)\cap (A\cap B \cap C)&#39;)=\Prob(A\cup B \cup C)-\Prob(A\cap B \cap C) = 0.83-0.05 = 0.78
+\Prob((A\cup B \cup C)\cap (A\cap B \cap C)')=\Prob(A\cup B \cup C)-\Prob(A\cap B \cap C) = 0.83-0.05 = 0.78
 \]</span></p></li>
 </ol>
 </div>
 <div id="problem-2-7" class="section level3" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> Problem 2</h3>
-<p>Consider the example of the family in the reading. What is the probability that the family has at least one boy?<br />
-<span class="math display">\[
+<h3>
+<span class="header-section-number">8.2.2</span> Problem 2<a class="anchor" aria-label="anchor" href="#problem-2-7"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider the example of the family in the reading. What is the probability that the family has at least one boy?<br><span class="math display">\[
 \Prob(\mbox{at least one boy})=1-\Prob(\mbox{no boys})=1-\Prob(\mbox{GGG})=1-\frac{1}{8} = 0.875
 \]</span></p>
 </div>
 <div id="problem-3-5" class="section level3" number="8.2.3">
-<h3><span class="header-section-number">8.2.3</span> Problem 3</h3>
+<h3>
+<span class="header-section-number">8.2.3</span> Problem 3<a class="anchor" aria-label="anchor" href="#problem-3-5"><i class="fas fa-link"></i></a>
+</h3>
 <p>The Birthday Problem Revisited.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Suppose there are <span class="math inline">\(n=20\)</span> students in a classroom. My birthday, the instructor, is April 3rd. What is the probability that at least one student shares my birthday? Assume only 365 days in a year and assume that all birthdays are equally likely.</li>
@@ -569,95 +171,113 @@ div.csl-indent {
 <span class="math display">\[
 \Prob(\mbox{at least one other person shares my bday})=1-\Prob(\mbox{no one else has my bday}) = 1-\left( \frac{364}{365}\right)^{n}
 \]</span></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="PROBRULES.html#cb75-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">300</span></span>
-<span id="cb75-2"><a href="PROBRULES.html#cb75-2" aria-hidden="true" tabindex="-1"></a>mybday<span class="ot">&lt;-</span><span class="cf">function</span>(x) <span class="dv">1</span><span class="sc">-</span>(<span class="dv">364</span><span class="sc">/</span><span class="dv">365</span>)<span class="sc">^</span>x</span>
-<span id="cb75-3"><a href="PROBRULES.html#cb75-3" aria-hidden="true" tabindex="-1"></a>mybday <span class="ot">&lt;-</span> <span class="fu">Vectorize</span>(mybday)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">300</span>
+<span class="va">mybday</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="fl">364</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span><span class="op">^</span><span class="va">x</span>
+<span class="va">mybday</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize</a></span><span class="op">(</span><span class="va">mybday</span><span class="op">)</span></code></pre></div>
 <p>Check our function.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="PROBRULES.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mybday</span>(<span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">mybday</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.05339153</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="PROBRULES.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_line</span>(<span class="fu">mybday</span>(n)<span class="sc">~</span> n,</span>
-<span id="cb78-2"><a href="PROBRULES.html#cb78-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;Number of People&quot;</span>,</span>
-<span id="cb78-3"><a href="PROBRULES.html#cb78-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Probability of Match&quot;</span>,</span>
-<span id="cb78-4"><a href="PROBRULES.html#cb78-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Probability of at least 1 person matching my birthday&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb78-5"><a href="PROBRULES.html#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(theme_bw)</span></code></pre></div>
-<p><img src="08-Probability-Rules-Solutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="PROBRULES.html#cb79-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">mybday</span>(n)</span>
-<span id="cb79-2"><a href="PROBRULES.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(prob<span class="sc">&gt;=</span> .<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">gf_line</span><span class="op">(</span><span class="fu">mybday</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">~</span> <span class="va">n</span>,
+        xlab<span class="op">=</span><span class="st">"Number of People"</span>,
+        ylab<span class="op">=</span><span class="st">"Probability of Match"</span>,
+        title<span class="op">=</span><span class="st">"Probability of at least 1 person matching my birthday"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="va">theme_bw</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-Probability-Rules-Solutions_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">prob</span> <span class="op">&lt;-</span> <span class="fu">mybday</span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">prob</span><span class="op">&gt;=</span> <span class="fl">.5</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271
 ## [20] 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290
 ## [39] 291 292 293 294 295 296 297 298 299 300</code></pre>
 <p>So 253 people.</p>
 </div>
 <div id="problem-4-1" class="section level3" number="8.2.4">
-<h3><span class="header-section-number">8.2.4</span> Problem 4</h3>
+<h3>
+<span class="header-section-number">8.2.4</span> Problem 4<a class="anchor" aria-label="anchor" href="#problem-4-1"><i class="fas fa-link"></i></a>
+</h3>
 <p>Thinking of the cards again. Answer the following questions:</p>
 <ol style="list-style-type: lower-alpha">
 <li>Define two events that are mutually exclusive.</li>
 </ol>
-<p>The first card drawn is red.<br />
+<p>The first card drawn is red.<br>
 The first card drawn is black.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Define two events that are independent.</li>
 </ol>
-<p>The first card drawn is black.<br />
+<p>The first card drawn is black.<br>
 The first card drawn is a face card.</p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Define an event and its complement.</li>
 </ol>
-<p>The first card drawn is less than 5.<br />
+<p>The first card drawn is less than 5.<br>
 The first card drawn is equal to or more than 5.</p>
 </div>
 <div id="problem-5-1" class="section level3" number="8.2.5">
-<h3><span class="header-section-number">8.2.5</span> Problem 5</h3>
+<h3>
+<span class="header-section-number">8.2.5</span> Problem 5<a class="anchor" aria-label="anchor" href="#problem-5-1"><i class="fas fa-link"></i></a>
+</h3>
 <p>Consider the license plate example from the reading.</p>
 <ol style="list-style-type: lower-alpha">
 <li>What is the probability that a license plate contains <strong>exactly</strong> one “B?”</li>
 </ol>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="PROBRULES.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fourth spot</span></span>
-<span id="cb81-2"><a href="PROBRULES.html#cb81-2" aria-hidden="true" tabindex="-1"></a>num4<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">1</span><span class="sc">*</span><span class="dv">25</span><span class="sc">*</span><span class="dv">25</span></span>
-<span id="cb81-3"><a href="PROBRULES.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-4"><a href="PROBRULES.html#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co">#fifth spot</span></span>
-<span id="cb81-5"><a href="PROBRULES.html#cb81-5" aria-hidden="true" tabindex="-1"></a>num5<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">25</span><span class="sc">*</span><span class="dv">1</span><span class="sc">*</span><span class="dv">25</span></span>
-<span id="cb81-6"><a href="PROBRULES.html#cb81-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-7"><a href="PROBRULES.html#cb81-7" aria-hidden="true" tabindex="-1"></a><span class="co">#sixth spot</span></span>
-<span id="cb81-8"><a href="PROBRULES.html#cb81-8" aria-hidden="true" tabindex="-1"></a>num6<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">25</span><span class="sc">*</span><span class="dv">25</span><span class="sc">*</span><span class="dv">1</span></span>
-<span id="cb81-9"><a href="PROBRULES.html#cb81-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-10"><a href="PROBRULES.html#cb81-10" aria-hidden="true" tabindex="-1"></a>denom<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span></span>
-<span id="cb81-11"><a href="PROBRULES.html#cb81-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-12"><a href="PROBRULES.html#cb81-12" aria-hidden="true" tabindex="-1"></a>(num4<span class="sc">+</span>num5<span class="sc">+</span>num6)<span class="sc">/</span>denom</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#fourth spot</span>
+<span class="va">num4</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">1</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">25</span>
+
+<span class="co">#fifth spot</span>
+<span class="va">num5</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">1</span><span class="op">*</span><span class="fl">25</span>
+
+<span class="co">#sixth spot</span>
+<span class="va">num6</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">1</span>
+
+<span class="va">denom</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">26</span><span class="op">*</span><span class="fl">26</span><span class="op">*</span><span class="fl">26</span>
+
+<span class="op">(</span><span class="va">num4</span><span class="op">+</span><span class="va">num5</span><span class="op">+</span><span class="va">num6</span><span class="op">)</span><span class="op">/</span><span class="va">denom</span></code></pre></div>
 <pre><code>## [1] 0.1066796</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>What is the probability that a license plate contains <strong>at least one</strong> “B?”</li>
 </ol>
 <p><span class="math display">\[
-1-\Prob(\mbox{no B&#39;s})
+1-\Prob(\mbox{no B's})
 \]</span></p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="PROBRULES.html#cb83-1" aria-hidden="true" tabindex="-1"></a>num0<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">25</span><span class="sc">*</span><span class="dv">25</span><span class="sc">*</span><span class="dv">25</span></span>
-<span id="cb83-2"><a href="PROBRULES.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span>num0<span class="sc">/</span>denom</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">num0</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">25</span>
+<span class="fl">1</span><span class="op">-</span><span class="va">num0</span><span class="op">/</span><span class="va">denom</span></code></pre></div>
 <pre><code>## [1] 0.1110036</code></pre>
 </div>
 <div id="problem-6" class="section level3" number="8.2.6">
-<h3><span class="header-section-number">8.2.6</span> Problem 6</h3>
+<h3>
+<span class="header-section-number">8.2.6</span> Problem 6<a class="anchor" aria-label="anchor" href="#problem-6"><i class="fas fa-link"></i></a>
+</h3>
 <p>Consider the party example in the reading.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Suppose 8 people showed up to the party dressed as zombies. What is the probability that all three awards are won by people dressed as zombies?
 <span class="math display">\[
 \frac{8\cdot 7 \cdot 6}{25\cdot 24 \cdot 23}
-\]</span></li>
+\]</span>
+</li>
 </ol>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="PROBRULES.html#cb85-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">8</span><span class="sc">*</span><span class="dv">7</span><span class="sc">*</span><span class="dv">6</span>)<span class="sc">/</span>(<span class="dv">25</span><span class="sc">*</span><span class="dv">24</span><span class="sc">*</span><span class="dv">23</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="fl">8</span><span class="op">*</span><span class="fl">7</span><span class="op">*</span><span class="fl">6</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">25</span><span class="op">*</span><span class="fl">24</span><span class="op">*</span><span class="fl">23</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.02434783</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>What is the probability that zombies win “most creative” and “funniest” but not “scariest?”
 <span class="math display">\[
 \frac{8 \cdot 17 \cdot 7}{25 \cdot 24 \cdot 23}
-\]</span></li>
+\]</span>
+</li>
 </ol>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="PROBRULES.html#cb87-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">8</span><span class="sc">*</span><span class="dv">17</span><span class="sc">*</span><span class="dv">7</span>)<span class="sc">/</span>(<span class="dv">25</span><span class="sc">*</span><span class="dv">24</span><span class="sc">*</span><span class="dv">23</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="fl">8</span><span class="op">*</span><span class="fl">17</span><span class="op">*</span><span class="fl">7</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">25</span><span class="op">*</span><span class="fl">24</span><span class="op">*</span><span class="fl">23</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.06898551</code></pre>
 </div>
 <div id="problem-7" class="section level3" number="8.2.7">
-<h3><span class="header-section-number">8.2.7</span> Problem 7</h3>
+<h3>
+<span class="header-section-number">8.2.7</span> Problem 7<a class="anchor" aria-label="anchor" href="#problem-7"><i class="fas fa-link"></i></a>
+</h3>
 <p>Consider the cards example from the reading.</p>
 <ol style="list-style-type: lower-alpha">
 <li>How many ways can we obtain a “two pairs” (2 of one number, 2 of another, and the final different)?</li>
@@ -671,7 +291,8 @@ Notice here the order does matter because a pair of Kings and 4s is the same as 
 <p><span class="math inline">\(\binom{44}{1}\)</span></p>
 <p>Putting it all together:</p>
 <p><span class="math inline">\(\binom{13}{2}\binom{4}{2}\binom{4}{2}\binom{44}{1}\)</span></p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="PROBRULES.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">13</span>,<span class="dv">2</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">4</span>,<span class="dv">2</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">4</span>,<span class="dv">2</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">44</span>,<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">13</span>,<span class="fl">2</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">44</span>,<span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 123552</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>What is the probability of drawing a “four of a kind” (four cards of the same value)?</li>
@@ -679,11 +300,14 @@ Notice here the order does matter because a pair of Kings and 4s is the same as 
 <p><span class="math display">\[
 \Prob(\mbox{4 of a kind})=\frac{\binom{13}{1}\binom{4}{4}\binom{48}{1}}{\binom{52}{5}}
 \]</span></p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="PROBRULES.html#cb91-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">13</span><span class="sc">*</span><span class="dv">1</span><span class="sc">*</span><span class="dv">48</span>)<span class="sc">/</span><span class="fu">choose</span>(<span class="dv">52</span>,<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="fl">13</span><span class="op">*</span><span class="fl">1</span><span class="op">*</span><span class="fl">48</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">52</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.000240096</code></pre>
 </div>
 <div id="problem-8" class="section level3" number="8.2.8">
-<h3><span class="header-section-number">8.2.8</span> Problem 8</h3>
+<h3>
+<span class="header-section-number">8.2.8</span> Problem 8<a class="anchor" aria-label="anchor" href="#problem-8"><i class="fas fa-link"></i></a>
+</h3>
 <p>Advanced Question: Consider rolling 5 dice. What is the <strong>probability</strong> of a pour resulting in a full house?</p>
 <p>First pick the value for the three of a kind, there are 6. Then pick the value from the remaining 5 for the two of a kind. This is actually a permutation. There are 30 distinct “flavors” of full house (three 1’s &amp; two 2’s, three 1’s &amp; two 3’s, etc.). In the reading we did this as
 <span class="math display">\[
@@ -696,91 +320,94 @@ We now have the 5 dice. We have to select three to have the same value and the o
 <span class="math display">\[
 \Prob(\mbox{full house}) = \frac{\binom{6}{1} \times \binom{5}{1} \times \binom{5}{3}}{6^5}
 \]</span></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="PROBRULES.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span><span class="sc">*</span><span class="dv">10</span><span class="sc">/</span>(<span class="dv">6</span><span class="sc">^</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">30</span><span class="op">*</span><span class="fl">10</span><span class="op">/</span><span class="op">(</span><span class="fl">6</span><span class="op">^</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.03858025</code></pre>
 <p>Simulating is tough so let’s write some code that may help.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="PROBRULES.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">23</span>)</span>
-<span id="cb95-2"><a href="PROBRULES.html#cb95-2" aria-hidden="true" tabindex="-1"></a>temp<span class="ot">&lt;-</span><span class="fu">table</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">size=</span><span class="dv">5</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
-<span id="cb95-3"><a href="PROBRULES.html#cb95-3" aria-hidden="true" tabindex="-1"></a>temp</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span>
+<span class="va">temp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/resample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,size<span class="op">=</span><span class="fl">5</span>,replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="va">temp</span></code></pre></div>
 <pre><code>## 
 ## 1 3 4 5 
 ## 1 2 1 1</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="PROBRULES.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(temp<span class="sc">==</span><span class="dv">2</span>) <span class="sc">&amp;</span> <span class="fu">sum</span>(temp<span class="sc">==</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">sum</a></span><span class="op">(</span><span class="va">temp</span><span class="op">==</span><span class="fl">2</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">sum</a></span><span class="op">(</span><span class="va">temp</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="PROBRULES.html#cb99-1" aria-hidden="true" tabindex="-1"></a>temp<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb99-2"><a href="PROBRULES.html#cb99-2" aria-hidden="true" tabindex="-1"></a>temp<span class="ot">&lt;-</span><span class="fu">table</span>(temp)</span>
-<span id="cb99-3"><a href="PROBRULES.html#cb99-3" aria-hidden="true" tabindex="-1"></a>temp</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">temp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>
+<span class="va">temp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
+<span class="va">temp</span></code></pre></div>
 <pre><code>## temp
 ## 1 2 
 ## 3 2</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="PROBRULES.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(temp<span class="sc">==</span><span class="dv">2</span>) <span class="sc">&amp;</span> <span class="fu">sum</span>(temp<span class="sc">==</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">sum</a></span><span class="op">(</span><span class="va">temp</span><span class="op">==</span><span class="fl">2</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">sum</a></span><span class="op">(</span><span class="va">temp</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Let’s write a function.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="PROBRULES.html#cb103-1" aria-hidden="true" tabindex="-1"></a>full_house <span class="ot">&lt;-</span><span class="cf">function</span>(x){</span>
-<span id="cb103-2"><a href="PROBRULES.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  temp<span class="ot">&lt;-</span><span class="fu">table</span>(x)</span>
-<span id="cb103-3"><a href="PROBRULES.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(temp<span class="sc">==</span><span class="dv">2</span>) <span class="sc">&amp;</span> <span class="fu">sum</span>(temp<span class="sc">==</span><span class="dv">3</span>)</span>
-<span id="cb103-4"><a href="PROBRULES.html#cb103-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="PROBRULES.html#cb104-1" aria-hidden="true" tabindex="-1"></a>temp<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb104-2"><a href="PROBRULES.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">full_house</span>(temp)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">full_house</span> <span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">temp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">sum</a></span><span class="op">(</span><span class="va">temp</span><span class="op">==</span><span class="fl">2</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">sum</a></span><span class="op">(</span><span class="va">temp</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">temp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>
+<span class="fu">full_house</span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="PROBRULES.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">751</span>)</span>
-<span id="cb106-2"><a href="PROBRULES.html#cb106-2" aria-hidden="true" tabindex="-1"></a>results<span class="ot">&lt;-</span><span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">full_house</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">size=</span><span class="dv">5</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
-<span id="cb106-3"><a href="PROBRULES.html#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="sc">~</span>full_house,<span class="at">data=</span>results)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">751</span><span class="op">)</span>
+<span class="va">results</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/do.html">do</a></span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span><span class="op">*</span><span class="fu">full_house</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/resample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,size<span class="op">=</span><span class="fl">5</span>,replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">mean</a></span><span class="op">(</span><span class="op">~</span><span class="va">full_house</span>,data<span class="op">=</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.039</code></pre>
 
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="CS2.html"><span class="header-section-number">7</span> Case Study</a></div>
+<div class="next"><a href="CONDPROB.html"><span class="header-section-number">9</span> Conditional Probability</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#PROBRULES"><span class="header-section-number">8</span> Probability Rules</a></li>
+<li><a class="nav-link" href="#objectives-7"><span class="header-section-number">8.1</span> Objectives</a></li>
+<li>
+<a class="nav-link" href="#homework-7"><span class="header-section-number">8.2</span> Homework</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#problem-1-7"><span class="header-section-number">8.2.1</span> Problem 1</a></li>
+<li><a class="nav-link" href="#problem-2-7"><span class="header-section-number">8.2.2</span> Problem 2</a></li>
+<li><a class="nav-link" href="#problem-3-5"><span class="header-section-number">8.2.3</span> Problem 3</a></li>
+<li><a class="nav-link" href="#problem-4-1"><span class="header-section-number">8.2.4</span> Problem 4</a></li>
+<li><a class="nav-link" href="#problem-5-1"><span class="header-section-number">8.2.5</span> Problem 5</a></li>
+<li><a class="nav-link" href="#problem-6"><span class="header-section-number">8.2.6</span> Problem 6</a></li>
+<li><a class="nav-link" href="#problem-7"><span class="header-section-number">8.2.7</span> Problem 7</a></li>
+<li><a class="nav-link" href="#problem-8"><span class="header-section-number">8.2.8</span> Problem 8</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="CS2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="CONDPROB.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": null,
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": null,
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"info": false
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -792,7 +419,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

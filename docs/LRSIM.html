@@ -1,563 +1,170 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 27 Simulation Based Linear Regression | Solutions for Probability and Statistics for Scientists and Engineers</title>
-  <meta name="description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 27 Simulation Based Linear Regression | Solutions for Probability and Statistics for Scientists and Engineers" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="/figures/SolutionCoverPSSE.png" />
-  <meta property="og:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 27 Simulation Based Linear Regression | Solutions for Probability and Statistics for Scientists and Engineers" />
-  
-  <meta name="twitter:description" content="This is a set of solutions used for Math 356 starting in the spring of 2022." />
-  <meta name="twitter:image" content="/figures/SolutionCoverPSSE.png" />
-
-<meta name="author" content="Matthew Davis" />
-<meta name="author" content="Brianna Hitt" />
-<meta name="author" content="Kenneth Horton" />
-<meta name="author" content="Bradley Warner" />
-
-
-<meta name="date" content="2021-12-15" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="LRDIAG.html"/>
-<link rel="next" href="LRMULTI.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 27 Simulation Based Linear Regression | Solutions for Probability and Statistics for Scientists and Engineers</title>
+<meta name="author" content="Matthew Davis">
+<meta name="author" content="Brianna Hitt">
+<meta name="author" content="Kenneth Horton">
+<meta name="author" content="Bradley Warner">
+<meta name="description" content="27.1 Objectives Using the bootstrap, generate confidence and estimates of standard error for parameter estimates from a linear regression model. Generate and interpret bootstrap confidence...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 27 Simulation Based Linear Regression | Solutions for Probability and Statistics for Scientists and Engineers">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/figures/SolutionCoverPSSE.png">
+<meta property="og:description" content="27.1 Objectives Using the bootstrap, generate confidence and estimates of standard error for parameter estimates from a linear regression model. Generate and interpret bootstrap confidence...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 27 Simulation Based Linear Regression | Solutions for Probability and Statistics for Scientists and Engineers">
+<meta name="twitter:description" content="27.1 Objectives Using the bootstrap, generate confidence and estimates of standard error for parameter estimates from a linear regression model. Generate and interpret bootstrap confidence...">
+<meta name="twitter:image" content="/figures/SolutionCoverPSSE.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Solutions Manual</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#book-structure-and-how-to-use-it"><i class="fa fa-check"></i><b>0.1</b> Book Structure and How to Use It</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2</b> Packages</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#file-creation-information"><i class="fa fa-check"></i><b>0.3</b> File Creation Information</a></li>
-</ul></li>
-<li class="part"><span><b>I Descriptive Statistical Modeling</b></span></li>
-<li class="chapter" data-level="1" data-path="CS1.html"><a href="CS1.html"><i class="fa fa-check"></i><b>1</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="CS1.html"><a href="CS1.html#objectives"><i class="fa fa-check"></i><b>1.1</b> Objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="CS1.html"><a href="CS1.html#homework"><i class="fa fa-check"></i><b>1.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="CS1.html"><a href="CS1.html#problem-1"><i class="fa fa-check"></i><b>1.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="1.2.2" data-path="CS1.html"><a href="CS1.html#problem-2"><i class="fa fa-check"></i><b>1.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="DB.html"><a href="DB.html"><i class="fa fa-check"></i><b>2</b> Data Basics</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="DB.html"><a href="DB.html#objectives-1"><i class="fa fa-check"></i><b>2.1</b> Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="DB.html"><a href="DB.html#homework-1"><i class="fa fa-check"></i><b>2.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="DB.html"><a href="DB.html#problem-1-1"><i class="fa fa-check"></i><b>2.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="2.2.2" data-path="DB.html"><a href="DB.html#problem-2-1"><i class="fa fa-check"></i><b>2.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="2.2.3" data-path="DB.html"><a href="DB.html#problem-3"><i class="fa fa-check"></i><b>2.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="ODCP.html"><a href="ODCP.html"><i class="fa fa-check"></i><b>3</b> Overview of Data Collection Principles</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="ODCP.html"><a href="ODCP.html#objectives-2"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
-<li class="chapter" data-level="3.2" data-path="ODCP.html"><a href="ODCP.html#homework-2"><i class="fa fa-check"></i><b>3.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="ODCP.html"><a href="ODCP.html#problem-1-2"><i class="fa fa-check"></i><b>3.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="3.2.2" data-path="ODCP.html"><a href="ODCP.html#problem-2-2"><i class="fa fa-check"></i><b>3.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="3.2.3" data-path="ODCP.html"><a href="ODCP.html#problem-3-1"><i class="fa fa-check"></i><b>3.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="STUDY.html"><a href="STUDY.html"><i class="fa fa-check"></i><b>4</b> Studies</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="STUDY.html"><a href="STUDY.html#objectives-3"><i class="fa fa-check"></i><b>4.1</b> Objectives</a></li>
-<li class="chapter" data-level="4.2" data-path="STUDY.html"><a href="STUDY.html#homework-3"><i class="fa fa-check"></i><b>4.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="STUDY.html"><a href="STUDY.html#problem-1-3"><i class="fa fa-check"></i><b>4.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="4.2.2" data-path="STUDY.html"><a href="STUDY.html#problem-2-3"><i class="fa fa-check"></i><b>4.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="4.2.3" data-path="STUDY.html"><a href="STUDY.html#problem-3-2"><i class="fa fa-check"></i><b>4.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="4.2.4" data-path="STUDY.html"><a href="STUDY.html#problem-4"><i class="fa fa-check"></i><b>4.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="4.2.5" data-path="STUDY.html"><a href="STUDY.html#problem-5"><i class="fa fa-check"></i><b>4.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="NUMDATA.html"><a href="NUMDATA.html"><i class="fa fa-check"></i><b>5</b> Numerical Data</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="NUMDATA.html"><a href="NUMDATA.html#objectives-4"><i class="fa fa-check"></i><b>5.1</b> Objectives</a></li>
-<li class="chapter" data-level="5.2" data-path="NUMDATA.html"><a href="NUMDATA.html#homework-4"><i class="fa fa-check"></i><b>5.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-1-4"><i class="fa fa-check"></i><b>5.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="5.2.2" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-2-4"><i class="fa fa-check"></i><b>5.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="5.2.3" data-path="NUMDATA.html"><a href="NUMDATA.html#problem-3-3"><i class="fa fa-check"></i><b>5.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="CATDATA.html"><a href="CATDATA.html"><i class="fa fa-check"></i><b>6</b> Categorical Data</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="CATDATA.html"><a href="CATDATA.html#objectives-5"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
-<li class="chapter" data-level="6.2" data-path="CATDATA.html"><a href="CATDATA.html#homework-5"><i class="fa fa-check"></i><b>6.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="CATDATA.html"><a href="CATDATA.html#problem-1-5"><i class="fa fa-check"></i><b>6.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="6.2.2" data-path="CATDATA.html"><a href="CATDATA.html#problem-2-5"><i class="fa fa-check"></i><b>6.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="6.2.3" data-path="CATDATA.html"><a href="CATDATA.html#problem-3-4"><i class="fa fa-check"></i><b>6.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>II Probability Modeling</b></span></li>
-<li class="chapter" data-level="7" data-path="CS2.html"><a href="CS2.html"><i class="fa fa-check"></i><b>7</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="CS2.html"><a href="CS2.html#objectives-6"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
-<li class="chapter" data-level="7.2" data-path="CS2.html"><a href="CS2.html#homework-6"><i class="fa fa-check"></i><b>7.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="CS2.html"><a href="CS2.html#problem-1-6"><i class="fa fa-check"></i><b>7.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="7.2.2" data-path="CS2.html"><a href="CS2.html#problem-2-6"><i class="fa fa-check"></i><b>7.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="PROBRULES.html"><a href="PROBRULES.html"><i class="fa fa-check"></i><b>8</b> Probability Rules</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="PROBRULES.html"><a href="PROBRULES.html#objectives-7"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
-<li class="chapter" data-level="8.2" data-path="PROBRULES.html"><a href="PROBRULES.html#homework-7"><i class="fa fa-check"></i><b>8.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-1-7"><i class="fa fa-check"></i><b>8.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="8.2.2" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-2-7"><i class="fa fa-check"></i><b>8.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="8.2.3" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-3-5"><i class="fa fa-check"></i><b>8.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="8.2.4" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-4-1"><i class="fa fa-check"></i><b>8.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="8.2.5" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-5-1"><i class="fa fa-check"></i><b>8.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="8.2.6" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-6"><i class="fa fa-check"></i><b>8.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="8.2.7" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-7"><i class="fa fa-check"></i><b>8.2.7</b> Problem 7</a></li>
-<li class="chapter" data-level="8.2.8" data-path="PROBRULES.html"><a href="PROBRULES.html#problem-8"><i class="fa fa-check"></i><b>8.2.8</b> Problem 8</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="CONDPROB.html"><a href="CONDPROB.html"><i class="fa fa-check"></i><b>9</b> Conditional Probability</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="CONDPROB.html"><a href="CONDPROB.html#objectives-8"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="CONDPROB.html"><a href="CONDPROB.html#homework-8"><i class="fa fa-check"></i><b>9.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="9.2.1" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-1-8"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="9.2.2" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-2-8"><i class="fa fa-check"></i><b>9.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="9.2.3" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-3-6"><i class="fa fa-check"></i><b>9.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="9.2.4" data-path="CONDPROB.html"><a href="CONDPROB.html#problem-4-2"><i class="fa fa-check"></i><b>9.2.4</b> Problem 4</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="RANDVAR.html"><a href="RANDVAR.html"><i class="fa fa-check"></i><b>10</b> Random Variables</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="RANDVAR.html"><a href="RANDVAR.html#objectives-9"><i class="fa fa-check"></i><b>10.1</b> Objectives</a></li>
-<li class="chapter" data-level="10.2" data-path="RANDVAR.html"><a href="RANDVAR.html#homework-9"><i class="fa fa-check"></i><b>10.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="10.2.1" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-1-9"><i class="fa fa-check"></i><b>10.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="10.2.2" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-2-9"><i class="fa fa-check"></i><b>10.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="10.2.3" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-3-7"><i class="fa fa-check"></i><b>10.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="10.2.4" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-4-3"><i class="fa fa-check"></i><b>10.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="10.2.5" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-5-2"><i class="fa fa-check"></i><b>10.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="10.2.6" data-path="RANDVAR.html"><a href="RANDVAR.html#problem-6-1"><i class="fa fa-check"></i><b>10.2.6</b> Problem 6</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html"><i class="fa fa-check"></i><b>11</b> Continuous Random Variables</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#objectives-10"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
-<li class="chapter" data-level="11.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#homework-10"><i class="fa fa-check"></i><b>11.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="11.2.1" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-1-10"><i class="fa fa-check"></i><b>11.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="11.2.2" data-path="CONRANDVAR.html"><a href="CONRANDVAR.html#problem-2-10"><i class="fa fa-check"></i><b>11.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html"><i class="fa fa-check"></i><b>12</b> Named Discrete Distributions</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#objectives-11"><i class="fa fa-check"></i><b>12.1</b> Objectives</a></li>
-<li class="chapter" data-level="12.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#homework-11"><i class="fa fa-check"></i><b>12.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-1-11"><i class="fa fa-check"></i><b>12.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="12.2.2" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-2-11"><i class="fa fa-check"></i><b>12.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="12.2.3" data-path="DISCRETENAMED.html"><a href="DISCRETENAMED.html#problem-3-8"><i class="fa fa-check"></i><b>12.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html"><i class="fa fa-check"></i><b>13</b> Named Continuous Distributions</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#objectives-12"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
-<li class="chapter" data-level="13.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#homework-12"><i class="fa fa-check"></i><b>13.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-1-12"><i class="fa fa-check"></i><b>13.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="13.2.2" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-2-12"><i class="fa fa-check"></i><b>13.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="13.2.3" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-3-9"><i class="fa fa-check"></i><b>13.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="13.2.4" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-4-4"><i class="fa fa-check"></i><b>13.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="13.2.5" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-5-3"><i class="fa fa-check"></i><b>13.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="13.2.6" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-6-2"><i class="fa fa-check"></i><b>13.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="13.2.7" data-path="CONTNNAMED.html"><a href="CONTNNAMED.html#problem-7-1"><i class="fa fa-check"></i><b>13.2.7</b> Problem 7</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html"><i class="fa fa-check"></i><b>14</b> Multivariate Distributions</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#objectives-13"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
-<li class="chapter" data-level="14.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#homework-13"><i class="fa fa-check"></i><b>14.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-1-13"><i class="fa fa-check"></i><b>14.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="14.2.2" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-2-13"><i class="fa fa-check"></i><b>14.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="14.2.3" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-3-10"><i class="fa fa-check"></i><b>14.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="14.2.4" data-path="MULTIDISTS.html"><a href="MULTIDISTS.html#problem-4-5"><i class="fa fa-check"></i><b>14.2.4</b> Problem 4</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="EST.html"><a href="EST.html"><i class="fa fa-check"></i><b>15</b> Estimation Methods</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="EST.html"><a href="EST.html#objectives-14"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
-<li class="chapter" data-level="15.2" data-path="EST.html"><a href="EST.html#homework-14"><i class="fa fa-check"></i><b>15.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="EST.html"><a href="EST.html#problem-1-14"><i class="fa fa-check"></i><b>15.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="15.2.2" data-path="EST.html"><a href="EST.html#problem-2-14"><i class="fa fa-check"></i><b>15.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="15.2.3" data-path="EST.html"><a href="EST.html#problem-3-11"><i class="fa fa-check"></i><b>15.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="15.2.4" data-path="EST.html"><a href="EST.html#problem-4-6"><i class="fa fa-check"></i><b>15.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="15.2.5" data-path="EST.html"><a href="EST.html#problem-5-4"><i class="fa fa-check"></i><b>15.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>III Statistical Modeling</b></span></li>
-<li class="chapter" data-level="16" data-path="CS3.html"><a href="CS3.html"><i class="fa fa-check"></i><b>16</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="CS3.html"><a href="CS3.html#objectives-15"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
-<li class="chapter" data-level="16.2" data-path="CS3.html"><a href="CS3.html#homework-15"><i class="fa fa-check"></i><b>16.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="16.2.1" data-path="CS3.html"><a href="CS3.html#problem-1-15"><i class="fa fa-check"></i><b>16.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="16.2.2" data-path="CS3.html"><a href="CS3.html#problem-2-15"><i class="fa fa-check"></i><b>16.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="HYPOTEST.html"><a href="HYPOTEST.html"><i class="fa fa-check"></i><b>17</b> Hypothesis Testing</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#objectives-16"><i class="fa fa-check"></i><b>17.1</b> Objectives</a></li>
-<li class="chapter" data-level="17.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#homework-16"><i class="fa fa-check"></i><b>17.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="17.2.1" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-1-16"><i class="fa fa-check"></i><b>17.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="17.2.2" data-path="HYPOTEST.html"><a href="HYPOTEST.html#problem-2-16"><i class="fa fa-check"></i><b>17.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="PVALUES.html"><a href="PVALUES.html"><i class="fa fa-check"></i><b>18</b> Empirical p-values</a>
-<ul>
-<li class="chapter" data-level="18.1" data-path="PVALUES.html"><a href="PVALUES.html#objective"><i class="fa fa-check"></i><b>18.1</b> Objective</a></li>
-<li class="chapter" data-level="18.2" data-path="PVALUES.html"><a href="PVALUES.html#homework-17"><i class="fa fa-check"></i><b>18.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="18.2.1" data-path="PVALUES.html"><a href="PVALUES.html#problem-1-17"><i class="fa fa-check"></i><b>18.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="18.2.2" data-path="PVALUES.html"><a href="PVALUES.html#problem-2-17"><i class="fa fa-check"></i><b>18.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="18.2.3" data-path="PVALUES.html"><a href="PVALUES.html#problem-3-12"><i class="fa fa-check"></i><b>18.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="CLT.html"><a href="CLT.html"><i class="fa fa-check"></i><b>19</b> Central Limit Theorem</a>
-<ul>
-<li class="chapter" data-level="19.1" data-path="CLT.html"><a href="CLT.html#objectives-17"><i class="fa fa-check"></i><b>19.1</b> Objectives</a></li>
-<li class="chapter" data-level="19.2" data-path="CLT.html"><a href="CLT.html#homework-18"><i class="fa fa-check"></i><b>19.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="19.2.1" data-path="CLT.html"><a href="CLT.html#problem-1-18"><i class="fa fa-check"></i><b>19.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="19.2.2" data-path="CLT.html"><a href="CLT.html#problem-2-18"><i class="fa fa-check"></i><b>19.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="19.2.3" data-path="CLT.html"><a href="CLT.html#problem-3-13"><i class="fa fa-check"></i><b>19.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="19.2.4" data-path="CLT.html"><a href="CLT.html#problem-4-7"><i class="fa fa-check"></i><b>19.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="19.2.5" data-path="CLT.html"><a href="CLT.html#problem-5-5"><i class="fa fa-check"></i><b>19.2.5</b> Problem 5</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="20" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>20</b> Confidence Intervals</a>
-<ul>
-<li class="chapter" data-level="20.1" data-path="CI.html"><a href="CI.html#objectives-18"><i class="fa fa-check"></i><b>20.1</b> Objectives</a></li>
-<li class="chapter" data-level="20.2" data-path="CI.html"><a href="CI.html#homework-19"><i class="fa fa-check"></i><b>20.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="20.2.1" data-path="CI.html"><a href="CI.html#problem-1-19"><i class="fa fa-check"></i><b>20.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="20.2.2" data-path="CI.html"><a href="CI.html#problem-2-19"><i class="fa fa-check"></i><b>20.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="20.2.3" data-path="CI.html"><a href="CI.html#problem-3-14"><i class="fa fa-check"></i><b>20.2.3</b> Problem 3</a></li>
-<li class="chapter" data-level="20.2.4" data-path="CI.html"><a href="CI.html#problem-4-8"><i class="fa fa-check"></i><b>20.2.4</b> Problem 4</a></li>
-<li class="chapter" data-level="20.2.5" data-path="CI.html"><a href="CI.html#problem-5-6"><i class="fa fa-check"></i><b>20.2.5</b> Problem 5</a></li>
-<li class="chapter" data-level="20.2.6" data-path="CI.html"><a href="CI.html#problem-6-3"><i class="fa fa-check"></i><b>20.2.6</b> Problem 6</a></li>
-<li class="chapter" data-level="20.2.7" data-path="CI.html"><a href="CI.html#problem-7-2"><i class="fa fa-check"></i><b>20.2.7</b> Problem 7</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="21" data-path="BOOT.html"><a href="BOOT.html"><i class="fa fa-check"></i><b>21</b> Bootstrap</a>
-<ul>
-<li class="chapter" data-level="21.1" data-path="BOOT.html"><a href="BOOT.html#objectives-19"><i class="fa fa-check"></i><b>21.1</b> Objectives</a></li>
-<li class="chapter" data-level="21.2" data-path="BOOT.html"><a href="BOOT.html#homework-20"><i class="fa fa-check"></i><b>21.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="21.2.1" data-path="BOOT.html"><a href="BOOT.html#problem-1-20"><i class="fa fa-check"></i><b>21.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="21.2.2" data-path="BOOT.html"><a href="BOOT.html#problem-2-20"><i class="fa fa-check"></i><b>21.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="21.2.3" data-path="BOOT.html"><a href="BOOT.html#problem-3-15"><i class="fa fa-check"></i><b>21.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="22" data-path="ADDTESTS.html"><a href="ADDTESTS.html"><i class="fa fa-check"></i><b>22</b> Additional Hypothesis Tests</a>
-<ul>
-<li class="chapter" data-level="22.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#objectives-20"><i class="fa fa-check"></i><b>22.1</b> Objectives</a></li>
-<li class="chapter" data-level="22.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#homework-21"><i class="fa fa-check"></i><b>22.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="22.2.1" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-1-21"><i class="fa fa-check"></i><b>22.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="22.2.2" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-2-21"><i class="fa fa-check"></i><b>22.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="22.2.3" data-path="ADDTESTS.html"><a href="ADDTESTS.html#problem-3-16"><i class="fa fa-check"></i><b>22.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>IV Predictive Statistical Modeling</b></span></li>
-<li class="chapter" data-level="23" data-path="CS4.html"><a href="CS4.html"><i class="fa fa-check"></i><b>23</b> Case Study</a>
-<ul>
-<li class="chapter" data-level="23.1" data-path="CS4.html"><a href="CS4.html#objectives-21"><i class="fa fa-check"></i><b>23.1</b> Objectives</a></li>
-<li class="chapter" data-level="23.2" data-path="CS4.html"><a href="CS4.html#homework-22"><i class="fa fa-check"></i><b>23.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="23.2.1" data-path="CS4.html"><a href="CS4.html#problem-1-22"><i class="fa fa-check"></i><b>23.2.1</b> Problem 1</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="24" data-path="LRBASICS.html"><a href="LRBASICS.html"><i class="fa fa-check"></i><b>24</b> Linear Regression Basics</a>
-<ul>
-<li class="chapter" data-level="24.1" data-path="LRBASICS.html"><a href="LRBASICS.html#objectives-22"><i class="fa fa-check"></i><b>24.1</b> Objectives</a></li>
-<li class="chapter" data-level="24.2" data-path="LRBASICS.html"><a href="LRBASICS.html#homework-23"><i class="fa fa-check"></i><b>24.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="24.2.1" data-path="LRBASICS.html"><a href="LRBASICS.html#problem-1-23"><i class="fa fa-check"></i><b>24.2.1</b> Problem 1</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="25" data-path="LRINF.html"><a href="LRINF.html"><i class="fa fa-check"></i><b>25</b> Linear Regression Inference</a>
-<ul>
-<li class="chapter" data-level="25.1" data-path="LRINF.html"><a href="LRINF.html#objectives-23"><i class="fa fa-check"></i><b>25.1</b> Objectives</a></li>
-<li class="chapter" data-level="25.2" data-path="LRINF.html"><a href="LRINF.html#homework-24"><i class="fa fa-check"></i><b>25.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="25.2.1" data-path="LRINF.html"><a href="LRINF.html#problem-1-24"><i class="fa fa-check"></i><b>25.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="25.2.2" data-path="LRINF.html"><a href="LRINF.html#problem-2-22"><i class="fa fa-check"></i><b>25.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="25.2.3" data-path="LRINF.html"><a href="LRINF.html#problem-3-17"><i class="fa fa-check"></i><b>25.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="26" data-path="LRDIAG.html"><a href="LRDIAG.html"><i class="fa fa-check"></i><b>26</b> Regression Diagnostics</a>
-<ul>
-<li class="chapter" data-level="26.1" data-path="LRDIAG.html"><a href="LRDIAG.html#objectives-24"><i class="fa fa-check"></i><b>26.1</b> Objectives</a></li>
-<li class="chapter" data-level="26.2" data-path="LRDIAG.html"><a href="LRDIAG.html#homework-25"><i class="fa fa-check"></i><b>26.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="26.2.1" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-1-25"><i class="fa fa-check"></i><b>26.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="26.2.2" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-2-23"><i class="fa fa-check"></i><b>26.2.2</b> Problem 2</a></li>
-<li class="chapter" data-level="26.2.3" data-path="LRDIAG.html"><a href="LRDIAG.html#problem-3-18"><i class="fa fa-check"></i><b>26.2.3</b> Problem 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="27" data-path="LRSIM.html"><a href="LRSIM.html"><i class="fa fa-check"></i><b>27</b> Simulation Based Linear Regression</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="LRSIM.html"><a href="LRSIM.html#objectives-25"><i class="fa fa-check"></i><b>27.1</b> Objectives</a></li>
-<li class="chapter" data-level="27.2" data-path="LRSIM.html"><a href="LRSIM.html#homework-26"><i class="fa fa-check"></i><b>27.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="27.2.1" data-path="LRSIM.html"><a href="LRSIM.html#problem-1-26"><i class="fa fa-check"></i><b>27.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="27.2.2" data-path="LRSIM.html"><a href="LRSIM.html#problem-2-24"><i class="fa fa-check"></i><b>27.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="28" data-path="LRMULTI.html"><a href="LRMULTI.html"><i class="fa fa-check"></i><b>28</b> Multiple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="28.1" data-path="LRMULTI.html"><a href="LRMULTI.html#objectives-26"><i class="fa fa-check"></i><b>28.1</b> Objectives</a></li>
-<li class="chapter" data-level="28.2" data-path="LRMULTI.html"><a href="LRMULTI.html#homework-27"><i class="fa fa-check"></i><b>28.2</b> Homework</a>
-<ul>
-<li class="chapter" data-level="28.2.1" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-1-27"><i class="fa fa-check"></i><b>28.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="28.2.2" data-path="LRMULTI.html"><a href="LRMULTI.html#problem-2-25"><i class="fa fa-check"></i><b>28.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="29" data-path="LOGREG.html"><a href="LOGREG.html"><i class="fa fa-check"></i><b>29</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="29.1" data-path="LOGREG.html"><a href="LOGREG.html#objectives-27"><i class="fa fa-check"></i><b>29.1</b> Objectives</a></li>
-<li class="chapter" data-level="29.2" data-path="LOGREG.html"><a href="LOGREG.html#homework-problems"><i class="fa fa-check"></i><b>29.2</b> Homework Problems</a>
-<ul>
-<li class="chapter" data-level="29.2.1" data-path="LOGREG.html"><a href="LOGREG.html#problem-1-28"><i class="fa fa-check"></i><b>29.2.1</b> Problem 1</a></li>
-<li class="chapter" data-level="29.2.2" data-path="LOGREG.html"><a href="LOGREG.html#problem-2-26"><i class="fa fa-check"></i><b>29.2.2</b> Problem 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Solutions for Probability and Statistics for Scientists and Engineers</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solutions for Probability and Statistics for Scientists and Engineers</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Descriptive Statistical Modeling</li>
+<li><a class="" href="CS1.html"><span class="header-section-number">1</span> Case Study</a></li>
+<li><a class="" href="DB.html"><span class="header-section-number">2</span> Data Basics</a></li>
+<li><a class="" href="ODCP.html"><span class="header-section-number">3</span> Overview of Data Collection Principles</a></li>
+<li><a class="" href="STUDY.html"><span class="header-section-number">4</span> Studies</a></li>
+<li><a class="" href="NUMDATA.html"><span class="header-section-number">5</span> Numerical Data</a></li>
+<li><a class="" href="CATDATA.html"><span class="header-section-number">6</span> Categorical Data</a></li>
+<li class="book-part">Probability Modeling</li>
+<li><a class="" href="CS2.html"><span class="header-section-number">7</span> Case Study</a></li>
+<li><a class="" href="PROBRULES.html"><span class="header-section-number">8</span> Probability Rules</a></li>
+<li><a class="" href="CONDPROB.html"><span class="header-section-number">9</span> Conditional Probability</a></li>
+<li><a class="" href="RANDVAR.html"><span class="header-section-number">10</span> Random Variables</a></li>
+<li><a class="" href="CONRANDVAR.html"><span class="header-section-number">11</span> Continuous Random Variables</a></li>
+<li><a class="" href="DISCRETENAMED.html"><span class="header-section-number">12</span> Named Discrete Distributions</a></li>
+<li><a class="" href="CONTNNAMED.html"><span class="header-section-number">13</span> Named Continuous Distributions</a></li>
+<li><a class="" href="MULTIDISTS.html"><span class="header-section-number">14</span> Multivariate Distributions</a></li>
+<li><a class="" href="EST.html"><span class="header-section-number">15</span> Estimation Methods</a></li>
+<li class="book-part">Statistical Modeling</li>
+<li><a class="" href="CS3.html"><span class="header-section-number">16</span> Case Study</a></li>
+<li><a class="" href="HYPOTEST.html"><span class="header-section-number">17</span> Hypothesis Testing</a></li>
+<li><a class="" href="PVALUES.html"><span class="header-section-number">18</span> Empirical p-values</a></li>
+<li><a class="" href="CLT.html"><span class="header-section-number">19</span> Central Limit Theorem</a></li>
+<li><a class="" href="CI.html"><span class="header-section-number">20</span> Confidence Intervals</a></li>
+<li><a class="" href="BOOT.html"><span class="header-section-number">21</span> Bootstrap</a></li>
+<li><a class="" href="ADDTESTS.html"><span class="header-section-number">22</span> Additional Hypothesis Tests</a></li>
+<li class="book-part">Predictive Statistical Modeling</li>
+<li><a class="" href="CS4.html"><span class="header-section-number">23</span> Case Study</a></li>
+<li><a class="" href="LRBASICS.html"><span class="header-section-number">24</span> Linear Regression Basics</a></li>
+<li><a class="" href="LRINF.html"><span class="header-section-number">25</span> Linear Regression Inference</a></li>
+<li><a class="" href="LRDIAG.html"><span class="header-section-number">26</span> Regression Diagnostics</a></li>
+<li><a class="active" href="LRSIM.html"><span class="header-section-number">27</span> Simulation Based Linear Regression</a></li>
+<li><a class="" href="LRMULTI.html"><span class="header-section-number">28</span> Multiple Linear Regression</a></li>
+<li><a class="" href="LOGREG.html"><span class="header-section-number">29</span> Logistic Regression</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="LRSIM" class="section level1" number="27">
-<h1><span class="header-section-number">Chapter 27</span> Simulation Based Linear Regression</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="LRSIM" class="section level1" number="27">
+<h1>
+<span class="header-section-number">27</span> Simulation Based Linear Regression<a class="anchor" aria-label="anchor" href="#LRSIM"><i class="fas fa-link"></i></a>
+</h1>
 <div id="objectives-25" class="section level2" number="27.1">
-<h2><span class="header-section-number">27.1</span> Objectives</h2>
+<h2>
+<span class="header-section-number">27.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-25"><i class="fas fa-link"></i></a>
+</h2>
 <ol style="list-style-type: decimal">
-<li>Using the bootstrap, generate confidence and estimates of standard error for parameter estimates from a linear regression model.<br />
+<li>Using the bootstrap, generate confidence and estimates of standard error for parameter estimates from a linear regression model.<br>
 </li>
-<li>Generate and interpret bootstrap confidence intervals for predicted values.<br />
+<li>Generate and interpret bootstrap confidence intervals for predicted values.<br>
 </li>
-<li>Generate bootstrap samples from sampling rows of the data or sampling residuals. Explain why you might prefer one over the other.<br />
+<li>Generate bootstrap samples from sampling rows of the data or sampling residuals. Explain why you might prefer one over the other.<br>
 </li>
 <li>Interpret regression coefficients for a linear model with a categorical explanatory variable.</li>
 </ol>
 </div>
 <div id="homework-26" class="section level2" number="27.2">
-<h2><span class="header-section-number">27.2</span> Homework</h2>
+<h2>
+<span class="header-section-number">27.2</span> Homework<a class="anchor" aria-label="anchor" href="#homework-26"><i class="fas fa-link"></i></a>
+</h2>
 <p>We will use the loans data set again to create linear models. Remember this data set represents thousands of loans made through the Lending Club platform, which is a platform that allows individuals to lend to other individuals.</p>
 <div id="problem-1-26" class="section level3" number="27.2.1">
-<h3><span class="header-section-number">27.2.1</span> Problem 1</h3>
+<h3>
+<span class="header-section-number">27.2.1</span> Problem 1<a class="anchor" aria-label="anchor" href="#problem-1-26"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Loans</strong></p>
 <p>In this exercise we will examine the relationship between interest rate and loan amount.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Read in the data from <code>loans.csv</code> in the <code>data</code> folder.</li>
 </ol>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="LRSIM.html#cb622-1" aria-hidden="true" tabindex="-1"></a>loans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/loans.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">loans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/loans.csv"</span><span class="op">)</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Create a subset of data with 200 with the following three variables <code>interest_rate</code>, <code>loan_amount</code>, and <code>term</code>. Change <code>term</code> into a factor and use a stratified sample to keep the proportion of loan term roughly the same as the original data.</li>
 </ol>
-<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="LRSIM.html#cb623-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tally</span>(<span class="sc">~</span>term,<span class="at">data=</span>loans,<span class="at">format=</span><span class="st">&quot;percent&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaicCore/man/tally.html">tally</a></span><span class="op">(</span><span class="op">~</span><span class="va">term</span>,data<span class="op">=</span><span class="va">loans</span>,format<span class="op">=</span><span class="st">"percent"</span><span class="op">)</span></code></pre></div>
 <pre><code>## term
 ##   36   60 
 ## 69.7 30.3</code></pre>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="LRSIM.html#cb625-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2111</span>)</span>
-<span id="cb625-2"><a href="LRSIM.html#cb625-2" aria-hidden="true" tabindex="-1"></a>loans200 <span class="ot">&lt;-</span> loans <span class="sc">%&gt;%</span></span>
-<span id="cb625-3"><a href="LRSIM.html#cb625-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(interest_rate,loan_amount,term) <span class="sc">%&gt;%</span></span>
-<span id="cb625-4"><a href="LRSIM.html#cb625-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term=</span><span class="fu">factor</span>(term)) <span class="sc">%&gt;%</span></span>
-<span id="cb625-5"><a href="LRSIM.html#cb625-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(term) <span class="sc">%&gt;%</span></span>
-<span id="cb625-6"><a href="LRSIM.html#cb625-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop=</span><span class="fl">0.02</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb625-7"><a href="LRSIM.html#cb625-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="LRSIM.html#cb626-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tally</span>(<span class="sc">~</span>term,<span class="at">data=</span>loans200,<span class="at">format=</span><span class="st">&quot;percent&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2111</span><span class="op">)</span>
+<span class="va">loans200</span> <span class="op">&lt;-</span> <span class="va">loans</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">interest_rate</span>,<span class="va">loan_amount</span>,<span class="va">term</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>term<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">term</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">term</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>prop<span class="op">=</span><span class="fl">0.02</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaicCore/man/tally.html">tally</a></span><span class="op">(</span><span class="op">~</span><span class="va">term</span>,data<span class="op">=</span><span class="va">loans200</span>,format<span class="op">=</span><span class="st">"percent"</span><span class="op">)</span></code></pre></div>
 <pre><code>## term
 ##       36       60 
 ## 69.84925 30.15075</code></pre>
-<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="LRSIM.html#cb628-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(loans200)</span></code></pre></div>
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">loans200</span><span class="op">)</span></code></pre></div>
 <pre><code>## tibble [199 × 3] (S3: tbl_df/tbl/data.frame)
 ##  $ interest_rate: num [1:199] 13.59 9.92 17.47 10.9 7.34 ...
 ##  $ loan_amount  : num [1:199] 13000 10000 10000 8400 4800 10000 6000 6300 10000 32000 ...
-##  $ term         : Factor w/ 2 levels &quot;36&quot;,&quot;60&quot;: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+##  $ term         : Factor w/ 2 levels "36","60": 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Plot <code>interest_rate</code> versus <code>loan_amount</code>. We think <code>interest_rate</code> should be the response.</li>
 </ol>
 <p>It seems natural that you would want to predict interest rate from loan amount.</p>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="LRSIM.html#cb630-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(loans200,<span class="fu">aes</span>(<span class="at">x=</span>loan_amount,<span class="at">y=</span>interest_rate)) <span class="sc">+</span></span>
-<span id="cb630-2"><a href="LRSIM.html#cb630-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb630-3"><a href="LRSIM.html#cb630-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Lending Club&quot;</span>,<span class="at">subtitle=</span><span class="st">&quot;Loan amount versus Interest rate&quot;</span>,</span>
-<span id="cb630-4"><a href="LRSIM.html#cb630-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Loan Amount&quot;</span>,<span class="at">y=</span><span class="st">&quot;Interest rate (percent)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb630-5"><a href="LRSIM.html#cb630-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">loans200</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">loan_amount</span>,y<span class="op">=</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Lending Club"</span>,subtitle<span class="op">=</span><span class="st">"Loan amount versus Interest rate"</span>,
+       x<span class="op">=</span><span class="st">"Loan Amount"</span>,y<span class="op">=</span><span class="st">"Interest rate (percent)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Fit a linear model to the data by regressing <code>interest_rate</code> on <code>loan_amount</code>. Is there a significant relationship between <code>interest_rate</code> and <code>loan_amount</code>?</li>
 </ol>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="LRSIM.html#cb631-1" aria-hidden="true" tabindex="-1"></a>int_rate_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(interest_rate<span class="sc">~</span>loan_amount,<span class="at">data=</span>loans200)</span></code></pre></div>
-<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="LRSIM.html#cb632-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(int_rate_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">int_rate_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">interest_rate</span><span class="op">~</span><span class="va">loan_amount</span>,data<span class="op">=</span><span class="va">loans200</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">int_rate_mod</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = interest_rate ~ loan_amount, data = loans200)
@@ -571,7 +178,7 @@ div.csl-indent {
 ## (Intercept) 1.165e+01  7.337e-01  15.874   &lt;2e-16 ***
 ## loan_amount 2.748e-05  3.722e-05   0.738    0.461    
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 5.423 on 197 degrees of freedom
 ## Multiple R-squared:  0.002759,   Adjusted R-squared:  -0.002303 
@@ -580,27 +187,32 @@ div.csl-indent {
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Using the <span class="math inline">\(t\)</span> distribution:
 <ol style="list-style-type: lower-roman">
-<li>Find a 95% confidence interval for the slope.<br />
+<li>Find a 95% confidence interval for the slope.<br>
 </li>
 <li>Find and interpret a 90% confidence interval for a loan amount of $20000.</li>
-</ol></li>
 </ol>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="LRSIM.html#cb634-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(int_rate_mod)</span></code></pre></div>
+</li>
+</ol>
+<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/confint.html">confint</a></span><span class="op">(</span><span class="va">int_rate_mod</span><span class="op">)</span></code></pre></div>
 <pre><code>##                     2.5 %       97.5 %
 ## (Intercept)  1.019986e+01 1.309374e+01
 ## loan_amount -4.592357e-05 1.008748e-04</code></pre>
 <p>We are 95% confident the true slope is between -4.592357e-05 and 1.008748e-04.</p>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="LRSIM.html#cb636-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(int_rate_mod,<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">loan_amount=</span><span class="dv">20000</span>),</span>
-<span id="cb636-2"><a href="LRSIM.html#cb636-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>,<span class="at">level=</span><span class="fl">0.90</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">int_rate_mod</span>,newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>loan_amount<span class="op">=</span><span class="fl">20000</span><span class="op">)</span>,
+        interval <span class="op">=</span> <span class="st">"confidence"</span>,level<span class="op">=</span><span class="fl">0.90</span><span class="op">)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 12.19631 11.53105 12.86157</code></pre>
 <p>We are 90% confident that the average interest rate for a loan of $20000 is between 11.5% and 12.9%.</p>
 <ol start="6" style="list-style-type: lower-alpha">
 <li>Repeat part e using a bootstrap.</li>
 </ol>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="LRSIM.html#cb638-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3011</span>)</span>
-<span id="cb638-2"><a href="LRSIM.html#cb638-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">lm</span>(interest_rate <span class="sc">~</span> loan_amount,<span class="at">data=</span><span class="fu">resample</span>(loans200))</span></code></pre></div>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="LRSIM.html#cb639-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
+<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">3011</span><span class="op">)</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/do.html">do</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">interest_rate</span> <span class="op">~</span> <span class="va">loan_amount</span>,data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/resample.html">resample</a></span><span class="op">(</span><span class="va">loans200</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Intercept   loan_amount    sigma    r.squared          F numdf dendf .row
 ## 1  10.26651  6.837311e-05 4.893962 0.0184148594 3.69578466     1   197    1
 ## 2  11.63858  2.341492e-05 5.147715 0.0021348812 0.42147139     1   197    1
@@ -615,15 +227,17 @@ div.csl-indent {
 ## 4      4
 ## 5      5
 ## 6      6</code></pre>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="LRSIM.html#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cdata</span>(<span class="sc">~</span>loan_amount,<span class="at">data=</span>results)</span></code></pre></div>
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/pqrdata.html">cdata</a></span><span class="op">(</span><span class="op">~</span><span class="va">loan_amount</span>,data<span class="op">=</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <pre><code>##              lower        upper central.p
 ## 2.5% -4.277717e-05 9.863203e-05      0.95</code></pre>
 <p>Or using the <code>infer</code> package:</p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="LRSIM.html#cb643-1" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> loans200 <span class="sc">%&gt;%</span></span>
-<span id="cb643-2"><a href="LRSIM.html#cb643-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(interest_rate<span class="sc">~</span>loan_amount) <span class="sc">%&gt;%</span></span>
-<span id="cb643-3"><a href="LRSIM.html#cb643-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps=</span><span class="dv">1000</span>,<span class="at">type=</span><span class="st">&quot;bootstrap&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb643-4"><a href="LRSIM.html#cb643-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat=</span><span class="st">&quot;slope&quot;</span>)</span>
-<span id="cb643-5"><a href="LRSIM.html#cb643-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results2)</span></code></pre></div>
+<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results2</span> <span class="op">&lt;-</span> <span class="va">loans200</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">specify</span><span class="op">(</span><span class="va">interest_rate</span><span class="op">~</span><span class="va">loan_amount</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">generate</span><span class="op">(</span>reps<span class="op">=</span><span class="fl">1000</span>,type<span class="op">=</span><span class="st">"bootstrap"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">calculate</span><span class="op">(</span>stat<span class="op">=</span><span class="st">"slope"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results2</span><span class="op">)</span></code></pre></div>
 <pre><code>## Response: interest_rate (numeric)
 ## Explanatory: loan_amount (numeric)
 ## # A tibble: 6 × 2
@@ -635,50 +249,59 @@ div.csl-indent {
 ## 4         4  0.00000481
 ## 5         5  0.0000549 
 ## 6         6  0.0000531</code></pre>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="LRSIM.html#cb645-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_confidence_interval</span>(results2)</span></code></pre></div>
+<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">get_confidence_interval</span><span class="op">(</span><span class="va">results2</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using `level = 0.95` to compute confidence interval.</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##     lower_ci  upper_ci
 ##        &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 -0.0000361 0.0000947</code></pre>
 <p>Now the confidence interval for average interest rate at a loan amount of 20000:</p>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="LRSIM.html#cb648-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb648-2"><a href="LRSIM.html#cb648-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred=</span>Intercept<span class="sc">+</span>loan_amount<span class="sc">*</span><span class="dv">20000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb648-3"><a href="LRSIM.html#cb648-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cdata</span>(<span class="sc">~</span>pred,<span class="at">data=</span>.)</span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pred<span class="op">=</span><span class="va">Intercept</span><span class="op">+</span><span class="va">loan_amount</span><span class="op">*</span><span class="fl">20000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/pqrdata.html">cdata</a></span><span class="op">(</span><span class="op">~</span><span class="va">pred</span>,data<span class="op">=</span><span class="va">.</span><span class="op">)</span></code></pre></div>
 <pre><code>##        lower    upper central.p
 ## 2.5% 11.4061 13.01508      0.95</code></pre>
 <p>Again, close to what we had but slightly different. Maybe some of the assumptions such as normality are not appropriate.</p>
 <ol start="7" style="list-style-type: lower-alpha">
 <li>Check the assumptions of linear regression.</li>
 </ol>
-<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="LRSIM.html#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_rate_mod)</span></code></pre></div>
-<p><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-1.png" width="672" /><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-2.png" width="672" /><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-3.png" width="672" /><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-4.png" width="672" /></p>
+<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">int_rate_mod</span><span class="op">)</span></code></pre></div>
+<p><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-1.png" width="672"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-2.png" width="672"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-3.png" width="672"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-16-4.png" width="672"></p>
 <p>There appears to be a lack of normality as the residuals are skewed to the right, large positive residuals. The bootstrap would probably be more appropriate for this problem.</p>
 </div>
 <div id="problem-2-24" class="section level3" number="27.2.2">
-<h3><span class="header-section-number">27.2.2</span> Problem 2</h3>
+<h3>
+<span class="header-section-number">27.2.2</span> Problem 2<a class="anchor" aria-label="anchor" href="#problem-2-24"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Loans II</strong></p>
 <p>Using the <code>loans</code> data set of 200 observations from the previous exercise, use the variable <code>term</code> to determine if there is a difference in interest rates for the two different loan lengths.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Build a set of side-by-side boxplots that summarize interest rate by term. Describe the relationship you see. Note: You will have to convert the <code>term</code> variable to a factor prior to continuing.</li>
 </ol>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="LRSIM.html#cb651-1" aria-hidden="true" tabindex="-1"></a>loans200 <span class="sc">%&gt;%</span></span>
-<span id="cb651-2"><a href="LRSIM.html#cb651-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_boxplot</span>(interest_rate<span class="sc">~</span>term) <span class="sc">%&gt;%</span></span>
-<span id="cb651-3"><a href="LRSIM.html#cb651-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_classic</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb651-4"><a href="LRSIM.html#cb651-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">title=</span><span class="st">&quot;Lending Club&quot;</span>,<span class="at">x=</span><span class="st">&quot;Length of Loan&quot;</span>,<span class="at">y=</span><span class="st">&quot;Interest Rate&quot;</span>)</span></code></pre></div>
-<p><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb651"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">loans200</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_boxplot</span><span class="op">(</span><span class="va">interest_rate</span><span class="op">~</span><span class="va">term</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_labs</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Lending Club"</span>,x<span class="op">=</span><span class="st">"Length of Loan"</span>,y<span class="op">=</span><span class="st">"Interest Rate"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-17-1.png" width="672"></div>
 <p>It looks like there is a difference in interest rate based on the length of the loan. It also appears both are skewed to the right, positive skew. Let’s plot the density and see what we find.</p>
-<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="LRSIM.html#cb652-1" aria-hidden="true" tabindex="-1"></a>loans200 <span class="sc">%&gt;%</span></span>
-<span id="cb652-2"><a href="LRSIM.html#cb652-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_dens</span>(<span class="sc">~</span>interest_rate,<span class="at">group=</span><span class="sc">~</span>term,<span class="at">color=</span><span class="sc">~</span>term) <span class="sc">%&gt;%</span></span>
-<span id="cb652-3"><a href="LRSIM.html#cb652-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_classic</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb652-4"><a href="LRSIM.html#cb652-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">title=</span><span class="st">&quot;Lending Club&quot;</span>,<span class="at">x=</span><span class="st">&quot;Interest Rate&quot;</span>,<span class="at">y=</span><span class="st">&quot;Density&quot;</span>)</span></code></pre></div>
-<p><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb652"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">loans200</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_dens</span><span class="op">(</span><span class="op">~</span><span class="va">interest_rate</span>,group<span class="op">=</span><span class="op">~</span><span class="va">term</span>,color<span class="op">=</span><span class="op">~</span><span class="va">term</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_theme</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gf_labs</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Lending Club"</span>,x<span class="op">=</span><span class="st">"Interest Rate"</span>,y<span class="op">=</span><span class="st">"Density"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 <p>Just as we thought.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Build a linear model fitting interest rate against term. Does there appear to be a significant difference in mean interest rates by term?</li>
 </ol>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="LRSIM.html#cb653-1" aria-hidden="true" tabindex="-1"></a>int_rate_mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(interest_rate<span class="sc">~</span>term,<span class="at">data=</span>loans200)</span></code></pre></div>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="LRSIM.html#cb654-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(int_rate_mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb653"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">int_rate_mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">interest_rate</span><span class="op">~</span><span class="va">term</span>,data<span class="op">=</span><span class="va">loans200</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">int_rate_mod2</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = interest_rate ~ term, data = loans200)
@@ -692,7 +315,7 @@ div.csl-indent {
 ## (Intercept)  10.7031     0.4230  25.304  &lt; 2e-16 ***
 ## term60        4.6601     0.7703   6.049 7.19e-09 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 4.987 on 197 degrees of freedom
 ## Multiple R-squared:  0.1567, Adjusted R-squared:  0.1524 
@@ -705,9 +328,10 @@ div.csl-indent {
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Construct a bootstrap confidence interval on the coefficient.</li>
 </ol>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="LRSIM.html#cb656-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">331</span>)</span>
-<span id="cb656-2"><a href="LRSIM.html#cb656-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">lm</span>(interest_rate <span class="sc">~</span> term,<span class="at">data=</span><span class="fu">resample</span>(loans200))</span>
-<span id="cb656-3"><a href="LRSIM.html#cb656-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">331</span><span class="op">)</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/do.html">do</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">interest_rate</span> <span class="op">~</span> <span class="va">term</span>,data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/resample.html">resample</a></span><span class="op">(</span><span class="va">loans200</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Intercept   term60    sigma  r.squared        F numdf dendf .row .index
 ## 1  10.11890 4.903166 4.534598 0.20352136 50.33871     1   197    1      1
 ## 2  10.91695 5.275981 5.220399 0.17564679 41.97523     1   197    1      2
@@ -715,12 +339,14 @@ div.csl-indent {
 ## 4  11.14948 3.675445 5.250290 0.09818999 21.44956     1   197    1      4
 ## 5  10.45978 4.941671 4.960234 0.17698753 42.36454     1   197    1      5
 ## 6  11.02597 4.232862 4.891180 0.13743012 31.38729     1   197    1      6</code></pre>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="LRSIM.html#cb658-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cdata</span>(<span class="sc">~</span>term60,<span class="at">data=</span>results)</span></code></pre></div>
+<div class="sourceCode" id="cb658"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/pqrdata.html">cdata</a></span><span class="op">(</span><span class="op">~</span><span class="va">term60</span>,data<span class="op">=</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <pre><code>##         lower    upper central.p
 ## 2.5% 3.029483 6.242261      0.95</code></pre>
 <p>We are 95% confident the difference in average interest rates for loans of 60 month and 36 month is between 3.03% and 6.24%.</p>
 <p>Let’s check using the assumption of normally distributed errors.</p>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="LRSIM.html#cb660-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(int_rate_mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb660"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/confint.html">confint</a></span><span class="op">(</span><span class="va">int_rate_mod2</span><span class="op">)</span></code></pre></div>
 <pre><code>##                2.5 %    97.5 %
 ## (Intercept) 9.868936 11.537251
 ## term60      3.140928  6.179218</code></pre>
@@ -728,63 +354,53 @@ div.csl-indent {
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Check model assumptions.</li>
 </ol>
-<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="LRSIM.html#cb662-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_rate_mod2)</span></code></pre></div>
-<p><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-1.png" width="672" /><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-2.png" width="672" /><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-3.png" width="672" /><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-4.png" width="672" /></p>
+<div class="sourceCode" id="cb662"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">int_rate_mod2</span><span class="op">)</span></code></pre></div>
+<p><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-1.png" width="672"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-2.png" width="672"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-3.png" width="672"><img src="29-Simulation-Based-Linear-Regression-Solutions_files/figure-html/unnamed-chunk-24-4.png" width="672"></p>
 <p>Because of the discrete nature of the predictor, only the first two plots are of interest. The assumption of constant variable does seem reasonable but the assumption of normally distributed errors is not. We have a positive skewness.</p>
 
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="LRDIAG.html"><span class="header-section-number">26</span> Regression Diagnostics</a></div>
+<div class="next"><a href="LRMULTI.html"><span class="header-section-number">28</span> Multiple Linear Regression</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#LRSIM"><span class="header-section-number">27</span> Simulation Based Linear Regression</a></li>
+<li><a class="nav-link" href="#objectives-25"><span class="header-section-number">27.1</span> Objectives</a></li>
+<li>
+<a class="nav-link" href="#homework-26"><span class="header-section-number">27.2</span> Homework</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#problem-1-26"><span class="header-section-number">27.2.1</span> Problem 1</a></li>
+<li><a class="nav-link" href="#problem-2-24"><span class="header-section-number">27.2.2</span> Problem 2</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="LRDIAG.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="LRMULTI.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": null,
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": null,
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"info": false
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -796,7 +412,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>
