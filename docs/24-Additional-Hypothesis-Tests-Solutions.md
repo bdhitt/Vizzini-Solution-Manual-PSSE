@@ -29,7 +29,7 @@ head(golf_balls)
 ```
 
 ```
-## # A tibble: 6 × 1
+## # A tibble: 6 x 1
 ##   number
 ##    <dbl>
 ## 1      3
@@ -231,7 +231,7 @@ mlb_prob3 %>%
 ```
 
 ```
-## # A tibble: 2 × 2
+## # A tibble: 2 x 2
 ##   position   stat
 ##   <fct>     <dbl>
 ## 1 IF       0.0371

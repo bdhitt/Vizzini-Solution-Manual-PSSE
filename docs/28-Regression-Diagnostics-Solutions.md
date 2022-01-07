@@ -113,7 +113,7 @@ bac
 ```
 
 ```
-## # A tibble: 16 × 3
+## # A tibble: 16 x 3
 ##    student beers   bac
 ##      <int> <int> <dbl>
 ##  1       1     5 0.1  

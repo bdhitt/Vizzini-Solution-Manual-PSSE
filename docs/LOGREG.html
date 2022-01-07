@@ -350,17 +350,17 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">MedGPA</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 55
 ## Columns: 11
-## $ Accept     &lt;chr&gt; "D", "A", "A", "A", "A", "A", "A", "D", "A", "A", "A", "A",…
-## $ Acceptance &lt;dbl&gt; 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1,…
-## $ Sex        &lt;chr&gt; "F", "M", "F", "F", "F", "M", "M", "M", "F", "F", "F", "F",…
-## $ BCPM       &lt;dbl&gt; 3.59, 3.75, 3.24, 3.74, 3.53, 3.59, 3.85, 3.26, 3.74, 3.86,…
-## $ GPA        &lt;dbl&gt; 3.62, 3.84, 3.23, 3.69, 3.38, 3.72, 3.89, 3.34, 3.71, 3.89,…
-## $ VR         &lt;dbl&gt; 11, 12, 9, 12, 9, 10, 11, 11, 8, 9, 11, 11, 8, 9, 11, 12, 8…
-## $ PS         &lt;dbl&gt; 9, 13, 10, 11, 11, 9, 12, 11, 10, 9, 9, 8, 10, 9, 8, 8, 8, …
-## $ WS         &lt;dbl&gt; 9, 8, 5, 7, 4, 7, 6, 8, 6, 6, 8, 4, 7, 4, 6, 8, 8, 9, 5, 8,…
-## $ BS         &lt;dbl&gt; 9, 12, 9, 10, 11, 10, 11, 9, 11, 10, 11, 8, 10, 10, 7, 10, …
-## $ MCAT       &lt;dbl&gt; 38, 45, 33, 40, 35, 36, 40, 39, 35, 34, 39, 31, 35, 32, 32,…
-## $ Apps       &lt;dbl&gt; 5, 3, 19, 5, 11, 5, 5, 7, 5, 11, 6, 9, 5, 8, 15, 6, 6, 1, 5…</code></pre>
+## $ Accept     &lt;chr&gt; "D", "A", "A", "A", "A", "A", "A", "D", "A", "A", "A", "A",~
+## $ Acceptance &lt;dbl&gt; 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1,~
+## $ Sex        &lt;chr&gt; "F", "M", "F", "F", "F", "M", "M", "M", "F", "F", "F", "F",~
+## $ BCPM       &lt;dbl&gt; 3.59, 3.75, 3.24, 3.74, 3.53, 3.59, 3.85, 3.26, 3.74, 3.86,~
+## $ GPA        &lt;dbl&gt; 3.62, 3.84, 3.23, 3.69, 3.38, 3.72, 3.89, 3.34, 3.71, 3.89,~
+## $ VR         &lt;dbl&gt; 11, 12, 9, 12, 9, 10, 11, 11, 8, 9, 11, 11, 8, 9, 11, 12, 8~
+## $ PS         &lt;dbl&gt; 9, 13, 10, 11, 11, 9, 12, 11, 10, 9, 9, 8, 10, 9, 8, 8, 8, ~
+## $ WS         &lt;dbl&gt; 9, 8, 5, 7, 4, 7, 6, 8, 6, 6, 8, 4, 7, 4, 6, 8, 8, 9, 5, 8,~
+## $ BS         &lt;dbl&gt; 9, 12, 9, 10, 11, 10, 11, 9, 11, 10, 11, 8, 10, 10, 7, 10, ~
+## $ MCAT       &lt;dbl&gt; 38, 45, 33, 40, 35, 36, 40, 39, 35, 34, 39, 31, 35, 32, 32,~
+## $ Apps       &lt;dbl&gt; 5, 3, 19, 5, 11, 5, 5, 7, 5, 11, 6, 9, 5, 8, 15, 6, 6, 1, 5~</code></pre>
 <div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">med_mod</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">GPA</span><span class="op">+</span><span class="va">Sex</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
@@ -452,7 +452,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 </ol>
 <div class="sourceCode" id="cb725"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">GPA</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 5
+<pre><code>## # A tibble: 2 x 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)    19.2       5.63      3.41 0.000644
@@ -468,7 +468,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 9 × 3
+<pre><code>## # A tibble: 9 x 3
 ##   term        p.value  p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 (Intercept) 0.00279 0.0251
@@ -485,7 +485,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span><span class="op">-</span><span class="va">VR</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 8 × 3
+<pre><code>## # A tibble: 8 x 3
 ##   term        p.value  p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 (Intercept) 0.00239 0.0191
@@ -501,7 +501,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Accept</span><span class="op">==</span><span class="st">"D"</span><span class="op">~</span><span class="va">.</span><span class="op">-</span><span class="va">Acceptance</span><span class="op">-</span><span class="va">MCAT</span><span class="op">-</span><span class="va">VR</span><span class="op">-</span><span class="va">Apps</span>,data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 7 × 3
+<pre><code>## # A tibble: 7 x 3
 ##   term        p.value  p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 (Intercept) 0.00147 0.0103
@@ -517,7 +517,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
          data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 3
+<pre><code>## # A tibble: 6 x 3
 ##   term        p.value   p.adj
 ##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 (Intercept) 0.00123 0.00739
@@ -532,7 +532,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
          data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 3
+<pre><code>## # A tibble: 5 x 3
 ##   term         p.value   p.adj
 ##   &lt;chr&gt;          &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 (Intercept) 0.000584 0.00292
@@ -546,7 +546,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
          data<span class="op">=</span><span class="va">MedGPA</span>,family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p.adj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">p.value</span>,<span class="va">p.adj</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 3
+<pre><code>## # A tibble: 4 x 3
 ##   term         p.value   p.adj
 ##   &lt;chr&gt;          &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 (Intercept) 0.000574 0.00230
@@ -677,7 +677,7 @@ We can see that <code>head_l</code> is correlated with the other three variables
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

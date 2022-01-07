@@ -130,7 +130,7 @@
 <div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">cor</a></span><span class="op">(</span><span class="va">pf_expression_influence</span>, <span class="va">pf_score</span>, use <span class="op">=</span> <span class="st">"complete.obs"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
+<pre><code>## # A tibble: 1 x 1
 ##   `cor(pf_expression_influence, pf_score, use = "complete.obs")`
 ##                                                            &lt;dbl&gt;
 ## 1                                                          0.787</code></pre>
@@ -220,7 +220,7 @@ Figure 23.1: Fitted values versus residuals for diagnostics.
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">pf_expression_influence</span><span class="op">==</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>ave<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">mean</a></span><span class="op">(</span><span class="va">pf_score</span><span class="op">)</span>,n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 2
+<pre><code>## # A tibble: 1 x 2
 ##     ave     n
 ##   &lt;dbl&gt; &lt;int&gt;
 ## 1  7.96    42</code></pre>
@@ -255,7 +255,7 @@ Figure 23.1: Fitted values versus residuals for diagnostics.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

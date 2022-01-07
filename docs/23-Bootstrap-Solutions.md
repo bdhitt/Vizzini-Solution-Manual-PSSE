@@ -269,7 +269,7 @@ textbooks<-read_csv("data/textbooks.csv")
 ```
 
 ```
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## Delimiter: ","
 ## chr (4): dept_abbr, course, isbn, more
 ## dbl (3): ucla_new, amaz_new, diff
@@ -277,8 +277,8 @@ textbooks<-read_csv("data/textbooks.csv")
 
 ```
 ## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 
@@ -287,7 +287,7 @@ head(textbooks)
 ```
 
 ```
-## # A tibble: 6 × 7
+## # A tibble: 6 x 7
 ##   dept_abbr course isbn           ucla_new amaz_new more   diff
 ##   <chr>     <chr>  <chr>             <dbl>    <dbl> <chr> <dbl>
 ## 1 Am Ind    C170   978-0803272620     27.7     28.0 Y     -0.28
@@ -407,7 +407,7 @@ textbooks %>%
 ```
 
 ```
-## # A tibble: 1 × 1
+## # A tibble: 1 x 1
 ##   obs_diff
 ##      <dbl>
 ## 1     12.8

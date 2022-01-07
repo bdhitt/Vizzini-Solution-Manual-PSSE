@@ -122,24 +122,24 @@
 <div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">starbucks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/starbucks.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 77 Columns: 7</code></pre>
-<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+<pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: ","
 ## chr (2): item, type
 ## dbl (5): calories, fat, carb, fiber, protein</code></pre>
 <pre><code>## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">starbucks</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 77
 ## Columns: 7
-## $ item     &lt;chr&gt; "8-Grain Roll", "Apple Bran Muffin", "Apple Fritter", "Banana…
-## $ calories &lt;dbl&gt; 350, 350, 420, 490, 130, 370, 460, 370, 310, 420, 380, 320, 3…
-## $ fat      &lt;dbl&gt; 8, 9, 20, 19, 6, 14, 22, 14, 18, 25, 17, 12, 17, 21, 5, 18, 1…
-## $ carb     &lt;dbl&gt; 67, 64, 59, 75, 17, 47, 61, 55, 32, 39, 51, 53, 34, 57, 52, 7…
-## $ fiber    &lt;dbl&gt; 5, 7, 0, 4, 0, 5, 2, 0, 0, 0, 2, 3, 2, 2, 3, 3, 2, 3, 0, 2, 0…
-## $ protein  &lt;dbl&gt; 10, 6, 5, 7, 0, 6, 7, 6, 5, 7, 4, 6, 5, 5, 12, 7, 8, 6, 0, 10…
-## $ type     &lt;chr&gt; "bakery", "bakery", "bakery", "bakery", "bakery", "bakery", "…</code></pre>
+## $ item     &lt;chr&gt; "8-Grain Roll", "Apple Bran Muffin", "Apple Fritter", "Banana~
+## $ calories &lt;dbl&gt; 350, 350, 420, 490, 130, 370, 460, 370, 310, 420, 380, 320, 3~
+## $ fat      &lt;dbl&gt; 8, 9, 20, 19, 6, 14, 22, 14, 18, 25, 17, 12, 17, 21, 5, 18, 1~
+## $ carb     &lt;dbl&gt; 67, 64, 59, 75, 17, 47, 61, 55, 32, 39, 51, 53, 34, 57, 52, 7~
+## $ fiber    &lt;dbl&gt; 5, 7, 0, 4, 0, 5, 2, 0, 0, 0, 2, 3, 2, 2, 3, 3, 2, 3, 0, 2, 0~
+## $ protein  &lt;dbl&gt; 10, 6, 5, 7, 0, 6, 7, 6, 5, 7, 4, 6, 5, 5, 12, 7, 8, 6, 0, 10~
+## $ type     &lt;chr&gt; "bakery", "bakery", "bakery", "bakery", "bakery", "bakery", "~</code></pre>
 <div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">starbucks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gf_point</span><span class="op">(</span><span class="va">calories</span><span class="op">~</span><span class="va">carb</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -281,7 +281,7 @@ larger patch on the right side. There might be some natural groupings of the the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

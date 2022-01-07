@@ -115,7 +115,7 @@
 <code class="sourceCode R"><span class="va">ads</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ads.csv"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ads</span></code></pre></div>
-<pre><code>## # A tibble: 10 × 2
+<pre><code>## # A tibble: 10 x 2
 ##    basic premium
 ##    &lt;dbl&gt;   &lt;dbl&gt;
 ##  1  6.95    3.38
@@ -132,7 +132,7 @@
 <code class="sourceCode R"><span class="va">ads</span> <span class="op">&lt;-</span> <span class="va">ads</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>,names_to<span class="op">=</span><span class="st">"channel"</span>,values_to <span class="op">=</span> <span class="st">"length"</span><span class="op">)</span>
 <span class="va">ads</span></code></pre></div>
-<pre><code>## # A tibble: 20 × 2
+<pre><code>## # A tibble: 20 x 2
 ##    channel length
 ##    &lt;chr&gt;    &lt;dbl&gt;
 ##  1 basic     6.95
@@ -215,15 +215,15 @@
 &amp;\hline &amp;Total              &amp; 34        &amp; 16            &amp; 50
 \end{array} 
 \]</span></p>
-<p>The data is in the file “yawn.csv.”</p>
+<p>The data is in the file “yawn.csv”.</p>
 <div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">yawn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/yawn.csv"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">yawn</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 50
 ## Columns: 2
-## $ group   &lt;chr&gt; "treatment", "treatment", "control", "treatment", "treatment",…
-## $ outcome &lt;chr&gt; "no_yawn", "no_yawn", "no_yawn", "no_yawn", "no_yawn", "yawn",…</code></pre>
+## $ group   &lt;chr&gt; "treatment", "treatment", "control", "treatment", "treatment",~
+## $ outcome &lt;chr&gt; "no_yawn", "no_yawn", "no_yawn", "no_yawn", "no_yawn", "yawn",~</code></pre>
 <div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mosaicCore/man/inspect.html">inspect</a></span><span class="op">(</span><span class="va">yawn</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -328,7 +328,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -111,7 +111,7 @@ head(migraine_study)
 ```
 
 ```
-## # A tibble: 6 × 2
+## # A tibble: 6 x 2
 ##   group     pain_free
 ##   <chr>     <chr>    
 ## 1 treatment yes      
@@ -159,7 +159,7 @@ tally(pain_free~group,data=migraine_study,format="proportion",margin=TRUE)
  ii. The difference in these rates looks pretty big, and so I suspect acupuncture is having a positive impact on pain.
 
 
-3. Compile, `knit`, this report into a pdf.
+3. Compile, `knit`, this report into an html and a pdf. In order to `knit` the report into a pdf, you may need to install the `knitr` and `tinytex` packages in `R`.
 
 Complete on your computer or server.
 

@@ -139,7 +139,7 @@ head(my_data)
 ```
 
 ```
-## # A tibble: 6 × 2
+## # A tibble: 6 x 2
 ##   Sample Percent
 ##    <dbl>   <dbl>
 ## 1     10   0.282

@@ -266,16 +266,16 @@ Write a function and find the <em>MAD</em> of the data.</li>
 <div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">textbooks</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/textbooks.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 73 Columns: 7</code></pre>
-<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+<pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: ","
 ## chr (4): dept_abbr, course, isbn, more
 ## dbl (3): ucla_new, amaz_new, diff</code></pre>
 <pre><code>## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">textbooks</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 7
+<pre><code>## # A tibble: 6 x 7
 ##   dept_abbr course isbn           ucla_new amaz_new more   diff
 ##   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
 ## 1 Am Ind    C170   978-0803272620     27.7     28.0 Y     -0.28
@@ -357,7 +357,7 @@ Write a function and find the <em>MAD</em> of the data.</li>
 <div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">textbooks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>obs_diff<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html">mean</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
+<pre><code>## # A tibble: 1 x 1
 ##   obs_diff
 ##      &lt;dbl&gt;
 ## 1     12.8</code></pre>
@@ -488,7 +488,7 @@ Write a function and find the <em>MAD</em> of the data.</li>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-03.</p>
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

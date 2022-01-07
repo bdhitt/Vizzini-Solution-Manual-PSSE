@@ -25,7 +25,7 @@ ads
 ```
 
 ```
-## # A tibble: 10 × 2
+## # A tibble: 10 x 2
 ##    basic premium
 ##    <dbl>   <dbl>
 ##  1  6.95    3.38
@@ -48,7 +48,7 @@ ads
 ```
 
 ```
-## # A tibble: 20 × 2
+## # A tibble: 20 x 2
 ##    channel length
 ##    <chr>    <dbl>
 ##  1 basic     6.95
@@ -181,8 +181,8 @@ glimpse(yawn)
 ```
 ## Rows: 50
 ## Columns: 2
-## $ group   <chr> "treatment", "treatment", "control", "treatment", "treatment",…
-## $ outcome <chr> "no_yawn", "no_yawn", "no_yawn", "no_yawn", "no_yawn", "yawn",…
+## $ group   <chr> "treatment", "treatment", "control", "treatment", "treatment",~
+## $ outcome <chr> "no_yawn", "no_yawn", "no_yawn", "no_yawn", "no_yawn", "yawn",~
 ```
 
 

@@ -47,8 +47,8 @@ glimpse(yawn)
 ```
 ## Rows: 50
 ## Columns: 2
-## $ group   <chr> "treatment", "treatment", "control", "treatment", "treatment",…
-## $ outcome <chr> "no_yawn", "no_yawn", "no_yawn", "no_yawn", "no_yawn", "yawn",…
+## $ group   <chr> "treatment", "treatment", "control", "treatment", "treatment",~
+## $ outcome <chr> "no_yawn", "no_yawn", "no_yawn", "no_yawn", "no_yawn", "yawn",~
 ```
 
 
@@ -295,9 +295,9 @@ glimpse(temperature)
 ```
 ## Rows: 130
 ## Columns: 3
-## $ temperature <dbl> 96.3, 96.7, 96.9, 97.0, 97.1, 97.1, 97.1, 97.2, 97.3, 97.4…
-## $ gender      <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ hr          <dbl> 70, 71, 74, 80, 73, 75, 82, 64, 69, 70, 68, 72, 78, 70, 75…
+## $ temperature <dbl> 96.3, 96.7, 96.9, 97.0, 97.1, 97.1, 97.1, 97.2, 97.3, 97.4~
+## $ gender      <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1~
+## $ hr          <dbl> 70, 71, 74, 80, 73, 75, 82, 64, 69, 70, 68, 72, 78, 70, 75~
 ```
 
 
@@ -333,7 +333,7 @@ temperature %>%
 ```
 
 ```
-## # A tibble: 2 × 2
+## # A tibble: 2 x 2
 ##   `temperature == 98.6`     n
 ##   <lgl>                 <int>
 ## 1 FALSE                   120
@@ -353,7 +353,7 @@ temperature %>%
 ```
 
 ```
-## # A tibble: 1 × 1
+## # A tibble: 1 x 1
 ##   num_greater
 ##         <int>
 ## 1          39
