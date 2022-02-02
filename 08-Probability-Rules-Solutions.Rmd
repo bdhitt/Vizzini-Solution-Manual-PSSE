@@ -1,5 +1,10 @@
 # Probability Rules {#PROBRULES}
 
+\newcommand{\E}{\mbox{E}}
+\newcommand{\Var}{\mbox{Var}}
+\newcommand{\Cov}{\mbox{Cov}}
+\newcommand{\Prob}{\mbox{P}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
 
 ## Objectives
 
@@ -68,7 +73,7 @@ $$
 
 
 
-b. In `R`, find the probability that at least one other person shares my birthday for each value of $n$ from 1 to 80. Plot these probabilities with $n$ on the $x$-axis and probability on the $y$-axis. At what value of $n$ would the probability be at least 50%? 
+b. In `R`, find the probability that at least one other person shares my birthday for each value of $n$ from 1 to 300. Plot these probabilities with $n$ on the $x$-axis and probability on the $y$-axis. At what value of $n$ would the probability be at least 50%? 
  
 
 Generalizing,

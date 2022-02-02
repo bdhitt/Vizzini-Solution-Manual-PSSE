@@ -112,33 +112,33 @@
 <h3>
 <span class="header-section-number">8.2.1</span> Problem 1<a class="anchor" aria-label="anchor" href="#problem-1-7"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> be events such that <span class="math inline">\(\Prob(A)=0.5\)</span>, <span class="math inline">\(\Prob(B)=0.3\)</span>, and <span class="math inline">\(\Prob(C)=0.4\)</span>. Also, we know that <span class="math inline">\(\Prob(A \cap B)=0.2\)</span>, <span class="math inline">\(\Prob(B \cap C)=0.12\)</span>, <span class="math inline">\(\Prob(A \cap C)=0.1\)</span>, and <span class="math inline">\(\Prob(A \cap B \cap C)=0.05\)</span>. Find the following:</p>
+<p>Let <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> be events such that <span class="math inline">\(\mbox{P}(A)=0.5\)</span>, <span class="math inline">\(\mbox{P}(B)=0.3\)</span>, and <span class="math inline">\(\mbox{P}(C)=0.4\)</span>. Also, we know that <span class="math inline">\(\mbox{P}(A \cap B)=0.2\)</span>, <span class="math inline">\(\mbox{P}(B \cap C)=0.12\)</span>, <span class="math inline">\(\mbox{P}(A \cap C)=0.1\)</span>, and <span class="math inline">\(\mbox{P}(A \cap B \cap C)=0.05\)</span>. Find the following:</p>
 <ol style="list-style-type: lower-alpha">
-<li><p><span class="math inline">\(\Prob(A\cup B)\)</span>
+<li><p><span class="math inline">\(\mbox{P}(A\cup B)\)</span>
 <span class="math display">\[
-\Prob(A\cup B) = \Prob(A)+\Prob(B)-\Prob(A\cap B)= 0.5+0.3-0.2 = 0.6
+\mbox{P}(A\cup B) = \mbox{P}(A)+\mbox{P}(B)-\mbox{P}(A\cap B)= 0.5+0.3-0.2 = 0.6
 \]</span></p></li>
-<li><p><span class="math inline">\(\Prob(A\cup B \cup C)\)</span>
+<li><p><span class="math inline">\(\mbox{P}(A\cup B \cup C)\)</span>
 <span class="math display">\[
-\Prob(A\cup B \cup C) = \Prob(A)+\Prob(B)+\Prob(C)-\Prob(A\cap B)-\Prob(A\cap C)-\Prob(B\cap C)+\Prob(A\cap B \cap C)
+\mbox{P}(A\cup B \cup C) = \mbox{P}(A)+\mbox{P}(B)+\mbox{P}(C)-\mbox{P}(A\cap B)-\mbox{P}(A\cap C)-\mbox{P}(B\cap C)+\mbox{P}(A\cap B \cap C)
 \]</span>
 <span class="math display">\[
 = 0.5+0.3+0.4-0.2-0.12-0.1+0.05 = 0.83
 \]</span></p></li>
-<li><p><span class="math inline">\(\Prob(B'\cap C')\)</span>
+<li><p><span class="math inline">\(\mbox{P}(B'\cap C')\)</span>
 <span class="math display">\[
-\Prob(B'\cap C')=\Prob((B\cup C)') = 1-\Prob(B\cup C) = 1-[\Prob(B)+\Prob(C)-\Prob(B\cap C)]
+\mbox{P}(B'\cap C')=\mbox{P}((B\cup C)') = 1-\mbox{P}(B\cup C) = 1-[\mbox{P}(B)+\mbox{P}(C)-\mbox{P}(B\cap C)]
 \]</span>
 <span class="math display">\[
 = 1-(0.3+0.4-0.12) = 0.42
 \]</span></p></li>
-<li><p><span class="math inline">\(\Prob(A\cup (B\cap C))\)</span>
+<li><p><span class="math inline">\(\mbox{P}(A\cup (B\cap C))\)</span>
 <span class="math display">\[
-\Prob(A\cup (B\cap C)) = \Prob(A)+\Prob(B\cap C) -\Prob(A\cap B \cap C) = 0.5+0.12-0.05 = 0.57
+\mbox{P}(A\cup (B\cap C)) = \mbox{P}(A)+\mbox{P}(B\cap C) -\mbox{P}(A\cap B \cap C) = 0.5+0.12-0.05 = 0.57
 \]</span></p></li>
-<li><p><span class="math inline">\(\Prob((A\cup B \cup C)\cap (A\cap B \cap C)')\)</span>
+<li><p><span class="math inline">\(\mbox{P}((A\cup B \cup C)\cap (A\cap B \cap C)')\)</span>
 <span class="math display">\[
-\Prob((A\cup B \cup C)\cap (A\cap B \cap C)')=\Prob(A\cup B \cup C)-\Prob(A\cap B \cap C) = 0.83-0.05 = 0.78
+\mbox{P}((A\cup B \cup C)\cap (A\cap B \cap C)')=\mbox{P}(A\cup B \cup C)-\mbox{P}(A\cap B \cap C) = 0.83-0.05 = 0.78
 \]</span></p></li>
 </ol>
 </div>
@@ -147,7 +147,7 @@
 <span class="header-section-number">8.2.2</span> Problem 2<a class="anchor" aria-label="anchor" href="#problem-2-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>Consider the example of the family in the reading. What is the probability that the family has at least one boy?<br><span class="math display">\[
-\Prob(\mbox{at least one boy})=1-\Prob(\mbox{no boys})=1-\Prob(\mbox{GGG})=1-\frac{1}{8} = 0.875
+\mbox{P}(\mbox{at least one boy})=1-\mbox{P}(\mbox{no boys})=1-\mbox{P}(\mbox{GGG})=1-\frac{1}{8} = 0.875
 \]</span></p>
 </div>
 <div id="problem-3-5" class="section level3" number="8.2.3">
@@ -159,17 +159,17 @@
 <li>Suppose there are <span class="math inline">\(n=20\)</span> students in a classroom. My birthday, the instructor, is April 3rd. What is the probability that at least one student shares my birthday? Assume only 365 days in a year and assume that all birthdays are equally likely.</li>
 </ol>
 <p><span class="math display">\[
-\Prob(\mbox{at least one other person shares my bday})=1-\Prob(\mbox{no one else has my bday}) = 
+\mbox{P}(\mbox{at least one other person shares my bday})=1-\mbox{P}(\mbox{no one else has my bday}) = 
 \]</span></p>
 <p><span class="math display">\[
 1-\left( \frac{364}{365}\right)^{20} = 0.0534
 \]</span></p>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>In <code>R</code>, find the probability that at least one other person shares my birthday for each value of <span class="math inline">\(n\)</span> from 1 to 80. Plot these probabilities with <span class="math inline">\(n\)</span> on the <span class="math inline">\(x\)</span>-axis and probability on the <span class="math inline">\(y\)</span>-axis. At what value of <span class="math inline">\(n\)</span> would the probability be at least 50%?</li>
+<li>In <code>R</code>, find the probability that at least one other person shares my birthday for each value of <span class="math inline">\(n\)</span> from 1 to 300. Plot these probabilities with <span class="math inline">\(n\)</span> on the <span class="math inline">\(x\)</span>-axis and probability on the <span class="math inline">\(y\)</span>-axis. At what value of <span class="math inline">\(n\)</span> would the probability be at least 50%?</li>
 </ol>
 <p>Generalizing,
 <span class="math display">\[
-\Prob(\mbox{at least one other person shares my bday})=1-\Prob(\mbox{no one else has my bday}) = 1-\left( \frac{364}{365}\right)^{n}
+\mbox{P}(\mbox{at least one other person shares my bday})=1-\mbox{P}(\mbox{no one else has my bday}) = 1-\left( \frac{364}{365}\right)^{n}
 \]</span></p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">300</span>
@@ -241,7 +241,7 @@ The first card drawn is equal to or more than 5.</p>
 <li>What is the probability that a license plate contains <strong>at least one</strong> “B”?</li>
 </ol>
 <p><span class="math display">\[
-1-\Prob(\mbox{no B's})
+1-\mbox{P}(\mbox{no B's})
 \]</span></p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">num0</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">10</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">25</span><span class="op">*</span><span class="fl">25</span>
@@ -298,7 +298,7 @@ Notice here the order does matter because a pair of Kings and 4s is the same as 
 <li>What is the probability of drawing a “four of a kind” (four cards of the same value)?</li>
 </ol>
 <p><span class="math display">\[
-\Prob(\mbox{4 of a kind})=\frac{\binom{13}{1}\binom{4}{4}\binom{48}{1}}{\binom{52}{5}}
+\mbox{P}(\mbox{4 of a kind})=\frac{\binom{13}{1}\binom{4}{4}\binom{48}{1}}{\binom{52}{5}}
 \]</span></p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="fl">13</span><span class="op">*</span><span class="fl">1</span><span class="op">*</span><span class="fl">48</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">52</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
@@ -315,10 +315,10 @@ Notice here the order does matter because a pair of Kings and 4s is the same as 
 \]</span>
 We now have the 5 dice. We have to select three to have the same value and the order doesn’t matter since they are the same value. Thus we multiple by <span class="math inline">\(\binom{5}{3}\)</span>. Divide this by the total distinct ways the dice could have landed (assuming order matters).
 <span class="math display">\[
-\Prob(\mbox{full house}) = \frac{30 \times \frac{5!}{3!2!}}{6^5}
+\mbox{P}(\mbox{full house}) = \frac{30 \times \frac{5!}{3!2!}}{6^5}
 \]</span>
 <span class="math display">\[
-\Prob(\mbox{full house}) = \frac{\binom{6}{1} \times \binom{5}{1} \times \binom{5}{3}}{6^5}
+\mbox{P}(\mbox{full house}) = \frac{\binom{6}{1} \times \binom{5}{1} \times \binom{5}{3}}{6^5}
 \]</span></p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">30</span><span class="op">*</span><span class="fl">10</span><span class="op">/</span><span class="op">(</span><span class="fl">6</span><span class="op">^</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
@@ -399,7 +399,7 @@ We now have the 5 dice. We have to select three to have the same value and the o
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-07.</p>
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

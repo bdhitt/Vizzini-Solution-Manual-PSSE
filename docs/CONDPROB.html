@@ -112,17 +112,17 @@
 <h3>
 <span class="header-section-number">9.2.1</span> Problem 1<a class="anchor" aria-label="anchor" href="#problem-1-8"><i class="fas fa-link"></i></a>
 </h3>
-<p>Consider Exercise 1 from Lesson 2. Recall: <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are events such that <span class="math inline">\(\Prob(A)=0.5\)</span>, <span class="math inline">\(\Prob(B)=0.3\)</span>, <span class="math inline">\(\Prob(C)=0.4\)</span>, <span class="math inline">\(\Prob(A \cap B)=0.2\)</span>, <span class="math inline">\(\Prob(B \cap C)=0.12\)</span>, <span class="math inline">\(\Prob(A \cap C)=0.1\)</span>, and <span class="math inline">\(\Prob(A \cap B \cap C)=0.05\)</span>.</p>
+<p>Consider Exercise 1 from Lesson 2. Recall: <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are events such that <span class="math inline">\(\mbox{P}(A)=0.5\)</span>, <span class="math inline">\(\mbox{P}(B)=0.3\)</span>, <span class="math inline">\(\mbox{P}(C)=0.4\)</span>, <span class="math inline">\(\mbox{P}(A \cap B)=0.2\)</span>, <span class="math inline">\(\mbox{P}(B \cap C)=0.12\)</span>, <span class="math inline">\(\mbox{P}(A \cap C)=0.1\)</span>, and <span class="math inline">\(\mbox{P}(A \cap B \cap C)=0.05\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Are <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent?</li>
 </ol>
-<p>No. <span class="math inline">\(\Prob(A)\Prob(B)=0.15\neq \Prob(A\cap B)\)</span>.</p>
+<p>No. <span class="math inline">\(\mbox{P}(A)\mbox{P}(B)=0.15\neq \mbox{P}(A\cap B)\)</span>.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Are <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> independent?</li>
 </ol>
-<p>Yes. <span class="math inline">\(\Prob(B)\Prob(C)=0.12 = \Prob(B\cap C)\)</span>. Also,
+<p>Yes. <span class="math inline">\(\mbox{P}(B)\mbox{P}(C)=0.12 = \mbox{P}(B\cap C)\)</span>. Also,
 <span class="math display">\[
-\Prob(B|C)=\frac{\Prob(B\cap C)}{\Prob(C)}= 0.12/0.4 = 0.3 =\Prob(B)
+\mbox{P}(B|C)=\frac{\mbox{P}(B\cap C)}{\mbox{P}(C)}= 0.12/0.4 = 0.3 =\mbox{P}(B)
 \]</span></p>
 </div>
 <div id="problem-2-8" class="section level3" number="9.2.2">
@@ -139,21 +139,21 @@
 </ol>
 <p>The coin is memoryless. So,
 <span class="math display">\[
-\Prob(\mbox{2nd flip heads}|\mbox{1st flip heads}) = 0.6
+\mbox{P}(\mbox{2nd flip heads}|\mbox{1st flip heads}) = 0.6
 \]</span></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>What is the probability both flips result in heads?</li>
 </ol>
 <p>Since the flips are independent,
 <span class="math display">\[
-\Prob(\mbox{both heads})=\Prob(\mbox{1st flip heads})\Prob(\mbox{2nd flip heads}) = 0.6*0.6=0.36
+\mbox{P}(\mbox{both heads})=\mbox{P}(\mbox{1st flip heads})\mbox{P}(\mbox{2nd flip heads}) = 0.6*0.6=0.36
 \]</span></p>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>What is the probability exactly one coin flip results in heads?</li>
 </ol>
 <p>This could happen in two ways. The first could be heads OR the second could be heads.
 <span class="math display">\[
-\Prob(\mbox{exactly one heads})=\Prob(\mbox{1st flip heads})\Prob(\mbox{2nd flip tails}) + \Prob(\mbox{1st flip tails})\Prob(\mbox{2nd flip heads})
+\mbox{P}(\mbox{exactly one heads})=\mbox{P}(\mbox{1st flip heads})\mbox{P}(\mbox{2nd flip tails}) + \mbox{P}(\mbox{1st flip tails})\mbox{P}(\mbox{2nd flip heads})
 \]</span>
 <span class="math display">\[
 0.6*0.4+0.4*0.6 = 0.48
@@ -161,7 +161,7 @@
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Now assume I flip the coin five times. What is the probability the result is 5 heads?
 <span class="math display">\[
-\Prob(\mbox{5 heads})= 0.6^5 = 0.0778
+\mbox{P}(\mbox{5 heads})= 0.6^5 = 0.0778
 \]</span>
 </li>
 </ol>
@@ -173,7 +173,7 @@
 </ol>
 <p>There are <span class="math inline">\(\binom{5}{2} = 10\)</span> ways for this to happen ({HHTTT},{HTHTT},…). So,
 <span class="math display">\[
-\Prob(\mbox{2 heads out of 5 flips})=\binom{5}{2} 0.6^2(1-0.6)^3 = 0.2304
+\mbox{P}(\mbox{2 heads out of 5 flips})=\binom{5}{2} 0.6^2(1-0.6)^3 = 0.2304
 \]</span></p>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">2</span><span class="op">)</span><span class="op">*</span><span class="fl">0.6</span><span class="op">^</span><span class="fl">2</span><span class="op">*</span><span class="fl">0.4</span><span class="op">^</span><span class="fl">3</span></code></pre></div>
@@ -186,16 +186,16 @@
 <p>(Adapted from IPSUR, <span class="citation">(<a href="references.html#ref-ipsur" role="doc-biblioref">Kerns 2010</a>)</span>). Suppose there are three assistants working at a company: Moe, Larry and Curly. All three assist with a filing process. Only one filing assistant is needed at a time. Moe assists 60% of the time, Larry assists 30% of the time and Curly assists the remaining 10% of the time. Occasionally, they make errors (misfiles); Moe has a misfile rate of 0.01, Larry has a misfile rate of 0.025, and Curly has a rate of 0.05. Suppose a misfile was discovered, but it is unknown who was on schedule when it occurred. Who is most likely to have committed the misfile? Calculate the probabilities for each of the three assistants.</p>
 <p>Let <span class="math inline">\(E\)</span> be the event a misfile was committed. Also, let <span class="math inline">\(M\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(C\)</span> denote the events that Moe, Larry and Curly was the assistant at the time, respectively.</p>
 <p><span class="math display">\[
-\Prob(E)=\Prob(E \cap M)+\Prob(E \cap L)+\Prob(E\cap C) 
+\mbox{P}(E)=\mbox{P}(E \cap M)+\mbox{P}(E \cap L)+\mbox{P}(E\cap C) 
 \]</span>
 <span class="math display">\[
-= \Prob(E|M)\Prob(M)+\Prob(E|L)\Prob(L)+\Prob(E|C)\Prob(C) = 0.01*0.6+0.025*0.3+0.05*0.1 = 0.0185
+= \mbox{P}(E|M)\mbox{P}(M)+\mbox{P}(E|L)\mbox{P}(L)+\mbox{P}(E|C)\mbox{P}(C) = 0.01*0.6+0.025*0.3+0.05*0.1 = 0.0185
 \]</span></p>
 <p>Thus,
 <span class="math display">\[
-\Prob(M|E)=\frac{\Prob(E \cap M)}{\Prob(E)}= \frac{0.01*0.6}{0.0185}=0.3243
+\mbox{P}(M|E)=\frac{\mbox{P}(E \cap M)}{\mbox{P}(E)}= \frac{0.01*0.6}{0.0185}=0.3243
 \]</span></p>
-<p>Similarly, <span class="math inline">\(\Prob(L|E)=0.4054\)</span> and <span class="math inline">\(\Prob(C|E)=0.2702\)</span>.</p>
+<p>Similarly, <span class="math inline">\(\mbox{P}(L|E)=0.4054\)</span> and <span class="math inline">\(\mbox{P}(C|E)=0.2702\)</span>.</p>
 <p>Larry is the assistant most likely to have committed the error.</p>
 </div>
 <div id="problem-4-2" class="section level3" number="9.2.4">
@@ -208,21 +208,21 @@
 </ol>
 <p>I will assume either coin is selected with a 50% probability.</p>
 <p><span class="math display">\[
-\Prob(Fair) = \Prob(Biased) = .5
+\mbox{P}(Fair) = \mbox{P}(Biased) = .5
 \]</span>
 <span class="math display">\[
-\Prob(3 Heads|Fair)=\frac{1}{2}^3=\frac{1}{8}
+\mbox{P}(3 Heads|Fair)=\frac{1}{2}^3=\frac{1}{8}
 \]</span>
 <span class="math display">\[
-\Prob(3 Heads|Biased)=.8^3=0.512
+\mbox{P}(3 Heads|Biased)=.8^3=0.512
 \]</span></p>
 <p>Now</p>
 <p><span class="math display">\[
-\Prob(Fair | 3 Heads) = \frac{\Prob(3 Heads | Fair)\Prob(Fair)}{\Prob(3 Heads | Fair)\Prob(Fair)+\Prob(3 Heads| Biased)\Prob(Biased)}
+\mbox{P}(Fair | 3 Heads) = \frac{\mbox{P}(3 Heads | Fair)\mbox{P}(Fair)}{\mbox{P}(3 Heads | Fair)\mbox{P}(Fair)+\mbox{P}(3 Heads| Biased)\mbox{P}(Biased)}
 \]</span></p>
 <p>Which is</p>
 <p><span class="math display">\[
-\Prob(Fair | 3 Heads) =  \frac{\frac{1}{8}\frac{1}{2}}{\frac{1}{8}\frac{1}{2}+.8^{3}\frac{1}{2}} = 0.196
+\mbox{P}(Fair | 3 Heads) =  \frac{\frac{1}{8}\frac{1}{2}}{\frac{1}{8}\frac{1}{2}+.8^{3}\frac{1}{2}} = 0.196
 \]</span></p>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">.125</span><span class="op">*</span><span class="fl">.5</span><span class="op">/</span><span class="op">(</span><span class="fl">.125</span><span class="op">*</span><span class="fl">.5</span><span class="op">+</span><span class="fl">.8</span><span class="op">^</span><span class="fl">3</span><span class="op">*</span><span class="fl">.5</span><span class="op">)</span></code></pre></div>
@@ -342,7 +342,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-01-07.</p>
+    <p>"<strong>Solutions for Probability and Statistics for Scientists and Engineers</strong>" was written by Matthew Davis, Brianna Hitt, Kenneth Horton, Bradley Warner. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
