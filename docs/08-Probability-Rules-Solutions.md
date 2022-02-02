@@ -226,7 +226,7 @@ a. How many ways can we obtain a "two pairs" (2 of one number, 2 of another, and
 We have to pick the rank of the two pairs.
 
 $$\binom{13}{2}$$
-Notice here the order does matter because a pair of Kings and 4s is the same as a pair of 4s and Kings. This is different from the full house example. Make sure you understand this point.
+Notice here the order doesn't matter because a pair of Kings and 4s is the same as a pair of 4s and Kings. This is different from the full house example. Make sure you understand this point.
 
 Now we have to pick two of the fours cards for each rank
 
