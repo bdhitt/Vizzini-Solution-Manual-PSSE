@@ -65,7 +65,7 @@ adaptIntegrate(f, lowerLimit = c(0, 0), upperLimit = c(1/2, 1))
 
 
 $$
-\Prob(Y<0.8)=\int_{0.8}^1 y+\frac{1}{2}\diff y = \frac{y^2}{2}+\frac{y}{2}\bigg|_{0.8}^1=1-0.72=0.28
+\Prob(Y>0.8)=\int_{0.8}^1 y+\frac{1}{2}\diff y = \frac{y^2}{2}+\frac{y}{2}\bigg|_{0.8}^1=1-0.72=0.28
 $$
 ```{r}
 adaptIntegrate(f, lowerLimit = c(0, 0.8), upperLimit = c(1, 1))
